@@ -1,55 +1,52 @@
-<?php 
-
-namespace App;
-
+<?php
+ use Core\Config;
+ use Core\Database\MysqlDatabase;
 class App 
 {
-    const DB_NAME = 'blog';
-    const DB_HOST = 'localhost';
-    const DB_USER = 'root';
-    const DB_PASS = '';
     
-    private static $database;
-    private static $title = 'My portefolio';
+    public $title = 'My portefolio';
+    
+    private static $_instance;
+    private $db_instance;
 
-    /**
-     * getDb checking the connection to the database 
-     *  if not connected start connection
-     * @return void
-     */
-    public static function getDb()
+    public static function getInstance()
     {
-        if(self::$database === null)
+        if(is_null(self::$_instance))
         {
-            self::$database = new Database(self::DB_NAME, self::DB_HOST, self::DB_USER, self::DB_PASS);
+            self::$_instance = new App();
         }
-        return self::$database;
+
+        return self::$_instance;
     }
 
-    
-    /**
-     * getTitle
-     * get the title for the <head>
-     *  'My portoflio' per default in private static $title
-     * @return void
-     */
-    public static function getTitle()
+    public static function load()
     {
-        return self::$title;
+        session_start();
+        require ROOT . '/app/Autoloader.php';
+        App\Autoloader::register();
+        require ROOT . '/core/Autoloader.php';
+        Core\Autoloader::register();
     }
 
-
-    /**
-     * setTitle
-     *
-     * @param  mixed $title
-     *
-     * @return void
-     */
-    public static function setTitle($title)
+    public function getTable($name)
     {
-        self::$title = $title;
+        $class_name = '\\App\\Table\\' . ucfirst($name) . 'Table';
+        return new $class_name($this->getDb());
     }
+
+    public function getDb()
+    {
+        $config = Config::getInstance(ROOT . '/config/config.php');
+
+        if (is_null($this->db_instance))
+        {
+            $this->db_instance = new MysqlDatabase($config->get('db_name'), $config->get('db_host'), $config->get('db_user'),$config->get('db_pass'));
+        }
+        return $this->db_instance;
+    }
+
+
+
 
 
 }

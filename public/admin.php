@@ -23,19 +23,19 @@ else
 ob_start();
 if($page==='home') 
 {
-  require ROOT . '/view/frontend/home.php';
+  require ROOT . '/view/backend/index.php';
 }
 elseif ($page === 'posts')
 {
-    require ROOT . '/view/frontend/posts.php';
+    require ROOT . '/view/backend/posts.php';
 }
 elseif ($page === 'posts.single')
 {
-    require ROOT . '/view/frontend/singlePost.php';
+    require ROOT . '/view/backend/singlePost.php';
 }
 elseif ($page === 'posts.category')
 {
-    require ROOT . '/view/frontend/category.php';
+    require ROOT . '/view/backend/category.php';
 }
 $content = ob_get_clean();
 require ROOT . '/view/frontend/templates/default.php'; 

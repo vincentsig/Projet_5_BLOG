@@ -8,7 +8,7 @@
   <meta name="description" content="Web developper Portefolio">
   <meta name="author" content="Signoret-Vincent">
 
-  <title><?= App\App::getTitle();?></title>
+  <title><?= App::getInstance()->title;?></title>
 
   <!-- Bootstrap core CSS -->
   <link href="../public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
