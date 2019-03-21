@@ -37,6 +37,11 @@ elseif ($page === 'posts.category')
 {
     require ROOT . '/view/frontend/category.php';
 }
+elseif ($page === 'login')
+{
+    require ROOT . '/view/users/login.php';
+}
+
 $content = ob_get_clean();
 require ROOT . '/view/frontend/templates/default.php'; 
  ?>

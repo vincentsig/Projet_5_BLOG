@@ -6,6 +6,9 @@ use Core\Table\Table;
 
 class PostTable extends Table
 {
+      
+    protected $table="blogpost";
+
     /**
      * last
      * get the last blogposts

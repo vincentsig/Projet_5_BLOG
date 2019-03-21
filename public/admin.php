@@ -1,14 +1,11 @@
 <?php 
+
+use Core\Auth\DBAuth;
+
 define('ROOT', dirname(__DIR__));
 require ROOT . '/app/App.php';
 
 App::load();
-
-$app = App::getInstance();
-
-$posts = $app->getTable('Post');
-
-
 
 
 if(isset($_GET['page'])) 
@@ -20,22 +17,37 @@ else
     $page ='home';
 }
 
+//auth
+
+$app = App::getInstance();
+$auth = new DBAuth($app->getDb());
+if (!$auth->logged())
+{
+    $app->forbidden();
+}
+
+
+
 ob_start();
 if($page==='home') 
 {
-  require ROOT . '/view/backend/index.php';
+  require ROOT . '/view/admin/posts/index.php';
 }
 elseif ($page === 'posts')
 {
-    require ROOT . '/view/backend/posts.php';
+    require ROOT . '/view/admin/posts/posts.php';
 }
 elseif ($page === 'posts.single')
 {
-    require ROOT . '/view/backend/singlePost.php';
+    require ROOT . '/view/admin/posts/singlePost.php';
 }
 elseif ($page === 'posts.category')
 {
-    require ROOT . '/view/backend/category.php';
+    require ROOT . '/view/admin/posts/category.php';
+}
+elseif ($page === 'posts.edit')
+{
+    require ROOT . '/view/admin/posts/edit.php';
 }
 $content = ob_get_clean();
 require ROOT . '/view/frontend/templates/default.php'; 

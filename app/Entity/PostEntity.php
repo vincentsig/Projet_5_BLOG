@@ -7,6 +7,8 @@ use Core\Entity\Entity;
 class PostEntity extends Entity
 {
 
+    
+
     public function getUrl()
     {
         return 'index.php?page=posts.single&id=' . $this->id;
