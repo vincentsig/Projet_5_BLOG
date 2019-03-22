@@ -23,7 +23,14 @@ class PostTable extends Table
         ORDER BY blogpost.date_created DESC");
     }
 
-    public function find($id)
+    /**
+     * find
+     * Find a post and his category with the post ID 
+     * @param  mixed $id
+     *
+     * @return void
+     */
+    public function findWithCategory($id)
     {
         return $this->query(
             "SELECT blogpost.id, blogpost.title, blogpost.content, category.title as category

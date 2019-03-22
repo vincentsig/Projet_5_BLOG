@@ -49,6 +49,15 @@ elseif ($page === 'posts.edit')
 {
     require ROOT . '/view/admin/posts/edit.php';
 }
+elseif ($page === 'posts.add')
+{
+    require ROOT . '/view/admin/posts/add.php';
+}
+elseif ($page==='posts.delete')
+{
+    require ROOT . '/view/admin/posts/delete.php';
+}
+
 $content = ob_get_clean();
 require ROOT . '/view/frontend/templates/default.php'; 
  ?>

@@ -37,6 +37,16 @@ class MysqlDatabase extends Database
     }
 
 
+    /**
+     * query
+     *
+     * @param  mixed $statement (sql)
+     * @param  mixed $class_name
+     * @param  mixed $one
+     * Check the type of the query request (UPDATE, INSERT or DELETE) in this case return the result 
+     * If it's an other type, return an Object or a Class depending of the $class_name
+     * @return void 
+     */
     public function query($statement, $class_name = null, $one = false)
     {
         $req = $this->getPDO()->query($statement);
@@ -99,4 +109,8 @@ class MysqlDatabase extends Database
         return $datas;
     }
 
+    public function lastInsertID()
+    {
+        return $this->getPDO()->lastInsertId();
+    }
 }

@@ -55,6 +55,23 @@ class Table
         return $this->query("SELECT * FROM {$this->table} WHERE id= ?", [$id], true);
     }
 
+
+    public function create($fields)
+    {
+        $sql_parts= [];
+        foreach ($fields as $key => $value)
+        {
+            $sql_parts[] = "$key = ?";
+            $attributes[] = $value;
+        }
+        $sql_part = implode(', ', $sql_parts);
+        
+        return $this->query("INSERT {$this->table} SET $sql_part", $attributes, true);
+    }
+
+
+
+
     public function update($id, $fields)
     {
         $sql_parts= [];
@@ -68,4 +85,30 @@ class Table
         
         return $this->query("UPDATE {$this->table} SET $sql_part WHERE id= ?", $attributes, true);
     }
+
+    /**
+     * getList
+     *
+     * @param  mixed $key
+     * @param  mixed $value
+     * Get a list from an Entity
+     * @return array
+     */
+    public function getList($key, $value)
+    {
+        $records = $this->all();
+        $return = [];
+        foreach($records as $k => $v)
+        {
+            $return[$v->$key] = $v->$value;
+        }
+        return $return;
+    }
+
+    public function delete($id)
+    {     
+        return $this->query("DELETE FROM {$this->table}  WHERE id= ?", [$id], true);
+    }
 }
+
+
