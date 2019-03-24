@@ -26,7 +26,7 @@ if($page==='home')
     $controller = new \App\Controller\PostController;
     $controller->index();
 }
-elseif ($page === 'posts.single')
+elseif ($page === 'posts.singlePost')
 {
     $controller = new \App\Controller\PostController;
     $controller->show();

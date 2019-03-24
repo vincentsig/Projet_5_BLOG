@@ -7,7 +7,7 @@ class Controller
     protected $viewPath;
     protected $template;
 
-    public function render($view ,$variables =[])
+    protected function render($view ,$variables =[])
     {
         ob_start();
         extract($variables);
@@ -15,4 +15,19 @@ class Controller
         $content = ob_get_clean();
         require ($this->viewPath . 'templates/' . $this->template . '.php');
     }
+
+    
+    protected function forbidden()
+    {
+        header('HTTP/1.0 403 Fordidden');
+        die('Acces interdit');
+    }
+
+    protected function notFound()
+    {
+        header('HTTP/1.0 404 Not Found');
+        die('Page Introuvable');
+    }
+
+
 }
