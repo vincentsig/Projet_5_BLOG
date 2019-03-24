@@ -57,7 +57,22 @@ elseif ($page==='posts.delete')
 {
     require ROOT . '/view/admin/posts/delete.php';
 }
-
+elseif($page==='categories.index') 
+{
+  require ROOT . '/view/admin/categories/index.php';
+}
+elseif ($page === 'categories.edit')
+{
+    require ROOT . '/view/admin/categories/edit.php';
+}
+elseif ($page === 'categories.add')
+{
+    require ROOT . '/view/admin/categories/add.php';
+}
+elseif ($page==='categories.delete')
+{
+    require ROOT . '/view/admin/categories/delete.php';
+}
 $content = ob_get_clean();
 require ROOT . '/view/frontend/templates/default.php'; 
  ?>
