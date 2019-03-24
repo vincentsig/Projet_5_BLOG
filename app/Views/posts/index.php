@@ -1,5 +1,5 @@
 
-<?php foreach(App::getInstance()->getTable('Post')->last() as $post): ?>
+<?php foreach($posts as $post): ?>
     
       <h2><a href="<?= $post->url ?>"><?= $post->title; ?></a></h2>
       <p>Category: <?= $post->category;?></p>
@@ -18,7 +18,7 @@
 
 <div>
      <ul>
-     <?php  foreach(App::getInstance()->getTable('Category')->all() as $category): ?>
+     <?php  foreach($categories as $category): ?>
      
             <li>
                   <a href="<?= $category->url; ?>"><?= $category->title; ?></a>

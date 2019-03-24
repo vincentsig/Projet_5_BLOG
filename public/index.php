@@ -23,25 +23,23 @@ else
 ob_start();
 if($page==='home') 
 {
-  require ROOT . '/view/frontend/home.php';
-}
-elseif ($page === 'posts')
-{
-    require ROOT . '/view/frontend/posts.php';
+    $controller = new \App\Controller\PostController;
+    $controller->index();
 }
 elseif ($page === 'posts.single')
 {
-    require ROOT . '/view/frontend/singlePost.php';
+    $controller = new \App\Controller\PostController;
+    $controller->show();
 }
 elseif ($page === 'posts.category')
 {
-    require ROOT . '/view/frontend/category.php';
+    $controller = new \App\Controller\PostController;
+    $controller->category();
 }
 elseif ($page === 'login')
 {
-    require ROOT . '/view/users/login.php';
+    $controller = new \App\Controller\UsersController;
+    $controller->login();
 }
 
-$content = ob_get_clean();
-require ROOT . '/view/frontend/templates/default.php'; 
  ?>
