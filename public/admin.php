@@ -17,14 +17,7 @@ else
     $page ='home';
 }
 
-//auth
 
-$app = App::getInstance();
-$auth = new DBAuth($app->getDb());
-if (!$auth->logged())
-{
-    $app->forbidden();
-}
 
 
 

@@ -1,14 +1,7 @@
 <?php 
 define('ROOT', dirname(__DIR__));
 require ROOT . '/app/App.php';
-
 App::load();
-
-$app = App::getInstance();
-
-$posts = $app->getTable('Post');
-
-
 
 
 if(isset($_GET['page'])) 
@@ -17,29 +10,23 @@ if(isset($_GET['page']))
 }
 else 
 {
-    $page ='home';
+    $page ='posts.index';
 }
 
-ob_start();
-if($page==='home') 
-{
-    $controller = new \App\Controller\PostController;
-    $controller->index();
-}
-elseif ($page === 'posts.singlePost')
-{
-    $controller = new \App\Controller\PostController;
-    $controller->show();
-}
-elseif ($page === 'posts.category')
-{
-    $controller = new \App\Controller\PostController;
-    $controller->category();
-}
-elseif ($page === 'login')
-{
-    $controller = new \App\Controller\UsersController;
-    $controller->login();
-}
 
- ?>
+
+$page = explode('.', $page);
+
+if($page[0] == 'admin')
+{
+    $controller = '\App\Controller\Admin\\' . ucfirst($page[1]) . 'Controller';
+    $action = $page[2];
+}
+else
+{
+    $controller = '\App\Controller\\' . ucfirst($page[0]) . 'Controller';
+    $action = $page[1];
+}
+    $controller = new $controller();
+    $controller->$action();
+

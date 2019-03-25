@@ -5,7 +5,7 @@ namespace App\Controller;
 use Core\Controller\Controller;
 
 
-class PostController extends AppController
+class PostsController extends AppController
 {
 
     public function __construct()

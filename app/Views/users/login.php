@@ -1,22 +1,9 @@
 <?php 
-if(!empty($_POST))
-{
-    $auth = new \Core\Auth\DBAuth(App::getInstance()->getDb());
-    if($auth->login($_POST['username'], $_POST['password']))
-    {
-       header('Location: admin.php');
-    }
-    else
-    {
-        ?>
-        <div class="alert alert-danger">
-            Identifiants incorrect
-        </div>
-        <?php
-    }
-}
-$form = new \Core\HTML\BootstrapForm($_POST);?>
-
+if($errors): ?>
+<div class="class=alert alert-danger">
+    Identifiants incorrects
+</div>
+<?php endif;?>
 
 <form method="post">
     <?= $form->input('username', 'Pseudo'); ?>
@@ -24,4 +11,3 @@ $form = new \Core\HTML\BootstrapForm($_POST);?>
     <button class="btn btn-primary">Envoyer</button> 
 
 </form>
-
