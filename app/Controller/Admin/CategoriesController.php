@@ -22,6 +22,7 @@ class CategoriesController extends AppController
         $this->render('admin.categories.index', compact('items'));
     }
    
+
     public function add()
     {
         if(!empty($_POST))
@@ -34,10 +35,6 @@ class CategoriesController extends AppController
         $this->render('admin.categories.add',compact('form'));
     }
 
-
-
-
-    
 
     public function edit()
     { 
@@ -55,6 +52,7 @@ class CategoriesController extends AppController
         $this->render('admin.categories.edit',compact('form'));
     }
     
+
     public function delete()
     {
         if(!empty($_POST))
@@ -66,8 +64,5 @@ class CategoriesController extends AppController
             
         }       
     }
-
-
-
 
 }

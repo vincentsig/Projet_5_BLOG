@@ -40,13 +40,7 @@
             <a class="nav-link" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">Articles</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="post.html">Sample Post</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="">Articles</a>
           </li>
         </ul>
       </div>
@@ -60,7 +54,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Web developper - PHP Synfony</h1>
+            <h1>Web developper - PHP Symfony</h1>
             <span class="subheading">Hi, I'm Vincent. </span>
           </div>
         </div>

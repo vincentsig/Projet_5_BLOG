@@ -7,7 +7,7 @@ use \Core\Auth\DBAuth;
 
 class AppController extends \App\Controller\AppController
 {
-    protected function __construct()
+    public function __construct()
     {
         parent::__construct();
         $app = App::getInstance();

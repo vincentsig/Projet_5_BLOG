@@ -8,7 +8,7 @@
   <meta name="description" content="Web developper Portefolio">
   <meta name="author" content="Signoret-Vincent">
 
-  <title>Portefolio - Web developper PHP Synfony</title>
+  <title>Portefolio - Web developper PHP Symfony</title>
 
   <!-- Bootstrap core CSS -->
   <link href="../public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Web developper - PHP Synfony</h1>
+            <h1>Web developper - PHP Symfony</h1>
             <span class="subheading">Hi, I'm Vincent. </span>
           </div>
         </div>
