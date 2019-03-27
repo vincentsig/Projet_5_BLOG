@@ -8,6 +8,16 @@ class Table
     protected $table;
     protected $db;
 
+    /**
+     * __construct
+     *
+     * @param  mixed $db
+     * This construct can get the name of the table in the database $db.
+     * If the name of the table is different to the file use name in this instance
+     * you can declare a protected $table variable in the instance matching with the 
+     * name of your database table
+     * @return string
+     */
     public function __construct(Database $db)
     {
         $this->db = $db;
@@ -24,11 +34,28 @@ class Table
         }
     }
       
+    /**
+     * all
+     * Select all the attributes form a the object
+     * @return array
+     */
     public function all()
     {
         return $this->query("SELECT * FROM {$this->table}");
     }
 
+
+    
+    /**
+     * query
+     *
+     * @param  mixed $statement : sql request
+     * @param  mixed $attributes :if there are attributes the function prepare the request before.
+     * @param  mixed $one : $one = true if you just have one attributes
+     *                      $one = false if you have more than one attributes
+     *
+     * @return void
+     */
     public function query($statement, $attributes = null , $one = false)
     {
         if($attributes)
@@ -69,9 +96,6 @@ class Table
         return $this->query("INSERT {$this->table} SET $sql_part", $attributes, true);
     }
 
-
-
-
     public function update($id, $fields)
     {
         $sql_parts= [];
@@ -109,6 +133,10 @@ class Table
     {     
         return $this->query("DELETE FROM {$this->table}  WHERE id= ?", [$id], true);
     }
+
+    
+
+
 }
 
 

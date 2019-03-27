@@ -22,6 +22,7 @@ class PostsController extends AppController
         $this->render('admin.posts.index', compact('posts'));
     }
    
+    
     public function add()
     {
        

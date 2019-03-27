@@ -42,8 +42,8 @@ class MysqlDatabase extends Database
      *
      * @param  mixed $statement (sql)
      * @param  mixed $class_name
-     * @param  mixed $one
-     * Check the type of the query request (UPDATE, INSERT or DELETE) in this case return the result 
+     * @param  mixed $one is true if there is just one result to get (fetch()).
+     * This request check the type (UPDATE, INSERT or DELETE) in this case the request is directly excuted
      * If it's an other type, return an Object or a Class depending of the $class_name
      * @return void 
      */

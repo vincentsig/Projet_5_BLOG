@@ -13,6 +13,7 @@ class PostsController extends AppController
             parent::__construct();
             $this->loadModel('Post');
             $this->loadModel('Category');
+            $this->loadModel('Comment');
         }
 
 
@@ -42,7 +43,14 @@ class PostsController extends AppController
         {
             $this->notFound();
         }
-        $this->render('posts.singlePost', compact('post'));
+        $comments = $this->Comment->all();
+        $count = $this->Comment->count($_GET['id']);
+        $this->render('posts.singlePost', compact('post','comments','count'));
 
     }
+
+
+
+
+    
 }

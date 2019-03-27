@@ -6,13 +6,15 @@
       <p>Category: <?= $post->category;?></p>
       <p><?= $post->lead_in?></p>
       <p><?php echo  $post->getExcerpt();?></p>
-     
+      
 <?php endforeach?>
 
       
 
         <h1>HELLO WORLDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</h1>
   <hr>
+<h2>Formulaire de contact</h2>
+
 
 <h2>liste de toutes les catégories</h2>
 
