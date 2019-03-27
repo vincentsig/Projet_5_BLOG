@@ -29,6 +29,12 @@ class UsersController extends AppController
     }
 
     
+    public function register()
+    {
+        $form = new BootstrapForm($_POST);
+        $this->render('users.register', compact('form'));
+    }
+
 
 
 }
