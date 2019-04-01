@@ -2,7 +2,7 @@
 
 namespace Core\Auth;
 
-use Core\Database\MysqlDatabase;
+
 
 class StrToken
 {

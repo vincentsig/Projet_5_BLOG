@@ -6,24 +6,14 @@ use Core\Database\MysqlDatabase;
 
 class DBAuth
 {
-    private $db;
+    public $db;
 
     public function __construct(MysqlDatabase $db)
     {
+        
         $this->db =$db;
     }
     
-    public function getUserId()
-    {
-        if ($this->logged())
-        {
-            return $_SESSION['auth'];
-        }
-        return false;
-    }
-
-
-
 
     /**
      * login
@@ -52,5 +42,16 @@ class DBAuth
     {
         return isset($_SESSION['auth']);
     }
+
+    
+    public function getUserId()
+    {
+        if ($this->logged())
+        {
+            return $_SESSION['auth'];
+        }
+        return false;
+    }
+
 
 }

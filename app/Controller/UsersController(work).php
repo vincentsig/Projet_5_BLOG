@@ -24,7 +24,6 @@ class UsersController extends AppController
         }
     }
     $form = new BootstrapForm($_POST);
-    
     $this->render('users.login', compact('form', 'errors'));
     }
 

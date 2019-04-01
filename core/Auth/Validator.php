@@ -1,18 +1,16 @@
 <?php
+use Core\Database\Database;
 
 namespace Core\Auth;
 
-use Core\Database\MysqlDatabase;
-
-class Validator
+class Validator 
 {
 
-    private $db;
+    
     private $data;
     private $errors = [];
 
 
-    
     /**
      * __construct
      *
@@ -20,12 +18,10 @@ class Validator
      *
      * @return void
      */
-    public function __construct(MysqlDatabase $db, $data)
+    public function __construct($data)
     {
-        $this->data = $data;
-        $this->db =$db;
+        $this->data = $data;  
     }
-
 
     /**
      * getField
@@ -42,8 +38,6 @@ class Validator
         }
         return $this->data[$field];
     }
-
-
     /**
      * alphanumriq
      *
@@ -65,25 +59,34 @@ class Validator
     /**
      * isUniq
      *
-     * @param  mixed $field
+     * @param  mixed 
      * @param  mixed $table
      * @param  mixed $errorMsg
-     * verifie q'un champ en'est pas déja utilisé en BDD
+     * verifie q'un champ n'est pas déja utilisé en BDD
      * @return void
      */
-    public function isUniq($field, $table, $errorMsg)
+    public function isUniq($field, $db,  $table, $errorMsg)
     {
-        $record = $this->db->query(
-            "SELECT id 
-            FROM $table 
-            WHERE $field = ?", [$this->getField($field)])->fetch();
-            
+        
+        $record = $db->prepare("SELECT id FROM $table WHERE $field = ?",[$this->getField($field)], null, true);
         if ($record) {
             $this->errors[$field] = $errorMsg;
             return false;
         }
         return true;
     }
+
+
+    public function isEmail($field, $errorMsg)
+    {
+        if (!filter_var($this->getField($field), FILTER_VALIDATE_EMAIL)) {
+            $this->errors[$field] = $errorMsg;
+            return false;
+        }
+        return true;
+    }
+
+
 
 
     /**

@@ -2,31 +2,60 @@
 namespace Core\Auth;
 
 use Core\Database\MysqlDatabase;
-
+use Core\Auth\StrToken;
 
 class Auth 
 {
     protected $db;
 
-        public function __construct(MysqlDatabase $db)
-        {
-            $this->db =$db;
-        }
+    public function __construct(MysqlDatabase $db)
+    {        
+        $this->db =$db;
+    }
     
+    
+    public function hashPassword($password){
+        return password_hash($password, PASSWORD_BCRYPT);
+    }
 
-
-    public function register($username, $password, $email)
+    public function getUserId()
     {
-        $password = $this->hashPassword($password);
-        $token = StrToken::random(60);
-        $this->db->query("INSERT INTO users SET username = ?, password = ?, email = ?, confirmation_token = ?", [
-            $username,
-            $password,
-            $email,
-            $token
-        ]);
-        $user_id = $this->db->lastInsertId();
-        mail($email, 'Confirmation de votre compte', "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://local.dev/Lab/Comptes/confirm.php?id=$user_id&token=$token"); 
+        if ($this->logged())
+        {
+            return $_SESSION['auth'];
+        }
+        return false;
+    }
+
+  
+    /**
+     * login
+     *
+     * @param  mixed $username
+     * @param  mixed $password
+     *
+     * @return boolean
+     */
+    public function login($username, $password)
+    {
+        $user = $this->db->prepare('SELECT * FROM user WHERE username = ?',[$username], null , true);
+        if($user)
+        {
+             if($user->password === $password)
+             {
+                 $_SESSION['auth'] = $user->id;
+                 return true;
+             }
+        }
+         return false;
+    }
+
+
+  
+
+    public function logged()
+    {
+        return isset($_SESSION['auth']);
     }
 
 

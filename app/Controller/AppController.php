@@ -19,4 +19,6 @@ class AppController extends Controller
         $this->$model_name = App::getInstance()->getTable($model_name);
     }
 
+    
+
 }
