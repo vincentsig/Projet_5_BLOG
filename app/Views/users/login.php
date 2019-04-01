@@ -5,6 +5,8 @@ if($errors): ?>
 </div>
 <?php endif;?>
 
+<?= var_dump($_SESSION['flash']);?>
+
 <form method="post">
     <?= $form->input('username', 'Pseudo'); ?>
     <?= $form->input('password', 'Mot de passe', ['type' => 'password']); ?>

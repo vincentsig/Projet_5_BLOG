@@ -1,6 +1,8 @@
 <?php
  use Core\Config;
  use Core\Database\MysqlDatabase;
+ use Core\Auth\Auth;
+ use Core\Auth\Session;
 class App 
 {
     
@@ -21,7 +23,7 @@ class App
 
     public static function load()
     {
-        session_start();
+        
         require ROOT . '/app/Autoloader.php';
         App\Autoloader::register();
         require ROOT . '/core/Autoloader.php';
@@ -45,5 +47,14 @@ class App
         return $this->db_instance;
     }
 
-    
+    static function getAuth(){
+        return new Auth(App::getInstance()->getDb(),Session::getInstance(), ['restriction_msg' => 'Désole votre compte à été bloqué']);
+    }
+
+
+    static function redirect($page){
+        header("Location: $page");
+        exit();
+    }
+
 }

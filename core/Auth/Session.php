@@ -1,8 +1,16 @@
 <?php
 
+namespace Core\Auth;
 Class Session
 {
 
+    static $instance;
+
+    /**
+     * getInstance
+     * singleton 
+     * @return void
+     */
     static function getInstance(){
         if(!self::$instance){
             self::$instance = new Session();
@@ -14,24 +22,57 @@ Class Session
         session_start();
     }
 
+    /**
+     * setFlash
+     *
+     * @param  mixed $key
+     * @param  mixed $message
+     *
+     * @return void
+     */
     public function setFlash($key, $message){
         $_SESSION['flash'][$key] = $message;
     }
 
+    /**
+     * hasFlashes
+     * check if there are some flashes message in memory
+     * @return void
+     */
     public function hasFlashes(){
         return isset($_SESSION['flash']);
     }
 
+    /**
+     * getFlashes
+     * get all the flashes message
+     * @return void
+     */
     public function getFlashes(){
         $flash = $_SESSION['flash'];
         unset($_SESSION['flash']);
         return $flash;
     }
 
+    /**
+     * write
+     *
+     * @param  mixed $key
+     * @param  mixed $value
+     * insert $value on $_SESSION[$key]
+     * @return void
+     */
     public function write($key, $value){
         $_SESSION[$key] = $value;
     }
 
+    /**
+     * read
+     * check if it's the same session
+     * @param  mixed $key
+     *
+     * @return void
+     */
     public function read($key){
         return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }

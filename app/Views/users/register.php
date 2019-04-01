@@ -13,9 +13,8 @@
 <form action="" method="post">
     <?= $form->input('username', 'Pseudo'); ?>
     <?= $form->input('email', 'Email'); ?>
-    <?= $form->input('email', 'Confirmation Email'); ?>
     <?= $form->input('password', 'Mot de passe', ['type' => 'password']); ?>
-    <?= $form->input('password', 'Confirmation du mot de passe', ['type' => 'password']); ?>
+    <?= $form->input('password_confirm', 'Confirmation du mot de passe', ['type' => 'password']); ?>
     <button class="btn btn-primary">Sauvegarder</button> 
 
 </form>

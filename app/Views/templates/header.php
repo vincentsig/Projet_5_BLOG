@@ -44,6 +44,16 @@
           </li>
         </ul>
       </div>
+      <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <?php if (isset($_SESSION['auth'])): ?>
+                    <li><a href="logout.php">Se déconnecter</a></li>
+                <?php else: ?>  
+                    <li><a href="index.php?page=users.register">S'inscrire</a></li>
+                    <li><a href="index.php?page=users.login">Se connecter</a></li>
+                <?php endif; ?>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
   </nav>
 
@@ -61,3 +71,8 @@
       </div>
     </div>
   </header>
+  <div class="container">
+
+
+
+  
