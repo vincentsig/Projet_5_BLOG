@@ -8,16 +8,15 @@
                     <?=$value; ?>)
                 <?php endforeach?>
 </h3>
-
+<?=var_dump($comments);?>
 
 <div>
      <ul>
      <?php  foreach($comments as $comment): ?>
             <li>
-                  <?=$comment->content; ?>
+                  <p>Autheur : <?=$comment->username; ?></p>
+                  <p><?=$comment->content; ?></p>
             </li>
+            <?php endforeach?>
      </ul>    
 </div>
-<?php endforeach?>
-
-

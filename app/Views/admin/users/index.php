@@ -19,7 +19,7 @@
         <td><?= $user->email; ?></td>
         <td><?= $user->role; ?></td>
         <td>
-            <a class="btn btn-primary" href="?page=admin.posts.edit&id=<?= $user->id;?>">Editer</a>      
+            <a class="btn btn-primary" href="?page=admin.users.edit&id=<?= $user->id;?>">Editer</a>      
         </td>    
     </tr>
     <?php endforeach?>

@@ -8,16 +8,14 @@ class UserTable extends Table
 {
    
 
-    public function getRole()
+    public function getRole($id)
     {
-
+        return $this->query('UPDATE ON 
+        FROM user
+        WHERE id = ?', [$id]);
     }
 
-    public function updateRole()
-    {
-        
-    }
-
+   
 
 
 }

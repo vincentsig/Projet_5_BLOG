@@ -13,6 +13,7 @@ class PostsController extends AppController
         parent:: __construct();
         $this->loadModel('Post');
         $this->loadModel('Category');
+        $this->loadModel('Comment');
     }
 
 
@@ -44,11 +45,6 @@ class PostsController extends AppController
         $form = new BootstrapForm($_POST);  
         $this->render('admin.posts.edit',compact('categories', 'form'));
     }
-
-
-
-
-    
 
     public function edit()
     {

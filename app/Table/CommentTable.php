@@ -19,5 +19,13 @@ class CommentTable extends Table
             WHERE comment.blogpost_id= ? AND comment.status IS NOT NULL", [$id], true);
     }
 
-    
+    public function findWithComment($id)
+    {
+        return $this->query(
+            "SELECT comment.id, comment.content, user.username FROM {$this->table} 
+        LEFT JOIN blogpost ON blogpost_id = blogpost.id
+        LEFT JOIN user ON user_id = user.id
+        WHERE blogpost_id = ?", [$id]);
+    }
+
 }

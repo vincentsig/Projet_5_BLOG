@@ -43,7 +43,7 @@ class PostsController extends AppController
         {
             $this->notFound();
         }
-        $comments = $this->Comment->all();
+        $comments = $this->Comment->findWithComment($_GET['id']);
         $count = $this->Comment->count($_GET['id']);
         $this->render('posts.singlePost', compact('post','comments','count'));
 
