@@ -17,7 +17,7 @@ class UsersController extends AppController
             $this->loadModel('User');
     }
 
-
+    
 
     public function register()
     {
@@ -46,40 +46,17 @@ class UsersController extends AppController
             {
                 $auth = new Auth($db, Session::getInstance());
                 $auth->register($db,$_POST['username'], $_POST['password'], $_POST['email']);
-                Session::getInstance()->setFlash('success', 'Un email de confirmation vous a été envoyé pour valider votre compte');
+                $session = Session::getInstance();
+                $session->setFlash('success', 'Un email de confirmation vous a été envoyé pour valider votre compte');
                 App::redirect('index.php?page=users.login.php');
             }
-        
+           
         }
         $errors = $validator->getErrors();
         $form = new BootstrapForm($_POST);
-        $this->render('users.register', compact('form', 'user', 'errors', 'validator'));
+        $this->render('users.register', compact('form', 'user', 'errors', 'flash', 'validator'));
         
 
-    }
-
-
-
-    public function login()
-    {
-        $auth = App::getAuth();
-        $db = App::getInstance()->getDb();
-        if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) 
-        {
-            $user = $auth->login($db, $_POST['username'], $_POST['password']);
-            $session = Session::getInstance();
-            if($user)
-            {
-                $session->setFlash('success', 'Vous êtes maintenant connecté');
-                App::redirect('index.php');
-            }else
-            {
-                $session->setFlash('danger', 'Identifiant ou mot de passe incorrecte');
-            }
-        }
-        $form = new BootstrapForm($_POST);    
-        $this->render('users.login', compact('form', 'session', 'errors', ''));
-        
     }
 
 
@@ -92,14 +69,74 @@ class UsersController extends AppController
         if(App::getAuth()->confirm($db, $_GET['id'], $_GET['token'], Session::getInstance()))
         {
             Session::getInstance()->setFlash('danger', "Votre compte a bien été validé");
-
+            App::redirect('index.php?page=users.account');
         }
         else{
-            Session::getInstance()->setFlash('danger', "Ce token n'est plus valide");
+           $session = Session::getInstance()->setFlash('danger', "Ce token n'est plus valide");
             App::redirect('index.php?page=users.login.php');
         }
-
+        
     }
+
+
+    public function login()
+    {
+        $auth = App::getAuth();
+        $db = App::getInstance()->getDb();
+
+        if($auth->user())
+        {
+            App::redirect('index.php?page=users.account');
+        }
+        if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) 
+        {
+            $user = $auth->login($db, $_POST['username'], $_POST['password']);
+            $session = Session::getInstance();
+            if($user)
+            {
+                $session->setFlash('success', 'Vous êtes maintenant connecté');
+                $this->render('index.php', compact('session', 'user'));
+            }else
+            {
+                $session->setFlash('danger', 'Identifiant ou mot de passe incorrecte');
+            }
+        }
+        $form = new BootstrapForm($_POST);    
+        $this->render('users.login', compact('form', 'flash', 'session', 'errors'));
+        
+    }
+
+    public function account()
+    {
+        $auth = App::getAuth();
+        $auth->restrict();
+        if(!empty($_POST))
+        {
+            if(empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm'])
+            {
+                $_SESSION['flash']['danger'] = "Les mots de passes ne correspondent pas";
+                }
+            else
+                {
+                $user_id = $_SESSION['auth']->id;
+                $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
+                $db = App::getInstance()->getDb();
+                $auth->update_password($db,$password,$user_id);
+                $_SESSION['flash']['success'] = "Votre mot de passe a bien été mis à jour";
+                }           
+        }
+        $form = new BootstrapForm($_POST);    
+        $this->render('users.account', compact('form', 'auth'));
+    }
+
+
+    public function logout()
+    {
+        App::getAuth()->logout();
+        Session::getInstance()->setFlash('success', 'Vous êtes maintenant déconnecté');
+        return $this->login();
+    }
+
 
 
     /*public function login()

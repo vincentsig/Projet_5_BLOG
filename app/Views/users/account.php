@@ -1,11 +1,13 @@
 <h1>Bonjour <?= $_SESSION['auth']->username; ?></h1>
+<?=var_dump($_SESSION['auth']);?>
+<?= var_dump($_SESSION['flash']);?>
 
-<form action="" method="post">
-    <div class="form-group">
-        <input class="form-control" type="password" name="password" placeholder="Changer de mot de passe"/>
-    </div>
-    <div class="form-group">
-        <input class="form-control" type="password" name="password_confirm" placeholder="Confirmation du mot de passe"/>
-    </div>
-    <button class="btn btn-primary">Changer mon mot de passe</button>
+<?= var_dump($_POST);?>
+<?= var_dump($_SESSION['flash']);?>
+
+
+<form method="post">
+<?= $form->input('password', 'Changer de mot de passe', ['type' => 'password']); ?>
+<?= $form->input('password_confirm', 'Confirmation du mot de passe', ['type' => 'password']); ?>
+<button class="btn btn-primary">Envoyer</button> 
 </form>

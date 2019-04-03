@@ -9,7 +9,7 @@
       
 <?php endforeach?>
 
-      
+
 
         <h1>HELLO WORLDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</h1>
         
@@ -18,7 +18,7 @@
 
 
 <h2>liste de toutes les catégories</h2>
-
+<?=var_dump($_SESSION['auth']);?>
 
 <div>
      <ul>

@@ -32,7 +32,8 @@ class CategoriesController extends AppController
             
             return $this->index(); 
         }
-        $this->render('admin.categories.add',compact('form'));
+        $form = new BootstrapForm($_POST);
+        $this->render('admin.categories.edit',compact('form'));
     }
 
 

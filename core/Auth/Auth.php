@@ -19,11 +19,13 @@ class Auth
         $this->session = $session;     
         $this->db =$db;
     }
+   
     
     public function hashPassword($password){
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
+    
     public function register($db, $username, $password, $email)
     {
         $password = $this->hashPassword($password);
@@ -74,19 +76,49 @@ class Auth
         return false;
     }
 
+
+    public function user(){
+        if(!$this->session->read('auth')){
+            return false;
+        }
+        return $this->session->read('auth');
+    }
+
+
+    public function connect($user){
+        $this->session->write('auth', $user);
+    }
+
+    public function logout()
+    {
+        $this->session->delete('auth');
+    }
+
     public function login($db, $username, $password)
     {
-        $user = $db->prepare('SELECT * FROM user WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL', ['username' => $username]);
-        if(password_verify($password, $user->password)){
+        $user = $db->prepare('SELECT * FROM user WHERE username = ? AND confirmed_at IS NOT NULL', [$username], null, true);
+        if(password_verify($password, $user->password))
+        {
             $this->connect($user);
-            
-        }else{
+        }
+        else
+        {
             return false;
         }
     }
 
-   
+    public function restrict(){
+        if(!$this->session->read('auth')){
+            $this->session->setFlash('danger', $this->options['restriction_msg']);
+            header('Location: index.php?page=users.login');
+            exit();
+        }
+    }
 
+    public function update_password($db, $password, $user_id)
+    {
+        $db->prepare('UPDATE user SET password = ? WHERE id = ?',[$password, $user_id]);
+    }
     
  
     /**
