@@ -86,7 +86,7 @@ class UsersController extends AppController
 
         if($auth->user())
         {
-            App::redirect('index.php?page=users.account');
+            App::redirect('users.account');
         }
         if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) 
         {
@@ -95,16 +95,21 @@ class UsersController extends AppController
             if($user)
             {
                 $session->setFlash('success', 'Vous êtes maintenant connecté');
-                $this->render('index.php', compact('session', 'user'));
+                app::redirect('index.php?page=posts.index');
             }else
             {
                 $session->setFlash('danger', 'Identifiant ou mot de passe incorrecte');
             }
+            
         }
+        
         $form = new BootstrapForm($_POST);    
         $this->render('users.login', compact('form', 'flash', 'session', 'errors'));
         
     }
+
+
+
 
     public function account()
     {

@@ -1,4 +1,10 @@
 
+<div class="alert alert-success">
+      <?=$_SESSION['flash']['success'];?>
+            </div>
+
+
+
 <?php foreach($posts as $post): ?>
     
       <h2><a href="<?= $post->url ?>"><?= $post->title; ?></a></h2>
@@ -16,9 +22,13 @@
   <hr>
 <h2>Formulaire de contact</h2>
 
+<?=var_dump($flash);?>
+<?=var_dump($session);?>
 
 <h2>liste de toutes les catégories</h2>
 <?=var_dump($_SESSION['auth']);?>
+<?=var_dump($_SESSION['flash']);?>
+
 
 <div>
      <ul>

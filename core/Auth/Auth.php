@@ -77,6 +77,7 @@ class Auth
     }
 
 
+
     public function user(){
         if(!$this->session->read('auth')){
             return false;
@@ -100,6 +101,7 @@ class Auth
         if(password_verify($password, $user->password))
         {
             $this->connect($user);
+            return $user;
         }
         else
         {

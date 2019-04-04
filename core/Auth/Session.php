@@ -27,7 +27,7 @@ Class Session
      *
      * @param  mixed $key
      * @param  mixed $message
-     *
+     * save a flash message in the Session 'flash'
      * @return void
      */
     public function setFlash($key, $message){
@@ -36,8 +36,7 @@ Class Session
 
     /**
      * hasFlashes
-     * check if there are some flashes message in memory
-     * @return void
+     * check if there are some flashes messages in ($_SESSION['flash'])
      */
     public function hasFlashes(){
         return isset($_SESSION['flash']);
@@ -45,7 +44,7 @@ Class Session
 
     /**
      * getFlashes
-     * get all the flashes message
+     * get all the flashes message and unset them
      * @return void
      */
     public function getFlashes(){
