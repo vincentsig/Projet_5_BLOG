@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Core\Controller\Controller;
+use Core\HTML\BootstrapForm;
 
 
 class PostsController extends AppController
@@ -14,6 +15,7 @@ class PostsController extends AppController
             $this->loadModel('Post');
             $this->loadModel('Category');
             $this->loadModel('Comment');
+            $this->loadModel('User');
         }
 
 
@@ -43,13 +45,25 @@ class PostsController extends AppController
         {
             $this->notFound();
         }
+         if(!empty($_POST) && isset($_POST))
+        {
+            $result = $this->Comment->create([
+                'content' => $_POST['content'],
+                'date_created' => date('Y-m-d H:i:s'),
+                'status' => NULL,
+                'user_id' => $_SESSION['auth']->id,
+                'blogpost_id' =>$_GET['id']  
+            ]);
+            
+        }
         $comments = $this->Comment->findWithComment($_GET['id']);
         $count = $this->Comment->count($_GET['id']);
-        $this->render('posts.singlePost', compact('post','comments','count'));
+        $form = new BootstrapForm($_POST);
+        $this->render('posts.singlePost', compact('post','comments','count','form'));
 
     }
 
-
+  
 
 
     

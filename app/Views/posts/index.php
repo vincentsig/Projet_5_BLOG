@@ -27,8 +27,8 @@
             <li>
                   <a href="<?= $category->url; ?>"><?= $category->title; ?></a>
             </li>
+       <?php endforeach?>      
      </ul> 
       
 </div>
 
-<?php endforeach?>
