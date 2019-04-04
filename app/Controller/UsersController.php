@@ -95,7 +95,7 @@ class UsersController extends AppController
             if($user)
             {
                 $session->setFlash('success', 'Vous êtes maintenant connecté');
-                app::redirect('index.php?page=posts.index');
+                app::redirect('index.php');
             }else
             {
                 $session->setFlash('danger', 'Identifiant ou mot de passe incorrecte');

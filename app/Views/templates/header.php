@@ -40,7 +40,7 @@
             <a class="nav-link" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.php?page=posts.singlepost">Articles</a>
+            <a class="nav-link" href="index.php?page=posts.blogpost">Articles</a>
           </li>
         </ul>
       </div>

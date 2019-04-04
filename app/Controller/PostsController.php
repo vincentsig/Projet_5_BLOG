@@ -19,11 +19,21 @@ class PostsController extends AppController
         }
 
 
+
     public function index()
+    {
+        $posts = $this->Post->lastFourPosts();
+        $categories = $this->Category->all();
+        $this->render('posts.index',compact('posts', 'categories'));
+    }
+
+
+
+    public function blogpost()
     {
         $posts = $this->Post->last();
         $categories = $this->Category->all();
-        $this->render('posts.index',compact('posts', 'categories'));
+        $this->render('posts.blogposts',compact('posts', 'categories'));
     }
 
     public function categories()

@@ -9,11 +9,7 @@ class PostTable extends Table
       
     protected $table="blogpost";
 
-    /**
-     * last
-     * get the last blogposts
-     * @return array
-     */
+
     public function last()
     {
         return $this->query(
@@ -21,7 +17,25 @@ class PostTable extends Table
                 blogpost.date_created, category.title as category
         FROM blogpost
         LEFT JOIN category ON category_id = category.id
-        ORDER BY blogpost.date_created DESC");
+        ORDER BY blogpost.date_created DESC
+        ");
+    }
+
+
+    /**
+     * last
+     * get the last 4 blogposts
+     * @return array
+     */
+    public function lastFourPosts()
+    {
+        return $this->query(
+            "SELECT blogpost.id, blogpost.title, blogpost.lead_in, blogpost.content,
+                blogpost.date_created, category.title as category
+        FROM blogpost
+        LEFT JOIN category ON category_id = category.id
+        ORDER BY blogpost.date_created DESC
+        LIMIT 4");
     }
 
     /**
