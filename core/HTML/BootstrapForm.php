@@ -39,22 +39,35 @@ class BootstrapForm extends Form {
     }
 
 
-        public function select($name, $label, $options)
+    public function select($name, $label, $options)
+    {
+        $label ='<label>' . $label . '</label>'; 
+        $input ='<select class="form-control" name="' . $name . '">';
+        foreach($options as $k => $v)
         {
-            $label ='<label>' . $label . '</label>'; 
-            $input ='<select class="form-control" name="' . $name . '">';
-            foreach($options as $k => $v)
-            {
-            $attributes= '';
-            if($k == $this->getValue($name))
-            {
-                $attributes= ' selected';
-            }            
-                $input .="<option value='$k'$attributes>$v</option>";
-            }
-            
-            $input .='</select>';
-            return $this->surround($label . $input);
+        $attributes= '';
+        if($k == $this->getValue($name))
+        {
+            $attributes= ' selected';
+        }            
+            $input .="<option value='$k'$attributes>$v</option>";
         }
-}
+        
+        $input .='</select>';
+        return $this->surround($label . $input);
+    }
 
+    
+
+/*
+        bootstrap a update pour les forms
+
+<div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Name</label>
+              <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+*/ 
+}

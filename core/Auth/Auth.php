@@ -38,7 +38,7 @@ class Auth
         ]);
         $user_id = $db->lastInsertId();
       
-        $headers = 'MIME-Version: 1.0' . "\r\n";
+    $headers = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $headers .= 'From: vinsouz94@hotmail.com' . "\r\n";
         mail($email, 'Confirmation de votre compte',
@@ -124,6 +124,7 @@ class Auth
     
  
     /**
+     * ancien système de login
      * login
      *
      * @param  mixed $username

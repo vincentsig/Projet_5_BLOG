@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Controller;
-
+use App;
+use \Core\Auth\Session;
 use Core\Controller\Controller;
 use Core\HTML\BootstrapForm;
 
@@ -10,21 +11,26 @@ class PostsController extends AppController
 {
 
     public function __construct()
-        {
-            parent::__construct();
-            $this->loadModel('Post');
-            $this->loadModel('Category');
-            $this->loadModel('Comment');
-            $this->loadModel('User');
-        }
+    {
+        parent::__construct();
+        $this->loadModel('Post');
+        $this->loadModel('Category');
+        $this->loadModel('Comment');
+        $this->loadModel('User');
+    }
 
 
 
     public function index()
     {
+        $flashs = Session::getInstance();
+        if($flashs->hasFlashes())
+        {
+            $flashs =$flashs->getFlashes();
+        }
         $posts = $this->Post->lastFourPosts();
         $categories = $this->Category->all();
-        $this->render('posts.index',compact('posts', 'categories'));
+        $this->render('posts.index',compact('posts', 'categories', 'flashs'));
     }
 
 
@@ -64,7 +70,7 @@ class PostsController extends AppController
                 'user_id' => $_SESSION['auth']->id,
                 'blogpost_id' =>$_GET['id']  
             ]);
-            
+            return App::redirect('index.php?page=posts.singlepost&id=' . $_GET['id']);
         }
         $comments = $this->Comment->findWithComment($_GET['id']);
         $count = $this->Comment->count($_GET['id']);

@@ -1,3 +1,8 @@
+
+<?php foreach($flashs as $flash): ?>
+<li><?= $flash; ?></li>
+<?php endforeach; ?>
+
 <?php 
 if($errors): ?>
 <div class="class=alert alert-danger">
@@ -7,10 +12,9 @@ if($errors): ?>
 
 
 
-<?= var_dump($session);?>
-<?= var_dump($_POST);?>
-<?= var_dump($_SESSION['flash']);?>
-<?= var_dump($_SESSION['auth']);?>
+<?= var_dump($flashs);?>
+
+
 <form method="post">
     <?= $form->input('username', 'Pseudo'); ?>
     <?= $form->input('password', 'Mot de passe', ['type' => 'password']); ?>

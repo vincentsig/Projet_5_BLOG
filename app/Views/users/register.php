@@ -18,4 +18,3 @@
     <button class="btn btn-primary">Sauvegarder</button> 
 
 </form>
-<?= var_dump($validator)?>;

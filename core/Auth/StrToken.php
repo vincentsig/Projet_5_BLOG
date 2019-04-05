@@ -2,10 +2,15 @@
 
 namespace Core\Auth;
 
-
-
 class StrToken
 {
+    /**
+     * random
+     * generate a token for the email validation
+     * @param  mixed $length
+     *
+     * @return void
+     */
     static function random($length)
     {  
         $alphabet = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";

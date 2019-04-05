@@ -2,8 +2,9 @@
 <?=var_dump($_SESSION['auth']);?>
 <?= var_dump($_SESSION['flash']);?>
 
-<?= var_dump($_POST);?>
-<?= var_dump($_SESSION['flash']);?>
+<?php foreach($flashs as $flash): ?>
+           <li><?= $flash; ?></li>
+        <?php endforeach; ?>
 
 
 <form method="post">
