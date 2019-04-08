@@ -59,7 +59,6 @@ class UsersController extends AppController
         $errors = $validator->getErrors();
         $form = new BootstrapForm($_POST);
         $this->render('users.register', compact('form', 'user','flashs', 'errors', 'validator'));
-        
 
     }
 

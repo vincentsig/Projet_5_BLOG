@@ -77,14 +77,12 @@ class Auth
     }
 
 
-
     public function user(){
         if(!$this->session->read('auth')){
             return false;
         }
         return $this->session->read('auth');
     }
-
 
     public function connect($user){
         $this->session->write('auth', $user);
@@ -123,29 +121,7 @@ class Auth
     }
     
  
-    /**
-     * ancien système de login
-     * login
-     *
-     * @param  mixed $username
-     * @param  mixed $password
-     *
-     * @return boolean
-     */
-      /*
-    public function login($username, $password)
-    {
-        $user = $this->db->prepare('SELECT * FROM user WHERE username = ?',[$username], null , true);
-        if($user)
-        {
-             if($user->password === $password)
-             {
-                 $_SESSION['auth'] = $user->id;
-                 return true;
-             }
-        }
-         return false;
-    } */
+ 
 
 
   

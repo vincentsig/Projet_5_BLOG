@@ -31,9 +31,9 @@ class PostTable extends Table
     {
         return $this->query(
             "SELECT blogpost.id, blogpost.title, blogpost.lead_in, blogpost.content,
-                blogpost.date_created, category.title as category, user.username as username, user.id 
+                blogpost.date_created, category.title as category, user.username as username, user.id as id_user 
         FROM blogpost
-        LEFT JOIN user ON user_id = user.id
+        LEFT JOIN user ON blogpost.user_id = user.id
         LEFT JOIN category ON category_id = category.id
         ORDER BY blogpost.date_created DESC
         LIMIT 4");

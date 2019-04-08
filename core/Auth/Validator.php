@@ -4,9 +4,7 @@ use Core\Database\Database;
 namespace Core\Auth;
 
 class Validator 
-{
-
-    
+{   
     private $data;
     private $errors = [];
 
@@ -85,8 +83,6 @@ class Validator
         }
         return true;
     }
-
-
 
 
     /**

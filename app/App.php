@@ -3,6 +3,7 @@
  use Core\Database\MysqlDatabase;
  use Core\Auth\Auth;
  use Core\Auth\Session;
+ use Core\Auth\Contact;
 class App 
 {
     
@@ -10,6 +11,7 @@ class App
     
     private static $_instance;
     private $db_instance;
+    private $my_email;
 
     public static function getInstance()
     {
@@ -57,4 +59,16 @@ class App
         exit();
     }
 
+
+    public function getEmail()
+    {
+        $config = Config::getInstance(ROOT . '/config/config.php');
+
+        if (is_null($this->my_email))
+        {
+            $this->my_email = new Contact($config->get('my_email'));
+        }
+        return $this->my_email;
+
+    }
 }

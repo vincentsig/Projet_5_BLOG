@@ -3,7 +3,8 @@
 namespace App\Controller;
 use App;
 use \Core\Auth\Session;
-use Core\Controller\Controller;
+use \Core\Auth\Validator;
+use \Core\Auth\Contact;
 use Core\HTML\BootstrapForm;
 
 
@@ -23,14 +24,31 @@ class PostsController extends AppController
 
     public function index()
     {
+        $errors = [];
+        $posts = $this->Post->lastFourPosts();
+        $categories = $this->Category->all();
         $flashs = Session::getInstance();
+        $validator = new Validator($_POST);
+        $contact = new Contact(App::getInstance()->getEmail());
         if($flashs->hasFlashes())
         {
             $flashs =$flashs->getFlashes();
         }
-        $posts = $this->Post->lastFourPosts();
-        $categories = $this->Category->all();
-        $this->render('posts.index',compact('posts', 'categories', 'flashs'));
+         if(!empty($_POST))
+         {
+            $validator->isAlpha('name', "Votre pseudo n'est pas valide (alphanumérique)");
+            $validator->isEmail('email', "Votre email n'est pas valide");
+            if($validator->isValid())
+            {
+            
+                //$contact->contact($_POST['name'], $_POST['email'], $_POST['message']);
+                $flashs->setFlash('success', 'Votre email de contact à bien été envoyé');
+                App::redirect('index.php');
+            }
+         }
+        $errors = $validator->getErrors();
+        $form = new BootstrapForm($_POST);
+        $this->render('posts.index',compact('posts', 'categories', 'flashs', 'form','errors', 'contact'));
     }
 
 
@@ -57,6 +75,7 @@ class PostsController extends AppController
     public function singlePost()
     {
         $post = $this->Post->findWithCategory($_GET['id']);
+        
         if($post ==false)
         {
             $this->notFound();
@@ -73,9 +92,10 @@ class PostsController extends AppController
             return App::redirect('index.php?page=posts.singlepost&id=' . $_GET['id']);
         }
         $comments = $this->Comment->findWithComment($_GET['id']);
+        $test = $this->Comment->waitingValidation($_SESSION['auth']->id, $_GET['id']);
         $count = $this->Comment->count($_GET['id']);
         $form = new BootstrapForm($_POST);
-        $this->render('posts.singlePost', compact('post','comments','count','form'));
+        $this->render('posts.singlePost', compact('post','comments','count','form', 'test'));
 
     }
 

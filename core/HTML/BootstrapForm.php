@@ -26,14 +26,14 @@ class BootstrapForm extends Form {
         $label ='<label>' . $label . '</label>'; 
         if($type ==='textarea')
         {
-            $input ='<textarea name="' . $name
+            $input ='<textarea rows="5" name="' . $name
              . '" class="form-control">' . $this->getValue($name) . '</textarea>'; 
 
         }
         else
         {
             $input ='<input type="' . $type .'" name="' . $name
-             . '" value="' . $this->getValue($name) . '">'; 
+            . '" class="form-control"' . '" value="' . $this->getValue($name) . '">'; 
         }
         return  $this->surround($label . $input);
     }
@@ -57,17 +57,13 @@ class BootstrapForm extends Form {
         return $this->surround($label . $input);
     }
 
-    
+   public function div($input)
+   {
+      '<div class="control-group">
+      <div class="form-group floating-label-form-group controls">'
+       . $input . '</div>
+       </div>';
+   }
 
-/*
-        bootstrap a update pour les forms
 
-<div class="control-group">
-            <div class="form-group floating-label-form-group controls">
-              <label>Name</label>
-              <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
-*/ 
 }
