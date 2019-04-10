@@ -121,12 +121,22 @@ class Auth
     }
     
  
- 
+    // method à modifier pour l'accès à l'espace admnistration
+
+    public function logged()
+    {
+        return isset($_SESSION['auth']);
+    }
 
 
-  
-
-
+    public function getAccess()
+    {
+        if(isset($_SESSION['auth']['status']) ===1)
+        {
+            return isset($_SESSION['auth']);
+        }
+        return false;
+    }
 
 
 }

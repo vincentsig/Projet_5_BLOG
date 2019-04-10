@@ -42,4 +42,26 @@ class CommentTable extends Table
         WHERE comment.user_id = ? AND comment.blogpost_id = ? AND comment.status IS NULL", [$user_id, $id]);
     }
 
+    /**
+     * waitingList
+     * show the comments not validated
+     * @return void
+     */
+    public function waitingList()
+    {
+        return $this->query(
+        "SELECT comment.id as comment_id, comment.content, comment.status, comment.user_id, user.username, user.id
+         FROM comment
+        LEFT JOIN user ON comment.user_id = user.id 
+        WHERE comment.status IS NULL");
+    }
+
+    public function valid($id)
+    {
+        return $this->query(
+        "UPDATE {$this->table} 
+        SET content = 'test de la requete'
+        WHERE id = ? ",[$id]);
+    }
+   
 }

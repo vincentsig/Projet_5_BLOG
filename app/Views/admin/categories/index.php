@@ -4,12 +4,16 @@
     <a href="?page=admin.categories.add" class="btn btn-success">Ajouter une catégorie</a>
 </p>
 
-<table class="table">
+
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+<table class="table table-dark">
 <thead>
     <tr>
-        <td>ID</td>
-        <td>Titre</td>
-        <td>Actions</td>
+    <th scope=>ID</th>
+    <th scope=>Titre</th>
+    <th scope=>Actions</th>
     </tr>
 </thead>
 <tbody>
@@ -30,3 +34,6 @@
     <?php endforeach?>
 </tbody>
 </table>
+        </div>
+    </div>
+</div>

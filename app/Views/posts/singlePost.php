@@ -1,13 +1,39 @@
-<h1><?= $post->title;?></h1>
-<p><?= $post->lead_in?></p>
-<p><?= $post->content;?></p>;
 
-<?=var_dump($_SESSION);?>
+<div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-10 mx-auto">
+        <div class="post-preview">
+            <h4 class="post-title">
+                  <?= $post->title; ?></a>
+            </h4>
+            </a>
+            <p class="post-meta">Posté par
+              <?= $post->username;?>, le <?= $post->date_created;?><br>
+              tag: <?= $post->category;?>
+            </p>
+            <p><?= $post->content?></p>
+        </div>
 
-<h3>Commentaires( <?php foreach($count as $value): ?>
+
+
+
+
+
+
+      
+            
+            
+        </div>
+      </div>
+
+</div>
+
+
+
+<h5>Commentaires( <?php foreach($count as $value): ?>
                     <?=$value; ?>)
                 <?php endforeach?>
-</h3>
+</h5>
 
 
 <div>
@@ -22,10 +48,10 @@
 </div>
 <div>
      <ul>
-     <?php  foreach($test as $te): ?>
+     <?php  foreach($waiting_coms as $com): ?>
             <li>
-                  <p>Autheur : <?=$te->username; ?></p>
-                  <p><?=$te->content; ?></p>  
+                  <p>Autheur : <?=$com->username; ?></p>
+                  <p><?=$com->content; ?></p>  
             </li>    
             <?php endforeach?>  
      </ul>    

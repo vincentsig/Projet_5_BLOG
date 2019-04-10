@@ -31,8 +31,11 @@ class PostsController extends AppController
         {
             $result = $this->Post-> create([
                 'title' => $_POST['title'],
+                'lead_in'=> $_POST['lead_in'],
                 'content' => $_POST['content'],
-                'category_id' => $_POST['category_id']
+                'category_id' => $_POST['category_id'],
+                'date_created' => date('Y-m-d H:i:s'),               
+                'user_id' => $_SESSION['auth']->id
             ]);
          
             if($result)

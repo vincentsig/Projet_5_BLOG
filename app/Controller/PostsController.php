@@ -92,10 +92,10 @@ class PostsController extends AppController
             return App::redirect('index.php?page=posts.singlepost&id=' . $_GET['id']);
         }
         $comments = $this->Comment->findWithComment($_GET['id']);
-        $test = $this->Comment->waitingValidation($_SESSION['auth']->id, $_GET['id']);
+        $waiting_coms = $this->Comment->waitingValidation($_SESSION['auth']->id, $_GET['id']);
         $count = $this->Comment->count($_GET['id']);
         $form = new BootstrapForm($_POST);
-        $this->render('posts.singlePost', compact('post','comments','count','form', 'test'));
+        $this->render('posts.singlePost', compact('post','user','comments','count','form', 'waiting_coms'));
 
     }
 

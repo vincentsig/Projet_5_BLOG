@@ -8,12 +8,14 @@ class UserTable extends Table
 {
    
 
-    public function getRole($id)
+    public function findWithUser($id)
     {
-        return $this->query('UPDATE ON 
-        FROM user
-        WHERE id = ?', [$id]);
-    }
+        return $this->query(
+            "SELECT user.id, user.username
+        FROM {$this->table}
+        LEFT JOIN blogpost ON user.id = blogpost.user_id
+        WHERE blogpost.id = ?", [$id], true);
+    }   
 
    
 

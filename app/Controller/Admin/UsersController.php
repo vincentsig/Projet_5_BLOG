@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use \Core\HTML\BootstrapForm;
 
-
 class UsersController extends AppController
 {
 
@@ -12,6 +11,7 @@ class UsersController extends AppController
     {
         parent:: __construct();
         $this->loadModel('User');
+        $this->loadModel('Role');
     }
 
 
@@ -26,7 +26,7 @@ class UsersController extends AppController
         if(!empty($_POST))
         {
             $result = $this->User->update($_GET['id'],[
-                'role' => $_POST['role']
+                'role_id' => $_POST['role_id']
             ]);
             if($result)
             {
@@ -34,9 +34,23 @@ class UsersController extends AppController
             }
         }
         $user = $this->User->find($_GET['id']);
-        $roles = $this->User->getList('id', 'role');
+        $roles = $this->Role->getList('id', 'name');
         $form = new BootstrapForm($user);
         $this->render('admin.users.edit',compact('roles', 'form','user'));
+    }
+
+
+
+    public function delete()
+    {
+        
+        if(!empty($_POST))
+        {
+            $result = $this->User->delete($_POST['id']);
+            {
+                return $this->index();
+            }
+        }       
     }
 
 
