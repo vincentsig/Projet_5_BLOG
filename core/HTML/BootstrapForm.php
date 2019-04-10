@@ -57,13 +57,4 @@ class BootstrapForm extends Form {
         return $this->surround($label . $input);
     }
 
-   public function div($input)
-   {
-      '<div class="control-group">
-      <div class="form-group floating-label-form-group controls">'
-       . $input . '</div>
-       </div>';
-   }
-
-
 }

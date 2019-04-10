@@ -5,21 +5,13 @@ namespace App\Controller\Admin;
 use App;
 
 
-class indexController extends AppController
+class IndexController extends AppController
 {
 
     public function dashboard()
     {
         $this->render('admin.index.dashboard');
     }
-
-
-    
-
-
-
-
-
 
 
 

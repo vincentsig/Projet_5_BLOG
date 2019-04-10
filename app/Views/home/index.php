@@ -1,8 +1,10 @@
-
 <?php foreach($flashs as $flash): ?>
-           <li><?= $flash; ?></li>
+<div class="alert alert-info">
+  <ul>
+    <li><?=$flash; ?></li>
+    </div>
+  </ul>
 <?php endforeach; ?>
-<?=var_dump($flashs);?>
 
 <div class="container">
       <div class="row">
@@ -35,10 +37,11 @@
             <h4 class="post-title">
             <a href="<?= $post->url ?>"><?= $post->title; ?></a>
             </h4>
-            <p><?= $post->lead_in ?></p>
+            <p><?= $post->lead_in ?><br><a class="btn btn-primary" href="<?= $post->url ?>">Suite</a></p>
+            
             </a>
             <p class="post-meta">Posté par
-              <?= $post->username;?>, le <?= $post->date_created;?><br>
+              <?= $post->username;?>, le <?= $post->date_created;?>, dernière modification : <?= $post->last_update?><br>
               tag: <?= $post->category;?>
             </p>
         </div>

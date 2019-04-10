@@ -46,7 +46,7 @@ class UsersController extends AppController
         
         if(!empty($_POST))
         {
-            $result = $this->User->delete($_POST['id']);
+            $this->User->delete($_POST['id']);
             {
                 return $this->index();
             }

@@ -1,0 +1,7 @@
+organization=vincentsig-github
+projectKey=vincentsig_Projet_5_BLOG
+serverUrl=https://sonarcloud.io
+serverVersion=7.8.0.23279
+dashboardUrl=https://sonarcloud.io/dashboard?id=vincentsig_Projet_5_BLOG
+ceTaskId=AWoE0emKAeX8nbrg2181
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWoE0emKAeX8nbrg2181

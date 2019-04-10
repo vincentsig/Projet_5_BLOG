@@ -75,7 +75,11 @@ class PostsController extends AppController
     public function singlePost()
     {
         $post = $this->Post->findWithCategory($_GET['id']);
-        
+        $flashs = Session::getInstance();
+        if($flashs->hasFlashes())
+        {
+            $flashs =$flashs->getFlashes();
+        }
         if($post ==false)
         {
             $this->notFound();
@@ -87,15 +91,27 @@ class PostsController extends AppController
                 'date_created' => date('Y-m-d H:i:s'),
                 'status' => NULL,
                 'user_id' => $_SESSION['auth']->id,
-                'blogpost_id' =>$_GET['id']  
+                'blogpost_id' =>$_GET['id']
             ]);
+
+            $flashs->setFlash('success', 'Votre commentaire sera publié après avoir été validé,
+            merci de votre compréhension.');
             return App::redirect('index.php?page=posts.singlepost&id=' . $_GET['id']);
         }
         $comments = $this->Comment->findWithComment($_GET['id']);
         $waiting_coms = $this->Comment->waitingValidation($_SESSION['auth']->id, $_GET['id']);
+        $waiting_message = NULL;
+        if(!empty($waiting_coms))
+        {
+                $waiting_message =" Votre commentaire est en attente de validation. Il sera rendu public 
+                après qu'un des admnistrateur du site vérifie son contenu. Merci de votre compréhension";
+                
+
+        }
+
         $count = $this->Comment->count($_GET['id']);
         $form = new BootstrapForm($_POST);
-        $this->render('posts.singlePost', compact('post','user','comments','count','form', 'waiting_coms'));
+        $this->render('posts.singlePost', compact('post','user','comments','count','form', 'waiting_coms', 'flashs','waiting_message'));
 
     }
 

@@ -57,8 +57,11 @@ class PostsController extends AppController
         {
             $result = $this->Post->update($_GET['id'],[
                 'title' => $_POST['title'],
+                'lead_in'=> $_POST['lead_in'],
                 'content' => $_POST['content'],
-                'category_id' => $_POST['category_id']
+                'category_id' => $_POST['category_id'],
+                'last_update' => date('Y-m-d H:i:s'),               
+                'user_id' => $_SESSION['auth']->id
             ]);
             if($result)
             {
@@ -75,7 +78,7 @@ class PostsController extends AppController
     {
         if(!empty($_POST))
         {
-            $result = $this->Post->delete($_POST['id']);
+            $this->Post->delete($_POST['id']);
             {
                 return $this->index();
             }

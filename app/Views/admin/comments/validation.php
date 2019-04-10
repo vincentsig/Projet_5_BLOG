@@ -1,7 +1,13 @@
+<?php foreach($flashs as $flash): ?>
+<div class="alert alert-info">
+  <ul>
+    <li><?=$flash; ?></li>
+    </div>
+  </ul>
+<?php endforeach; ?>
+
 <table class="table table-dark">
-
 <h4>Voici la listes des commentaires en attentes de validation</h4>
-
 <thead>
     <tr>
     <th scope="col">ID</th>
@@ -17,12 +23,12 @@
         <td><?=  $comment->content;?></td>
         <td>
             <form action="?page=admin.comments.valid" method="post" style="display: inline;">
-            <input type="hidden" name="id" value="<?= $comment->comment_id; ?>">
-            <button type="submit" class="btn btn-primary">Valider</button>
+                <input type="hidden" name="id" value="<?= $comment->comment_id; ?>">
+                <button type="submit" class="btn btn-primary">Valider</button>
             </form>
             <form action="?page=admin.comments.delete" method="post" style="display: inline;">
-            <input type="hidden" name="id" value="<?= $comment->comment_id; ?>">
-            <button type="submit" class="btn btn-danger">Supprimer</button>
+                <input type="hidden" name="id" value="<?= $comment->comment_id; ?>">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>
 
         </td>    

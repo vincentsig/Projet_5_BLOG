@@ -6,7 +6,7 @@
           </div>
           <div class="col-lg-3 col-md-10 mx-auto">
           <?php if (isset($_SESSION['auth'])): ?>
-            <a href="index.php?page=admin.index.dashboard">espace administration</a>
+          <a button class="btn btn-primary" href="index.php?page=admin.index.dashboard">espace administration</a>
             <?php endif; ?>
           </div>
       </div>

@@ -41,9 +41,8 @@ class CategoriesController extends AppController
     { 
         if(!empty($_POST))
         {
-            $result = $this->Post->update($_GET['id'],[
-                'title' => $_POST['title'],
-                
+            $this->Post->update($_GET['id'],[
+                'title' => $_POST['title'],    
             ]);
             return $this->index();        
             
@@ -58,7 +57,7 @@ class CategoriesController extends AppController
     {
         if(!empty($_POST))
         {
-            $result = $this->Category->delete($_POST['id']);
+            $this->Category->delete($_POST['id']);
             {
                 return $this->index();
             }
