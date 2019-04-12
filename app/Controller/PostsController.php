@@ -6,6 +6,8 @@ use \Core\Auth\Session;
 use \Core\Auth\Validator;
 use \Core\Auth\Contact;
 use Core\HTML\BootstrapForm;
+use Core\Auth\Auth;
+
 
 
 class PostsController extends AppController
@@ -74,16 +76,30 @@ class PostsController extends AppController
 
     public function singlePost()
     {
-        $post = $this->Post->findWithCategory($_GET['id']);
+        $db = App::getInstance()->getDb();
+        $auth = new Auth($db, Session::getInstance());
+            if ($auth->logged())
+            {
+                $waiting_coms = $this->Comment->waitingValidation($_SESSION['auth']->id, $_GET['id']);
+
+            }
+            else 
+            {
+                $waiting_coms = [];
+            }
+
         $flashs = Session::getInstance();
         if($flashs->hasFlashes())
         {
             $flashs =$flashs->getFlashes();
         }
+
+        $post = $this->Post->findWithCategory($_GET['id']);
         if($post ==false)
         {
             $this->notFound();
         }
+        
          if(!empty($_POST) && isset($_POST))
         {
             $result = $this->Comment->create([
@@ -99,24 +115,10 @@ class PostsController extends AppController
             return App::redirect('index.php?page=posts.singlepost&id=' . $_GET['id']);
         }
         $comments = $this->Comment->findWithComment($_GET['id']);
-        $waiting_coms = $this->Comment->waitingValidation($_SESSION['auth']->id, $_GET['id']);
-        $waiting_message = NULL;
-        if(!empty($waiting_coms))
-        {
-                $waiting_message =" Votre commentaire est en attente de validation. Il sera rendu public 
-                après qu'un des admnistrateur du site vérifie son contenu. Merci de votre compréhension";
-                
-
-        }
-
         $count = $this->Comment->count($_GET['id']);
         $form = new BootstrapForm($_POST);
-        $this->render('posts.singlePost', compact('post','user','comments','count','form', 'waiting_coms', 'flashs','waiting_message'));
+        $this->render('posts.singlePost', compact('post','user','comments','count','form', 'waiting_coms', 'flashs'));
 
     }
-
-  
-
-
     
 }

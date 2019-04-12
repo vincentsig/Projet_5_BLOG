@@ -3,14 +3,14 @@
 
 <p>Vous pouvez gérer ici les commentaires. Pour voir les commentaires en attentes de validation cliquez sur le bouton ci dessous.</p>
 <a class="btn btn-primary" href="?page=admin.comments.validation">Commentaires en attentes</a>
-<table class="table table-dark">
 
+<table class="table table-dark">
 <thead>
     <tr>
-    <th scope=>ID</th>
-    <th scope=>>ID utilisateur</th>
-    <th scope=>Status</th>
-    <th scope=>Actions</th>
+    <th scope="col">ID</th>
+    <th scope="col">>ID utilisateur</th>
+    <th scope="col">Status</th>
+    <th scope="col">Actions</th>
     </tr>
 </thead>
 <tbody>

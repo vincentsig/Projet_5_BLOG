@@ -1,10 +1,11 @@
-<?php foreach($flashs as $flash): ?>
-<div class="alert alert-info">
+<?php foreach($flashs as $type => $message ): ?>
+<div class="alert alert-<?= $type; ?>">
   <ul>
-    <li><?=$flash; ?></li>
+    <li><?=$message;?></li>
     </div>
   </ul>
 <?php endforeach; ?>
+
 
 <table class="table table-dark">
 <h4>Voici la listes des commentaires en attentes de validation</h4>
@@ -16,7 +17,6 @@
     </tr>
 </thead>
 <tbody>
-    <?=var_dump($comments)?>
     <?php foreach($comments as $comment):?>
     <tr>
         <td><?=  $comment->id; ?></td>

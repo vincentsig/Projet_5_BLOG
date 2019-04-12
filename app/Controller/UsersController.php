@@ -96,13 +96,14 @@ class UsersController extends AppController
             if($user)
             {
                 $flashs->setFlash('success', 'Vous êtes maintenant connecté');
-                app::redirect('index.php');
+                App::redirect('index.php');
            
             }else
             {
                 $flashs->setFlash('danger', 'Identifiant ou mot de passe incorrecte');
-            }
                 
+            }
+            
         }
         if($flashs->hasFlashes())
         {
@@ -120,15 +121,11 @@ class UsersController extends AppController
         $auth = App::getAuth();
         $auth->restrict();
         $flashs = Session::getInstance();
-        if($flashs->hasFlashes())
-        {
-            $flashs =$flashs->getFlashes();
-        }
         if(!empty($_POST))
         {
             if(empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm'])
             {
-                $flashs->setFlash("Les mots de passes ne correspondent pas");
+                $flashs->setFlash('danger','Les mots de passes ne correspondent pas');
             }
             else
             {
@@ -136,8 +133,12 @@ class UsersController extends AppController
                 $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $db = App::getInstance()->getDb();
                 $auth->update_password($db,$password,$user_id);
-                $flashs->setFlash("Votre mot de passe a bien été mis à jour");
+                $flashs->setFlash('success','Votre mot de passe a bien été mis à jour');
             }           
+        }
+        if($flashs->hasFlashes())
+        {
+            $flashs =$flashs->getFlashes();
         }
         $form = new BootstrapForm($_POST);    
         $this->render('users.account', compact('form', 'auth', 'flashs'));

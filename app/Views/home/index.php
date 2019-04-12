@@ -1,7 +1,7 @@
-<?php foreach($flashs as $flash): ?>
-<div class="alert alert-info">
+<?php foreach($flashs as $type => $message ): ?>
+<div class="alert alert-<?= $type; ?>">
   <ul>
-    <li><?=$flash; ?></li>
+    <li><?=$message;?></li>
     </div>
   </ul>
 <?php endforeach; ?>
@@ -20,14 +20,12 @@
             <p>Je suis d'avantage spécialisé en programmation back-end avec le langage PHP, et je suis capable de travailler sur
             toutes les étapes d'un projet, de sa conceptualisation à sa réalisation.</p>  
           </div>
-      </div>
-      
+      </div>     
 </div>
 <hr>
 
 <h2>Mes Projets</h2>
-      
-</div>
+ <br>     
 <div class="container">
   <div class="row">
     <?php foreach($posts as $post): ?>
@@ -72,33 +70,17 @@
             <?= $form->input('message', 'Message', ['type' => 'textarea']); ?>
             <button class="btn btn-primary">Envoyer</button> 
         </form>
-
-
         <hr>
       </div>
   </div>
 
   <h2>Mon CV</h2>
+  <br>
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-10 mx-auto">
-      <a href="cv\CV_Signoret_Vincent.pdf" target="_blank">Cliquez ici pour voir le pdf</a>
-      
+      <a href="cv\CV_Signoret_Vincent.pdf" target="_blank">Cliquez ici pour voir le pdf</a>    
+      </div>
     </div>
- </div>
- 
-  <div>
-  
-     <ul>
-     <?php  foreach($categories as $category): ?>
-     
-            <li>
-                  <a href="<?= $category->url; ?>"><?= $category->title; ?></a>
-            </li>
-       <?php endforeach?>      
-     </ul> 
-      
   </div>
-
-</div>
 </div>

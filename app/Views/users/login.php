@@ -1,18 +1,11 @@
 
-<?php foreach($flashs as $flash): ?>
-<li><?= $flash; ?></li>
+<?php foreach($flashs as $type => $message ): ?>
+<div class="alert alert-<?= $type; ?>">
+  <ul>
+    <li><?=$message;?></li>
+    </div>
+  </ul>
 <?php endforeach; ?>
-
-<?php 
-if($errors): ?>
-<div class="class=alert alert-danger">
-    Identifiants incorrects
-</div>
-<?php endif;?>
-
-
-
-<?= var_dump($flashs);?>
 
 
 <form method="post">

@@ -36,7 +36,7 @@
      <ul>
      <?php  foreach($comments as $comment): ?>
             <li>
-                  <p>Autheur : <?=$comment->username; ?></p>
+                  <p>Auteur : <?=$comment->username; ?></p>
                   <p><?=$comment->content; ?></p>  
             </li>    
             <?php endforeach?>  
