@@ -60,7 +60,7 @@ class Validator
      * @param  mixed 
      * @param  mixed $table
      * @param  mixed $errorMsg
-     * verifie q'un champ n'est pas déja utilisé en BDD
+     * Check if the field is not already in the database
      * @return void
      */
     public function isUniq($field, $db,  $table, $errorMsg)
@@ -75,6 +75,14 @@ class Validator
     }
 
 
+    /**
+     * isEmail
+     * check if the field is an email
+     * @param  mixed $field
+     * @param  mixed $errorMsg
+     *
+     * @return void
+     */
     public function isEmail($field, $errorMsg)
     {
         if (!filter_var($this->getField($field), FILTER_VALIDATE_EMAIL)) {

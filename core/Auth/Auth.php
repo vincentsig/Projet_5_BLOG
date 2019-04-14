@@ -21,11 +21,29 @@ class Auth
     }
    
     
+    /**
+     * hashPassword
+     * check if there is a password
+     * @param  mixed $password
+     *
+     * @return void
+     */
     public function hashPassword($password){
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
     
+    
+    /**
+     * register
+     * register a new user in the db
+     * @param  mixed $db
+     * @param  mixed $username
+     * @param  mixed $password
+     * @param  mixed $email
+     *
+     * @return void
+     */
     public function register($db, $username, $password, $email)
     {
         $password = $this->hashPassword($password);
@@ -131,11 +149,9 @@ class Auth
 
     public function getAccess()
     {
-        if(isset($_SESSION['auth']['status']) ===1)
-        {
-            return isset($_SESSION['auth']);
-        }
-        return false;
+            
+        
+       
     }
 
 

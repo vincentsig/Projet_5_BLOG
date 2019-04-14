@@ -11,13 +11,13 @@
         <div class="col-lg-12 col-md-8 mx-auto">
           <div class="page-heading">
              <h2>About Me</h2>
-           <p>Bonjour, je m'appelle Vincent, j'ai 31 ans et je suis actuellement en formation pour devenir devellopeur web.
+           <p>Bonjour, je m'appelle Vincent, j'ai 31 ans et je suis actuellement en formation pour devenir développeur web.
             Après avoir travaillé dans différents domaines et sur différents continents, j'ai décidé de me reconvertir vers
              la fin de l'année 2019.<br>
-            Le devellopement web m'a toujours attiré, je suis une personne curieuse et passionnée. Le milieu de la programmation
+            Le développement web m'a toujours attiré, je suis une personne curieuse et passionnée. Le milieu de la programmation
             me permet d'apprendre et de découvrir de nouvelles choses chaque jours.</p>
       
-            <p>Je suis d'avantage spécialisé en programmation back-end avec le langage PHP, et je suis capable de travailler sur
+            <p>Je suis d'avantage spécialisé en programmation back-end avec le langage PHP et je suis capable de travailler sur
             toutes les étapes d'un projet, de sa conceptualisation à sa réalisation.</p>  
           </div>
       </div>     

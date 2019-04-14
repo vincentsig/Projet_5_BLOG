@@ -17,6 +17,11 @@ class PostsController extends AppController
     }
 
 
+    /**
+     * index
+     * list all the blogposts
+     * @return void
+     */
     public function index()
     {
         $posts = $this->Post->all();
@@ -24,6 +29,11 @@ class PostsController extends AppController
     }
    
     
+    /**
+     * add
+     * add a blogpost
+     * @return void
+     */
     public function add()
     {
        
@@ -49,6 +59,11 @@ class PostsController extends AppController
         $this->render('admin.posts.edit',compact('categories', 'form'));
     }
 
+    /**
+     * edit
+     * edit a blogpost
+     * @return void
+     */
     public function edit()
     {
        
@@ -74,6 +89,11 @@ class PostsController extends AppController
         $this->render('admin.posts.edit',compact('categories', 'form','post'));
     }
     
+    /**
+     * delete
+     * delete permanently a blogpost
+     * @return void
+     */
     public function delete()
     {
         if(!empty($_POST))

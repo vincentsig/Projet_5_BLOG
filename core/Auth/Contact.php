@@ -30,7 +30,7 @@ class Contact
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
         $headers .= "From: 'vincent.signoret.mail@gmail.com\n"; 
         $headers .= "Reply-To: $email_address";   
-        mail($to,$email_subject,$email_body,$headers);
+        mail($to->my_email,$email_subject,$email_body,$headers);
         return true;   
     }
 

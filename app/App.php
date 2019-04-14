@@ -23,15 +23,26 @@ class App
         return self::$_instance;
     }
 
+    /**
+     * load
+     * load the controller with the autoloader 
+     * @return void
+     */
     public static function load()
     {
-        session_start();
         require ROOT . '/app/Autoloader.php';
         App\Autoloader::register();
         require ROOT . '/core/Autoloader.php';
         Core\Autoloader::register();
     }
 
+    /**
+     * getTable
+     *initialize object corresponding to the table ($name) from the DBB
+     * @param  mixed $name
+     *
+     * @return void
+     */
     public function getTable($name)
     {
         $class_name = '\\App\\Table\\' . ucfirst($name) . 'Table';
@@ -49,17 +60,35 @@ class App
         return $this->db_instance;
     }
 
-    static function getAuth(){
+    /**
+     * getAuth
+     *
+     * @return void
+     */
+    static function getAuth()
+    {
         return new Auth(App::getInstance()->getDb(),Session::getInstance(), ['restriction_msg' => 'Désole votre compte à été bloqué']);
     }
 
 
+    /**
+     * redirect
+     * redirect from path $page
+     * @param  mixed $page
+     *
+     * @return void
+     */
     static function redirect($page){
         header("Location: $page");
         exit();
     }
 
 
+    /**
+     * getEmail
+     * get the email in the config file
+     * @return void
+     */
     public function getEmail()
     {
         $config = Config::getInstance(ROOT . '/config/config.php');

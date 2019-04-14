@@ -23,40 +23,15 @@ class PostsController extends AppController
     }
 
 
-
-    public function index()
-    {
-        $errors = [];
-        $posts = $this->Post->lastFourPosts();
-        $categories = $this->Category->all();
-        $flashs = Session::getInstance();
-        $validator = new Validator($_POST);
-        $contact = new Contact(App::getInstance()->getEmail());
-        if($flashs->hasFlashes())
-        {
-            $flashs =$flashs->getFlashes();
-        }
-         if(!empty($_POST))
-         {
-            $validator->isAlpha('name', "Votre pseudo n'est pas valide (alphanumérique)");
-            $validator->isEmail('email', "Votre email n'est pas valide");
-            if($validator->isValid())
-            {
-            
-                //$contact->contact($_POST['name'], $_POST['email'], $_POST['message']);
-                $flashs->setFlash('success', 'Votre email de contact à bien été envoyé');
-                App::redirect('index.php');
-            }
-         }
-        $errors = $validator->getErrors();
-        $form = new BootstrapForm($_POST);
-        $this->render('posts.index',compact('posts', 'categories', 'flashs', 'form','errors', 'contact'));
-    }
-
-
-
+    /**
+     * blogpost
+     * show all the blogposts order by last date
+     * @return void
+     */
     public function blogpost()
     {
+        $db = App::getInstance()->getDb();
+        $auth = new Auth($db, Session::getInstance());
         $posts = $this->Post->last();
         $categories = $this->Category->all();
         $this->render('posts.blogposts',compact('posts', 'categories'));
@@ -74,20 +49,21 @@ class PostsController extends AppController
         $this->render('posts.category', compact('posts', 'categories','category'));
     }
 
+    /**
+     * singlePost
+     * Show all the details of a singlepost with the possibility to add some new comments
+     * @return void
+     */
     public function singlePost()
     {
         $db = App::getInstance()->getDb();
         $auth = new Auth($db, Session::getInstance());
+        $waiting_coms = [];
             if ($auth->logged())
             {
                 $waiting_coms = $this->Comment->waitingValidation($_SESSION['auth']->id, $_GET['id']);
-
             }
-            else 
-            {
-                $waiting_coms = [];
-            }
-
+    
         $flashs = Session::getInstance();
         if($flashs->hasFlashes())
         {

@@ -28,7 +28,7 @@ class MysqlDatabase extends Database
     {
         if($this->pdo === null)
         {
-            $pdo = new PDO('mysql:dbname=blog;localhost','root', ''); 
+            $pdo = new PDO('mysql:dbname=blog;localhost','root', '');  
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo;
         }

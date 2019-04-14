@@ -22,6 +22,12 @@ class HomeController extends AppController
 
 
 
+    /**
+     * index
+     * show the preview of the last four blogpost
+     * send a contact form if there is data in $_POST and if all the fields are valids.
+     * @return void
+     */
     public function index()
     {
         $errors = [];
@@ -41,9 +47,9 @@ class HomeController extends AppController
             if($validator->isValid())
             {
             
-                //$contact->contact($_POST['name'], $_POST['email'], $_POST['message']);
+                $contact->contact($_POST['name'], $_POST['email'], $_POST['message']);
                 $flashs->setFlash('success', 'Votre email de contact à bien été envoyé');
-                App::redirect('home.index.php');
+                App::redirect('index.php?page=home.index.php');
             }
         }
         

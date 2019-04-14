@@ -19,6 +19,11 @@ class UsersController extends AppController
 
     
 
+    /**
+     * register
+     * check if the fields form the register form are valid and create the user profil in the database.
+     * @return void
+     */
     public function register()
     {
         $errors = [];
@@ -62,6 +67,11 @@ class UsersController extends AppController
 
     }
 
+    /**
+     * confirm
+     * get the validation token sent by email during the registering
+     * @return void
+     */
     public function confirm()
     {
         $db = App::getInstance()->getDb();
@@ -80,15 +90,20 @@ class UsersController extends AppController
     }
 
 
+    /**
+     * login
+     * log the user if the username and password are valid.
+     * @return void
+     */
     public function login()
     {
-        $auth = App::getAuth();
         $db = App::getInstance()->getDb();
+        $auth = App::getAuth($db, Session::getInstance());
         $flashs = Session::getInstance();
 
-        if($auth->user())
+        if($auth->logged())
         {
-            App::redirect('users.account');
+            App::redirect('index.php?page=users.account');
         }
         if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) 
         {
@@ -116,6 +131,12 @@ class UsersController extends AppController
     }
 
 
+    
+    /**
+     * account
+     * go to the account page where the user have the possibility to change his password.
+     * @return void
+     */
     public function account()
     {
         $auth = App::getAuth();
@@ -145,6 +166,11 @@ class UsersController extends AppController
     }
 
 
+    /**
+     * logout
+     * logout the user and redirect the user on the login page.
+     * @return void
+     */
     public function logout()
     {
         App::getAuth()->logout();
@@ -153,23 +179,5 @@ class UsersController extends AppController
     }
 
 
-    /*public function login()
-    { 
-        $errors = false;
-        if(!empty($_POST))
-        {
-        $auth = new Auth(App::getInstance()->getDb());
-        if($auth->login($_POST['username'], $_POST['password']))
-            {
-            header('Location: index.php?page=admin.posts.index');
-            }
-        else
-        {
-            $errors = true;
-            
-        }
-    }
-        $form = new BootstrapForm($_POST);
-        $this->render('users.login', compact('form', 'errors'));
-    }*/
+
 }

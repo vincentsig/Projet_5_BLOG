@@ -76,6 +76,14 @@ Class Session
         return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }
 
+    
+    /**
+     * delete
+     * unset the session
+     * @param  mixed $key
+     *
+     * @return void
+     */
     public function delete($key){
         unset($_SESSION[$key]);
     }
