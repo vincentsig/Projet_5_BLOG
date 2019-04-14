@@ -1,4 +1,4 @@
-<?php foreach($posts as $post): ?>
+<?php foreach ($posts as $post): ?>
     
       <h2><a href="<?= $post->url ?>"><?= $post->title; ?></a></h2>
       <p><?= $post->date_created?></p>

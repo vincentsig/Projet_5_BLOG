@@ -2,9 +2,8 @@
 
 namespace Core\HTML;
 
-class BootstrapForm extends Form {
-
-
+class BootstrapForm extends Form
+{
     protected function surround($html)
     {
         return "<div class=\"form-group\">{$html}</div>";
@@ -23,17 +22,13 @@ class BootstrapForm extends Form {
     public function input($name, $label, $options=[])
     {
         $type = isset($options['type']) ? $options['type'] : 'texte';
-        $label ='<label>' . $label . '</label>'; 
-        if($type ==='textarea')
-        {
+        $label ='<label>' . $label . '</label>';
+        if ($type ==='textarea') {
             $input ='<textarea rows="5" name="' . $name
-             . '" class="form-control">' . $this->getValue($name) . '</textarea>'; 
-
-        }
-        else
-        {
+             . '" class="form-control">' . $this->getValue($name) . '</textarea>';
+        } else {
             $input ='<input type="' . $type .'" name="' . $name
-            . '" class="form-control"' . '" value="' . $this->getValue($name) . '">'; 
+            . '" class="form-control"' . '" value="' . $this->getValue($name) . '">';
         }
         return  $this->surround($label . $input);
     }
@@ -41,20 +36,17 @@ class BootstrapForm extends Form {
 
     public function select($name, $label, $options)
     {
-        $label ='<label>' . $label . '</label>'; 
+        $label ='<label>' . $label . '</label>';
         $input ='<select class="form-control" name="' . $name . '">';
-        foreach($options as $k => $v)
-        {
-        $attributes= '';
-        if($k == $this->getValue($name))
-        {
-            $attributes= ' selected';
-        }            
+        foreach ($options as $k => $v) {
+            $attributes= '';
+            if ($k == $this->getValue($name)) {
+                $attributes= ' selected';
+            }
             $input .="<option value='$k'$attributes>$v</option>";
         }
         
         $input .='</select>';
         return $this->surround($label . $input);
     }
-
 }

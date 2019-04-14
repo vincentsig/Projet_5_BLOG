@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App;
 use \Core\Auth\Session;
 use \Core\Auth\Validator;
@@ -8,11 +9,8 @@ use \Core\Auth\Contact;
 use Core\HTML\BootstrapForm;
 use Core\Auth\Auth;
 
-
-
 class PostsController extends AppController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -34,19 +32,18 @@ class PostsController extends AppController
         $auth = new Auth($db, Session::getInstance());
         $posts = $this->Post->last();
         $categories = $this->Category->all();
-        $this->render('posts.blogposts',compact('posts', 'categories'));
+        $this->render('posts.blogposts', compact('posts', 'categories'));
     }
 
     public function categories()
     {
         $category = $this->Category->find($_GET['id']);
-        if($category===false)
-        {
+        if ($category===false) {
             $this->notFound();
         }
         $posts = $this->Post->lastByCategory($_GET['id']);
         $categories = $this->Category->all();
-        $this->render('posts.category', compact('posts', 'categories','category'));
+        $this->render('posts.category', compact('posts', 'categories', 'category'));
     }
 
     /**
@@ -59,29 +56,25 @@ class PostsController extends AppController
         $db = App::getInstance()->getDb();
         $auth = new Auth($db, Session::getInstance());
         $waiting_coms = [];
-            if ($auth->logged())
-            {
-                $waiting_coms = $this->Comment->waitingValidation($_SESSION['auth']->id, $_GET['id']);
-            }
+        if ($auth->logged()) {
+            $waiting_coms = $this->Comment->waitingValidation($_SESSION['auth']->id, $_GET['id']);
+        }
     
         $flashs = Session::getInstance();
-        if($flashs->hasFlashes())
-        {
+        if ($flashs->hasFlashes()) {
             $flashs =$flashs->getFlashes();
         }
 
         $post = $this->Post->findWithCategory($_GET['id']);
-        if($post ==false)
-        {
+        if ($post ==false) {
             $this->notFound();
         }
         
-         if(!empty($_POST) && isset($_POST))
-        {
+        if (!empty($_POST) && isset($_POST)) {
             $result = $this->Comment->create([
                 'content' => $_POST['content'],
                 'date_created' => date('Y-m-d H:i:s'),
-                'status' => NULL,
+                'status' => null,
                 'user_id' => $_SESSION['auth']->id,
                 'blogpost_id' =>$_GET['id']
             ]);
@@ -93,8 +86,6 @@ class PostsController extends AppController
         $comments = $this->Comment->findWithComment($_GET['id']);
         $count = $this->Comment->count($_GET['id']);
         $form = new BootstrapForm($_POST);
-        $this->render('posts.singlePost', compact('post','user','comments','count','form', 'waiting_coms', 'flashs'));
-
+        $this->render('posts.singlePost', compact('post', 'user', 'comments', 'count', 'form', 'waiting_coms', 'flashs'));
     }
-    
 }

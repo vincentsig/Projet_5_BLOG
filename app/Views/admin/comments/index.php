@@ -14,7 +14,7 @@
     </tr>
 </thead>
 <tbody>
-    <?php foreach($comments as $comment):?>
+    <?php foreach ($comments as $comment):?>
     <tr>
         <td><?= $comment->id; ?></td>
         <td><?= $comment->user_id; ?></td>

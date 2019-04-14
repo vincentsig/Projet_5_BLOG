@@ -1,4 +1,4 @@
-<?php foreach($flashs as $type => $message ): ?>
+<?php foreach ($flashs as $type => $message): ?>
 <div class="alert alert-<?= $type; ?>">
   <ul>
     <li><?=$message;?></li>
@@ -17,7 +17,7 @@
     </tr>
 </thead>
 <tbody>
-    <?php foreach($comments as $comment):?>
+    <?php foreach ($comments as $comment):?>
     <tr>
         <td><?=  $comment->id; ?></td>
         <td><?=  $comment->content;?></td>

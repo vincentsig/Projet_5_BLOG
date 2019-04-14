@@ -1,12 +1,12 @@
 <?php
  use Core\Config;
- use Core\Database\MysqlDatabase;
- use Core\Auth\Auth;
- use Core\Auth\Session;
- use Core\Auth\Contact;
-class App 
+use Core\Database\MysqlDatabase;
+use Core\Auth\Auth;
+use Core\Auth\Session;
+use Core\Auth\Contact;
+
+class App
 {
-    
     public $title = 'My portefolio';
     
     private static $_instance;
@@ -15,8 +15,7 @@ class App
 
     public static function getInstance()
     {
-        if(is_null(self::$_instance))
-        {
+        if (is_null(self::$_instance)) {
             self::$_instance = new App();
         }
 
@@ -25,7 +24,7 @@ class App
 
     /**
      * load
-     * load the controller with the autoloader 
+     * load the controller with the autoloader
      * @return void
      */
     public static function load()
@@ -53,9 +52,8 @@ class App
     {
         $config = Config::getInstance(ROOT . '/config/config.php');
 
-        if (is_null($this->db_instance))
-        {
-            $this->db_instance = new MysqlDatabase($config->get('db_name'), $config->get('db_host'), $config->get('db_user'),$config->get('db_pass'));
+        if (is_null($this->db_instance)) {
+            $this->db_instance = new MysqlDatabase($config->get('db_name'), $config->get('db_host'), $config->get('db_user'), $config->get('db_pass'));
         }
         return $this->db_instance;
     }
@@ -65,9 +63,9 @@ class App
      *
      * @return void
      */
-    static function getAuth()
+    public static function getAuth()
     {
-        return new Auth(App::getInstance()->getDb(),Session::getInstance(), ['restriction_msg' => 'Désole votre compte à été bloqué']);
+        return new Auth(App::getInstance()->getDb(), Session::getInstance(), ['restriction_msg' => 'Désole votre compte à été bloqué']);
     }
 
 
@@ -78,7 +76,8 @@ class App
      *
      * @return void
      */
-    static function redirect($page){
+    public static function redirect($page)
+    {
         header("Location: $page");
         exit();
     }
@@ -93,11 +92,9 @@ class App
     {
         $config = Config::getInstance(ROOT . '/config/config.php');
 
-        if (is_null($this->my_email))
-        {
+        if (is_null($this->my_email)) {
             $this->my_email = new Contact($config->get('my_email'));
         }
         return $this->my_email;
-
     }
 }

@@ -15,7 +15,7 @@ class MysqlDatabase extends Database
 
 
 
-    public function __construct($db_name, $db_host='localhost', $db_user='root',$db_pass='')
+    public function __construct($db_name, $db_host='localhost', $db_user='root', $db_pass='')
     {
         $this->db_name = $db_name;
         $this->db_host = $db_host;
@@ -26,14 +26,12 @@ class MysqlDatabase extends Database
 
     public function getPDO()
     {
-        if($this->pdo === null)
-        {
-            $pdo = new PDO('mysql:dbname=blog;localhost','root', '');  
+        if ($this->pdo === null) {
+            $pdo = new PDO('mysql:dbname=blog;localhost', 'root', '');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo;
         }
         return $this->pdo;
-        
     }
 
 
@@ -45,33 +43,26 @@ class MysqlDatabase extends Database
      * @param  mixed $one is true if there is just one result to get (fetch()).
      * This request check the type (UPDATE, INSERT or DELETE) in this case the request is directly excuted
      * If it's an other type, return an Object or a Class depending of the $class_name
-     * @return void 
+     * @return void
      */
     public function query($statement, $class_name = null, $one = false)
     {
         $req = $this->getPDO()->query($statement);
-        if( 
+        if (
             strpos($statement, 'UPDATE')=== 0 ||
             strpos($statement, 'INSERT')=== 0 ||
-            strpos($statement, 'DELETE')=== 0 )
-        {
+            strpos($statement, 'DELETE')=== 0) {
             return $req;
         }
         
-        if($class_name === null)
-        {
+        if ($class_name === null) {
             $req->setFetchmode(PDO::FETCH_OBJ);
-        }
-        else
-        {
+        } else {
             $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
         }
-        if($one)
-        {
+        if ($one) {
             $datas = $req->fetch();
-        }
-        else
-        {
+        } else {
             $datas = $req->fetchAll();
         }
         return $datas;
@@ -81,29 +72,22 @@ class MysqlDatabase extends Database
     {
         $req= $this->getPDO()->prepare($statement);
         $res = $req->execute($attributes);
-        if( 
+        if (
             strpos($statement, 'UPDATE')=== 0 ||
             strpos($statement, 'INSERT')=== 0 ||
-            strpos($statement, 'DELETE')=== 0 )
-            {
-                return $res;
-            }
+            strpos($statement, 'DELETE')=== 0) {
+            return $res;
+        }
         
        
-        if($class_name === null)
-        {
+        if ($class_name === null) {
             $req->setFetchmode(PDO::FETCH_OBJ);
-        }
-        else
-        {
+        } else {
             $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
         }
-        if($one)
-        {
+        if ($one) {
             $datas = $req->fetch();
-        }
-        else
-        {
+        } else {
             $datas = $req->fetchAll();
         }
         return $datas;

@@ -6,7 +6,6 @@ use Core\Table\Table;
 
 class PostTable extends Table
 {
-      
     protected $table="blogpost";
 
 
@@ -18,7 +17,8 @@ class PostTable extends Table
         FROM blogpost
         LEFT JOIN category ON category_id = category.id
         ORDER BY blogpost.date_created DESC
-        ");
+        "
+        );
     }
 
 
@@ -37,12 +37,13 @@ class PostTable extends Table
         LEFT JOIN user ON blogpost.user_id = user.id
         LEFT JOIN category ON category_id = category.id
         ORDER BY date_created DESC
-        LIMIT 4");
+        LIMIT 4"
+        );
     }
 
     /**
      * find
-     * Find a post and his category with the post ID 
+     * Find a post and his category with the post ID
      * @param  mixed $id
      *
      * @return void
@@ -55,7 +56,10 @@ class PostTable extends Table
         FROM blogpost
         LEFT JOIN user ON blogpost.user_id = user.id
         LEFT JOIN category ON category_id = category.id
-        WHERE blogpost.id = ?", [$id], true);
+        WHERE blogpost.id = ?",
+            [$id],
+            true
+        );
     }
 
     public function lastByCategory($category_id)
@@ -65,12 +69,8 @@ class PostTable extends Table
             FROM blogpost
             LEFT JOIN category ON category_id = category.id
             WHERE blogpost.category_id = ? 
-            ORDER BY blogpost.date_created DESC" ,[$category_id]);
+            ORDER BY blogpost.date_created DESC",
+            [$category_id]
+        );
     }
-
-
-     
-
-
-
 }

@@ -10,7 +10,4 @@ class CategoryEntity extends Entity
     {
         return 'index.php?page=posts.category&id=' . $this->id;
     }
-
-  
-
 }

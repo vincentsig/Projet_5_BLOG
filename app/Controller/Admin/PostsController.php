@@ -4,10 +4,8 @@ namespace App\Controller\Admin;
 
 use \Core\HTML\BootstrapForm;
 
-
 class PostsController extends AppController
 {
-
     public function __construct()
     {
         parent:: __construct();
@@ -36,27 +34,24 @@ class PostsController extends AppController
      */
     public function add()
     {
-       
-        if(!empty($_POST))
-        {
+        if (!empty($_POST)) {
             $result = $this->Post-> create([
                 'title' => $_POST['title'],
                 'lead_in'=> $_POST['lead_in'],
                 'content' => $_POST['content'],
                 'category_id' => $_POST['category_id'],
-                'date_created' => date('Y-m-d H:i:s'),               
+                'date_created' => date('Y-m-d H:i:s'),
                 'user_id' => $_SESSION['auth']->id
             ]);
          
-            if($result)
-            {
-                return $this->index(); 
+            if ($result) {
+                return $this->index();
             }
         }
        
-        $categories = $this->Category->getList('id','title');
-        $form = new BootstrapForm($_POST);  
-        $this->render('admin.posts.edit',compact('categories', 'form'));
+        $categories = $this->Category->getList('id', 'title');
+        $form = new BootstrapForm($_POST);
+        $this->render('admin.posts.edit', compact('categories', 'form'));
     }
 
     /**
@@ -66,27 +61,23 @@ class PostsController extends AppController
      */
     public function edit()
     {
-       
-        
-        if(!empty($_POST))
-        {
-            $result = $this->Post->update($_GET['id'],[
+        if (!empty($_POST)) {
+            $result = $this->Post->update($_GET['id'], [
                 'title' => $_POST['title'],
                 'lead_in'=> $_POST['lead_in'],
                 'content' => $_POST['content'],
                 'category_id' => $_POST['category_id'],
-                'last_update' => date('Y-m-d H:i:s'),               
+                'last_update' => date('Y-m-d H:i:s'),
                 'user_id' => $_SESSION['auth']->id
             ]);
-            if($result)
-            {
-               return $this->index();        
+            if ($result) {
+                return $this->index();
             }
         }
         $post = $this->Post->find($_GET['id']);
         $categories = $this->Category->getList('id', 'title');
         $form = new BootstrapForm($post);
-        $this->render('admin.posts.edit',compact('categories', 'form','post'));
+        $this->render('admin.posts.edit', compact('categories', 'form', 'post'));
     }
     
     /**
@@ -96,17 +87,11 @@ class PostsController extends AppController
      */
     public function delete()
     {
-        if(!empty($_POST))
-        {
+        if (!empty($_POST)) {
             $this->Post->delete($_POST['id']);
             {
                 return $this->index();
             }
-            
-        }       
+        }
     }
-
-
-
-
 }

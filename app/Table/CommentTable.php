@@ -6,21 +6,26 @@ use Core\Table\Table;
 
 class CommentTable extends Table
 {
-
     public function count($id)
     {
         return $this->query(
             "SELECT COUNT(comment.content) FROM {$this->table} 
-            WHERE comment.blogpost_id = ? AND comment.status IS NOT NULL", [$id], true);
+            WHERE comment.blogpost_id = ? AND comment.status IS NOT NULL",
+            [$id],
+            true
+        );
     }
 
     public function findWithComment($id)
     {
         return $this->query(
-            "SELECT comment.id, comment.content, comment.status, user.username, user.id FROM {$this->table} 
-        LEFT JOIN blogpost ON blogpost_id = blogpost.id
-        LEFT JOIN user ON comment.user_id = user.id
-        WHERE  comment.status IS NOT NULL AND blogpost_id = ?", [$id]) ;
+            "SELECT comment.id, comment.content, DATE_FORMAT(comment.status, '%d/%m/%Y %H:%i:%s') as date_published  , user.username, user.id 
+            FROM {$this->table} 
+            LEFT JOIN blogpost ON blogpost_id = blogpost.id
+            LEFT JOIN user ON comment.user_id = user.id
+            WHERE  comment.status IS NOT NULL AND blogpost_id = ?",
+            [$id]
+        ) ;
     }
 
 
@@ -36,10 +41,12 @@ class CommentTable extends Table
     public function waitingValidation($user_id, $id)
     {
         return $this->query(
-        "SELECT comment.id, comment.content, comment.status, comment.user_id, comment.blogpost_id, user.username, user.id  FROM {$this->table}
+            "SELECT comment.id, comment.content, comment.status, comment.user_id, comment.blogpost_id, user.username, user.id  FROM {$this->table}
         LEFT JOIN blogpost ON comment.blogpost_id = blogpost.id
         LEFT JOIN user ON comment.user_id = user.id 
-        WHERE comment.user_id = ? AND comment.blogpost_id = ? AND comment.status IS NULL", [$user_id, $id]);
+        WHERE comment.user_id = ? AND comment.blogpost_id = ? AND comment.status IS NULL",
+            [$user_id, $id]
+        );
     }
 
     /**
@@ -50,18 +57,12 @@ class CommentTable extends Table
     public function waitingList()
     {
         return $this->query(
-        "SELECT comment.id as comment_id, comment.content, comment.status, comment.user_id, user.username, user.id
+            "SELECT comment.id as comment_id, comment.content, comment.status, comment.user_id, user.username, user.id
          FROM comment
         LEFT JOIN user ON comment.user_id = user.id 
-        WHERE comment.status IS NULL");
+        WHERE comment.status IS NULL"
+        );
     }
 
-    public function valid($id)
-    {
-        return $this->query(
-        "UPDATE {$this->table} 
-        SET content = 'test de la requete'
-        WHERE id = ? ",[$id]);
-    }
    
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use \Core\HTML\BootstrapForm;
 use \Core\Auth\Auth;
 use \Core\Auth\Validator;
@@ -9,8 +10,6 @@ use\App;
 
 class UsersController extends AppController
 {
-     
-
     public function __construct()
     {
         parent::__construct();
@@ -31,40 +30,32 @@ class UsersController extends AppController
         $validator = new Validator($_POST);
         $flashs = Session::getInstance();
 
-        if(!empty($_POST))
-        { 
-                    
+        if (!empty($_POST)) {
             $validator->isAlpha('username', "Votre pseudo n'est pas valide (alphanumérique)");
             
-            if($validator->isValid())
-            {
-                $validator->isUniq('username', $db,'user', 'Ce pseudo est déjà pris');
+            if ($validator->isValid()) {
+                $validator->isUniq('username', $db, 'user', 'Ce pseudo est déjà pris');
             }
             $validator->isEmail('email', "Votre email n'est pas valide");
 
-            if($validator->isValid())
-            {
+            if ($validator->isValid()) {
                 $validator->isUniq('email', $db, 'user', 'Cet email est déjà utilisé pour un autre compte');
             }
             $validator->isConfirmed('password', 'Vous devez rentrer un mot de passe valide');
             
-            if($validator->isValid())
-            {
+            if ($validator->isValid()) {
                 $auth = new Auth($db, Session::getInstance());
-                $auth->register($db,$_POST['username'], $_POST['password'], $_POST['email']);
+                $auth->register($db, $_POST['username'], $_POST['password'], $_POST['email']);
                 $flashs->setFlash('success', 'Un email de confirmation vous a été envoyé pour valider votre compte');
                 App::redirect('index.php?page=users.login.php');
             }
-           
         }
-        if($flashs->hasFlashes())
-        {
+        if ($flashs->hasFlashes()) {
             $flashs =$flashs->getFlashes();
         }
         $errors = $validator->getErrors();
         $form = new BootstrapForm($_POST);
-        $this->render('users.register', compact('form', 'user','flashs', 'errors', 'validator'));
-
+        $this->render('users.register', compact('form', 'user', 'flashs', 'errors', 'validator'));
     }
 
     /**
@@ -77,16 +68,13 @@ class UsersController extends AppController
         $db = App::getInstance()->getDb();
         $flashs = Session::getInstance();
 
-        if(App::getAuth()->confirm($db, $_GET['id'], $_GET['token'], Session::getInstance()))
-        {
+        if (App::getAuth()->confirm($db, $_GET['id'], $_GET['token'], Session::getInstance())) {
             $flashs->setFlash('danger', "Votre compte a bien été validé");
             App::redirect('index.php?page=users.account');
-        }
-        else{
+        } else {
             $flashs->setFlash('danger', "Ce token n'est plus valide");
             App::redirect('index.php?page=users.login.php');
         }
-       
     }
 
 
@@ -101,33 +89,24 @@ class UsersController extends AppController
         $auth = App::getAuth($db, Session::getInstance());
         $flashs = Session::getInstance();
 
-        if($auth->logged())
-        {
+        if ($auth->logged()) {
             App::redirect('index.php?page=users.account');
         }
-        if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) 
-        {
+        if (!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
             $user = $auth->login($db, $_POST['username'], $_POST['password']);
-            if($user)
-            {
+            if ($user) {
                 $flashs->setFlash('success', 'Vous êtes maintenant connecté');
                 App::redirect('index.php');
-           
-            }else
-            {
+            } else {
                 $flashs->setFlash('danger', 'Identifiant ou mot de passe incorrecte');
-                
             }
-            
         }
-        if($flashs->hasFlashes())
-        {
+        if ($flashs->hasFlashes()) {
             $flashs =$flashs->getFlashes();
         }
 
-        $form = new BootstrapForm($_POST);    
-        $this->render('users.login', compact('form','flashs', 'errors'));
-        
+        $form = new BootstrapForm($_POST);
+        $this->render('users.login', compact('form', 'flashs', 'errors'));
     }
 
 
@@ -142,26 +121,21 @@ class UsersController extends AppController
         $auth = App::getAuth();
         $auth->restrict();
         $flashs = Session::getInstance();
-        if(!empty($_POST))
-        {
-            if(empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm'])
-            {
-                $flashs->setFlash('danger','Les mots de passes ne correspondent pas');
-            }
-            else
-            {
+        if (!empty($_POST)) {
+            if (empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm']) {
+                $flashs->setFlash('danger', 'Les mots de passes ne correspondent pas');
+            } else {
                 $user_id = $_SESSION['auth']->id;
                 $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $db = App::getInstance()->getDb();
-                $auth->update_password($db,$password,$user_id);
-                $flashs->setFlash('success','Votre mot de passe a bien été mis à jour');
-            }           
+                $auth->update_password($db, $password, $user_id);
+                $flashs->setFlash('success', 'Votre mot de passe a bien été mis à jour');
+            }
         }
-        if($flashs->hasFlashes())
-        {
+        if ($flashs->hasFlashes()) {
             $flashs =$flashs->getFlashes();
         }
-        $form = new BootstrapForm($_POST);    
+        $form = new BootstrapForm($_POST);
         $this->render('users.account', compact('form', 'auth', 'flashs'));
     }
 
@@ -177,7 +151,4 @@ class UsersController extends AppController
         Session::getInstance()->setFlash('success', 'Vous êtes maintenant déconnecté');
         return $this->login();
     }
-
-
-
 }

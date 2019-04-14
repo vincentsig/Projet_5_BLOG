@@ -1,24 +1,26 @@
 <?php
 
 namespace Core\Auth;
-Class Session
-{
 
-    static $instance;
+class Session
+{
+    public static $instance;
 
     /**
      * getInstance
-     * singleton 
+     * singleton
      * @return void
      */
-    static function getInstance(){
-        if(!self::$instance){
+    public static function getInstance()
+    {
+        if (!self::$instance) {
             self::$instance = new Session();
         }
         return self::$instance;
     }
 
-    public function __construct(){
+    public function __construct()
+    {
         session_start();
     }
 
@@ -30,7 +32,8 @@ Class Session
      * save a flash message in the Session 'flash'
      * @return void
      */
-    public function setFlash($key, $message){
+    public function setFlash($key, $message)
+    {
         $_SESSION['flash'][$key] = $message;
     }
 
@@ -38,7 +41,8 @@ Class Session
      * hasFlashes
      * check if there are some flashes messages in ($_SESSION['flash'])
      */
-    public function hasFlashes(){
+    public function hasFlashes()
+    {
         return isset($_SESSION['flash']);
     }
 
@@ -47,7 +51,8 @@ Class Session
      * get all the flashes message and unset them
      * @return void
      */
-    public function getFlashes(){
+    public function getFlashes()
+    {
         $flash = $_SESSION['flash'];
         unset($_SESSION['flash']);
         return $flash;
@@ -61,7 +66,8 @@ Class Session
      * insert $value on $_SESSION[$key]
      * @return void
      */
-    public function write($key, $value){
+    public function write($key, $value)
+    {
         $_SESSION[$key] = $value;
     }
 
@@ -72,7 +78,8 @@ Class Session
      *
      * @return void
      */
-    public function read($key){
+    public function read($key)
+    {
         return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }
 
@@ -84,8 +91,8 @@ Class Session
      *
      * @return void
      */
-    public function delete($key){
+    public function delete($key)
+    {
         unset($_SESSION[$key]);
     }
-
 }

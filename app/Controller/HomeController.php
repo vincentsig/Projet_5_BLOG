@@ -5,7 +5,7 @@ use App;
 use \Core\Auth\Session;
 use \Core\Auth\Validator;
 use \Core\Auth\Contact;
-use Core\HTML\BootstrapForm;
+use \Core\HTML\BootstrapForm;
 
 
 class HomeController extends AppController
@@ -42,12 +42,13 @@ class HomeController extends AppController
         }
          if(!empty($_POST))
         {
-            $validator->isAlpha('name', "Votre pseudo n'est pas valide (alphanumérique)");
+            $validator->isAlpha('firstname', "Votre Prénom n'est pas valide (alphanumérique)");
+            $validator->isAlpha('surname', "Votre nom n'est pas valide (alphanumérique)");
             $validator->isEmail('email', "Votre email n'est pas valide");
             if($validator->isValid())
             {
             
-                $contact->contact($_POST['name'], $_POST['email'], $_POST['message']);
+                $contact->contact($_POST['firstname'],$_POST['surname'], $_POST['email'], $_POST['message']);
                 $flashs->setFlash('success', 'Votre email de contact à bien été envoyé');
                 App::redirect('index.php?page=home.index.php');
             }
@@ -57,14 +58,6 @@ class HomeController extends AppController
         $form = new BootstrapForm($_POST);
         $this->render('home.index',compact('posts', 'categories', 'flashs', 'form','errors', 'contact'));
     }
-
-
-    
-
-    
-
-  
-
 
     
 }

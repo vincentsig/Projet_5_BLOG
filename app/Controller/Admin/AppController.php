@@ -13,10 +13,8 @@ class AppController extends \App\Controller\AppController
         parent::__construct();
         $db = App::getInstance()->getDb();
         $auth = new Auth($db, Session::getInstance());
-        if (!$auth->logged())
-        {
+        if (!$auth->logged()) {
             $this->forbidden();
         }
     }
-
 }

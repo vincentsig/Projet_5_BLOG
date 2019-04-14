@@ -6,8 +6,4 @@ use Core\Entity\Entity;
 
 class RoleEntity extends Entity
 {
-
-    
-
-   
 }

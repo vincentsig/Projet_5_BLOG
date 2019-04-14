@@ -14,7 +14,7 @@
     </tr>
 </thead>
 <tbody>
-    <?php foreach($posts as $post):?>
+    <?php foreach ($posts as $post):?>
     <tr>
         <td><?= $post->id; ?></td>
         <td><?= $post->title; ?></td>

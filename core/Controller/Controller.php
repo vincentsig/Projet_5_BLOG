@@ -7,13 +7,13 @@ class Controller
     protected $viewPath;
     protected $template;
 
-    protected function render($view ,$variables =[])
+    protected function render($view, $variables =[])
     {
         ob_start();
         extract($variables);
-        require($this->viewPath . str_replace('.','/', $view) . '.php');
+        require($this->viewPath . str_replace('.', '/', $view) . '.php');
         $content = ob_get_clean();
-        require ($this->viewPath . 'templates/' . $this->template . '.php');
+        require($this->viewPath . 'templates/' . $this->template . '.php');
     }
 
     
@@ -28,6 +28,4 @@ class Controller
         header('HTTP/1.0 404 Not Found');
         die('Page Introuvable');
     }
-
-
 }

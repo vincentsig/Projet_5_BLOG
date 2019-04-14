@@ -1,5 +1,5 @@
 
-<?php foreach($flashs as $flash): ?>
+<?php foreach ($flashs as $flash): ?>
 <div class="alert alert-info">
 <ul>
     <li><?=$flash; ?></li>
@@ -26,7 +26,7 @@
 
 </div>
 
-<h5>Commentaires( <?php foreach($count as $value): ?>
+<h5>Commentaires( <?php foreach ($count as $value): ?>
                     <?=$value; ?>)
                 <?php endforeach?>
 </h5>
@@ -34,9 +34,10 @@
 
 <div>
      <ul>
-     <?php  foreach($comments as $comment): ?>
+     <?php  foreach ($comments as $comment): ?>
             <li>
                   <p>Auteur : <?=$comment->username; ?></p>
+                  <p>Date de publication : <?=$comment->date_published; ?></p>
                   <p><?=$comment->content; ?></p>  
             </li>    
             <?php endforeach?>  
@@ -47,7 +48,7 @@
 <div>
 <blockquote>
      <ul>
-     <?php  foreach($waiting_coms as $com): ?>
+     <?php  foreach ($waiting_coms as $com): ?>
      <p>Ce commentaire est en attente de validation. Il sera rendu public 
       après qu'un des admnistrateur du site aura vérifié son contenu. Merci de votre compréhension</p>
             <li>

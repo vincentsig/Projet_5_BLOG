@@ -1,4 +1,4 @@
-<?php foreach($flashs as $type => $message ): ?>
+<?php foreach ($flashs as $type => $message): ?>
 <div class="alert alert-<?= $type; ?>">
   <ul>
     <li><?=$message;?></li>
@@ -28,7 +28,7 @@
  <br>     
 <div class="container">
   <div class="row">
-    <?php foreach($posts as $post): ?>
+    <?php foreach ($posts as $post): ?>
       <div class="col-lg-6 col-md-8 mx-auto">
         <div class="post-preview">
           <a href="<?= $post->url ?>">
@@ -39,7 +39,9 @@
             
             </a>
             <p class="post-meta">Posté par
-              <?= $post->username;?>, le <?= $post->date_created;?>, dernière modification : <?= $post->last_update?><br>
+              <?= $post->username;?>, le <?= $post->date_created;?>
+              <?php if(isset($post->last_update)):?>, dernière modification : <?= $post->last_update?><br>
+              <?php endif;?>
               tag: <?= $post->category;?>
             </p>
         </div>
@@ -52,7 +54,7 @@
 
 <h2>Formulaire de contact</h2>
 
-<?php  foreach($errors as $error): ?>
+<?php  foreach ($errors as $error): ?>
     <li>
       <?=$error?>;
     </li>
@@ -65,7 +67,8 @@
           Je vous contacterais dès que possible.</p>
         
         <form action="" method="post">
-            <?= $form->input('name', 'nom'); ?>
+            <?= $form->input('firstname', 'Prénom'); ?>
+            <?= $form->input('surname', 'Nom'); ?>
             <?= $form->input('email', 'Email'); ?>
             <?= $form->input('message', 'Message', ['type' => 'textarea']); ?>
             <button class="btn btn-primary">Envoyer</button> 
