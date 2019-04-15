@@ -17,20 +17,23 @@ class CommentsController extends AppController
     }
 
 
+    /**
+     * index
+     * index of the comments managment
+     * @return void
+     */
     public function index()
     {
         $comments = $this->Comment->all();
         $this->render('admin.comments.index', compact('comments'));
     }
    
-    
-    public function show()
-    {
-        $comments = $this->Comment->find($_GET['id']);
-        $this->render('admin.comments.show', compact('comments'));
-    }
 
-
+    /**
+     * validation
+     * show all the comments not validated
+     * @return void
+     */
     public function validation()
     {
         $flashs = Session::getInstance();
@@ -43,6 +46,11 @@ class CommentsController extends AppController
     }
 
 
+    /**
+     * valid
+     * valid a comment and publish it on the website
+     * @return void
+     */
     public function valid()
     {
         $flashs = Session::getInstance();
@@ -56,6 +64,11 @@ class CommentsController extends AppController
         }
     }
 
+    /**
+     * delete
+     * delete a comment
+     * @return void
+     */
     public function delete()
     {
         if (!empty($_POST)) {

@@ -5,7 +5,6 @@
     </div>
   </ul>
 <?php endforeach; ?>
-
 <div class="container">
       <div class="row">
         <div class="col-lg-12 col-md-8 mx-auto">
@@ -23,7 +22,7 @@
       </div>     
 </div>
 <hr>
-
+<?= var_dump($_SESSION['auth']);?>
 <h2>Mes Projets</h2>
  <br>     
 <div class="container">

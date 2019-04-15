@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use \Core\HTML\BootstrapForm;
+use \Core\Auth\Session;
+
+use App;
 
 class UsersController extends AppController
 {
@@ -14,12 +17,29 @@ class UsersController extends AppController
     }
 
 
+    /**
+     * index
+     * index of the user managment
+     * @return void
+     */
     public function index()
     {
         $users = $this->User->all();
-        $this->render('admin.users.index', compact('users'));
+        $db = App::getInstance()->getDb();
+        $auth = App::getAuth($db, Session::getInstance());
+        $flashs = Session::getInstance();
+        if ($flashs->hasFlashes()) {
+            $flashs =$flashs->getFlashes();
+        }
+        $session_id = $auth->getUserId();
+        $this->render('admin.users.index', compact('users', 'session_id', 'auth', 'flashs'));
     }
 
+    /**
+     * edit
+     * edit the user table
+     * @return void
+     */
     public function edit()
     {
         if (!empty($_POST)) {
@@ -38,13 +58,29 @@ class UsersController extends AppController
 
 
 
+    /**
+     * delete
+     * delete a user but you can't delete your own account during the session
+     * @return void
+     */
     public function delete()
     {
-        if (!empty($_POST)) {
-            $this->User->delete($_POST['id']);
+
+        if (!empty($_POST)) 
+        {
+            $db = App::getInstance()->getDb();
+            $auth = App::getAuth($db, Session::getInstance());
+            $flashs = Session::getInstance();
+            $session_id = $auth->getUserId();
+            if($_POST['id'] === $session_id)
             {
-                return $this->index();
+                $flashs->setFlash('danger', "Vous ne pouvez pas supprimer votre propre compte");
+                App::redirect('index.php?page=admin.users.index');
             }
+            $this->User->delete($_POST['id']);
+            return $this->index();
+            
         }
+        
     }
 }

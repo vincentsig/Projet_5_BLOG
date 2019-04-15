@@ -1,4 +1,4 @@
-<h1>Gestion des catégories<h1>
+<h1 class="section-heading">Gestion des catégories</h1>
 
 <p>
     <a href="?page=admin.categories.add" class="btn btn-success">Ajouter une catégorie</a>
@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="col-lg-12 col-md-10 mx-auto">
 <table class="table table-dark">
 <thead>
     <tr>

@@ -1,16 +1,22 @@
-
-<h1>Gestion des articles<h1>
+<div class="container">
+    <h1 class="section-heading">Gestion des Articles</h1>
+    <div class="row">
+      <div class="col-lg-12 col-md-10 mx-auto">
 
 <p>
     <a href="?page=admin.posts.add" class="btn btn-success">Ajouter un article</a>
 </p>
 
-<table class="table">
+
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-10 mx-auto">
+<table class="table table-dark">
 <thead>
     <tr>
-        <td>ID</td>
-        <td>Titre</td>
-        <td>Actions</td>
+        <th scope=>ID</td>
+        <th scope=>Titre</td>
+        <th scope=>Actions</td>
     </tr>
 </thead>
 <tbody>
@@ -31,3 +37,6 @@
     <?php endforeach?>
 </tbody>
 </table>
+        </div>
+    </div>
+</div>

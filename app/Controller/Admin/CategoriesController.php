@@ -14,6 +14,11 @@ class CategoriesController extends AppController
     }
 
 
+    /**
+     * index
+     * index of the categories managment
+     * @return void
+     */
     public function index()
     {
         $items = $this->Category->all();
@@ -21,6 +26,11 @@ class CategoriesController extends AppController
     }
    
 
+    /**
+     * add
+     * add a new category
+     * @return void
+     */
     public function add()
     {
         if (!empty($_POST)) {
@@ -34,6 +44,11 @@ class CategoriesController extends AppController
     }
 
 
+    /**
+     * edit
+     * rename a category
+     * @return void
+     */
     public function edit()
     {
         if (!empty($_POST)) {
@@ -48,6 +63,11 @@ class CategoriesController extends AppController
     }
     
 
+    /**
+     * delete
+     * delete a category
+     * @return void
+     */
     public function delete()
     {
         if (!empty($_POST)) {

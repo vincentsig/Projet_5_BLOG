@@ -48,7 +48,8 @@ class HomeController extends AppController
             if($validator->isValid())
             {
             
-                $contact->contact($_POST['firstname'],$_POST['surname'], $_POST['email'], $_POST['message']);
+                $contact->contact( htmlentities($_POST['firstname']),htmlentities($_POST['surname']),
+                htmlentities($_POST['email']), htmlentities($_POST['message']));
                 $flashs->setFlash('success', 'Votre email de contact à bien été envoyé');
                 App::redirect('index.php?page=home.index.php');
             }

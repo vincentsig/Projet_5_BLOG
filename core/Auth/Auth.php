@@ -1,12 +1,14 @@
 <?php
 namespace Core\Auth;
 
+use App;
 use Core\Database\MysqlDatabase;
 use Core\Auth\StrToken;
 
 class Auth
 {
     protected $db;
+    private $my_email;
     private $session;
     private $options = [
         'restriction_msg' => "Vous n'avez pas le droit d'accéder à cette page"
@@ -18,6 +20,7 @@ class Auth
         $this->options = array_merge($this->options, $options);
         $this->session = $session;
         $this->db =$db;
+        $this->my_email= App::getInstance()->getEmail();
     }
    
     
@@ -59,7 +62,7 @@ class Auth
       
         $headers = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-        $headers .= 'From: vinsouz94@hotmail.com' . "\r\n";
+        $headers .= 'From: "' . $this->my_email . "\r\n";
         mail(
             $email,
             'Confirmation de votre compte',
@@ -69,14 +72,6 @@ class Auth
         );
     }
 
-
-    public function getUserId()
-    {
-        if ($this->logged()) {
-            return $_SESSION['auth'];
-        }
-        return false;
-    }
 
 
     /**
@@ -99,14 +94,6 @@ class Auth
         return false;
     }
 
-
-    public function user()
-    {
-        if (!$this->session->read('auth')) {
-            return false;
-        }
-        return $this->session->read('auth');
-    }
 
     public function connect($user)
     {
@@ -143,16 +130,36 @@ class Auth
         $db->prepare('UPDATE user SET password = ? WHERE id = ?', [$password, $user_id]);
     }
     
- 
-    // method à modifier pour l'accès à l'espace admnistration
 
     public function logged()
     {
         return isset($_SESSION['auth']);
     }
 
-
-    public function getAccess()
+    /**
+     * getUserId
+     * get the user id (use in the managment users)
+     * @return void
+     */
+    public function getUserId()
     {
+        if ($this->logged()) {
+            $session_id = $_SESSION['auth']->id;
+            return $session_id;
+        }
+    }
+
+
+    /**
+     * getRole
+     * get the role id for the managment acces
+     * @return void
+     */
+    public function getRole()
+    {
+        if ($this->logged()){
+        $role = $_SESSION['auth']->role_id;
+        return $role;
+        }
     }
 }

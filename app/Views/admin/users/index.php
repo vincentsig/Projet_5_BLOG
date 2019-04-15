@@ -1,16 +1,28 @@
 
-<h1>Gestion des Utilisateurs<h1>
 
+<?= var_dump($session_id);?>
+<?= var_dump($_SESSION['auth']);?>
 
+<?php foreach ($flashs as $type => $message): ?>
+<div class="alert alert-<?= $type; ?>">
+  <ul>
+    <li><?=$message;?></li>
+    </div>
+  </ul>
+<?php endforeach; ?>
 
-<table class="table">
+<div class="container">
+    <h1 class="section-heading">Gestion des Utilisateurs</h1>
+    <div class="row">
+      <div class="col-lg-12 col-md-10 mx-auto">
+<table class="table table-dark">
 <thead>
     <tr>
-        <td>ID</td>
-        <td>username</td>
-        <td>email</td>
-        <td>role</td>
-        <td>action</td>
+        <th scope=>ID</td>
+        <th scope=>username</td>
+        <th scope=>email</td>
+        <th scope=>role</td>
+        <th scope=>action</td>
     </tr>
 </thead>
 <tbody>
@@ -32,3 +44,6 @@
     <?php endforeach?>
 </tbody>
 </table>
+        </div>
+    </div>
+</div>

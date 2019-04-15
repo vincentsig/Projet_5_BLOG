@@ -72,7 +72,7 @@ class PostsController extends AppController
         
         if (!empty($_POST) && isset($_POST)) {
             $result = $this->Comment->create([
-                'content' => $_POST['content'],
+                'content' => htmlentities($_POST['content']),
                 'date_created' => date('Y-m-d H:i:s'),
                 'status' => null,
                 'user_id' => $_SESSION['auth']->id,

@@ -4,6 +4,6 @@
       <p><?= $post->date_created?></p>
       <p>Category: <?= $post->category;?></p>
       <p><?= $post->lead_in?></p>
-      <p><?php echo  $post->getExcerpt();?></p>
+      <p><?= $post->getExcerpt();?></p>
       
 <?php endforeach?>

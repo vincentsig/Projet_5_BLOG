@@ -48,27 +48,5 @@ class DBAuth
         return false;
     }
 
-    /**
-      * ancien système de login
-      * login
-      *
-      * @param  mixed $username
-      * @param  mixed $password
-      *
-      * @return boolean
-      */
-      /*
-    public function login($username, $password)
-    {
-        $user = $this->db->prepare('SELECT * FROM user WHERE username = ?',[$username], null , true);
-        if($user)
-        {
-             if($user->password === $password)
-             {
-                 $_SESSION['auth'] = $user->id;
-                 return true;
-             }
-        }
-         return false;
-    } */
+  
 }

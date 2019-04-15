@@ -69,7 +69,7 @@ class UsersController extends AppController
         $flashs = Session::getInstance();
 
         if (App::getAuth()->confirm($db, $_GET['id'], $_GET['token'], Session::getInstance())) {
-            $flashs->setFlash('danger', "Votre compte a bien été validé");
+            $flashs->setFlash('success', "Votre compte a bien été validé");
             App::redirect('index.php?page=users.account');
         } else {
             $flashs->setFlash('danger', "Ce token n'est plus valide");
@@ -131,6 +131,7 @@ class UsersController extends AppController
                 $auth->update_password($db, $password, $user_id);
                 $flashs->setFlash('success', 'Votre mot de passe a bien été mis à jour');
             }
+            App::redirect('index.php?page=users.account');
         }
         if ($flashs->hasFlashes()) {
             $flashs =$flashs->getFlashes();

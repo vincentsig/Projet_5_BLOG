@@ -93,7 +93,7 @@ class App
         $config = Config::getInstance(ROOT . '/config/config.php');
 
         if (is_null($this->my_email)) {
-            $this->my_email = new Contact($config->get('my_email'));
+            $this->my_email = $config->get('my_email');
         }
         return $this->my_email;
     }
