@@ -52,7 +52,7 @@ class Auth
     {
         $password = $this->hashPassword($password);
         $token = StrToken::random(60);
-        $db->prepare("INSERT INTO user SET username = ?, password = ?, email = ?, confirmation_token = ?", [
+        $db->prepare("INSERT INTO user SET role_id = 2 ,username = ?, password = ?, email = ?, confirmation_token = ?", [
             $username,
             $password,
             $email,

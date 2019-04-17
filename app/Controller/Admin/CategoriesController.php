@@ -34,7 +34,7 @@ class CategoriesController extends AppController
     public function add()
     {
         if (!empty($_POST)) {
-            $result = $this->Category-> create([
+            $this->Category-> create([
                 'title' => $_POST['title']]);
             
             return $this->index();

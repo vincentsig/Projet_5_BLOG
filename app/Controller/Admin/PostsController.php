@@ -50,7 +50,7 @@ class PostsController extends AppController
         }
        
         $categories = $this->Category->getList('id', 'title');
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm(array($_POST));
         $this->render('admin.posts.edit', compact('categories', 'form'));
     }
 

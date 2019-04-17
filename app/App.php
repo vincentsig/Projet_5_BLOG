@@ -78,8 +78,9 @@ class App
      */
     public static function redirect($page)
     {
-        header("Location: $page");
-        exit();
+        
+        return header("Location: $page");
+        
     }
 
 

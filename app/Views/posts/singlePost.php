@@ -26,6 +26,9 @@
 
 </div>
 
+
+
+
 <h5>Commentaires( <?php foreach ($count as $value): ?>
                     <?=$value; ?>)
                 <?php endforeach?>
@@ -59,6 +62,36 @@
      </ul> 
      </blockquote>   
 </div>
+
+
+
+<div class="row bootstrap snippets">
+    <div class="col-md-10 col-md-offset-4 col-sm-12">
+        <div class="comment-wrapper">
+            <div class="panel panel-info">
+                <div class="panel-body">
+                <?php  foreach ($comments as $comment): ?>
+                    <ul class="media-list">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">publié le <?=$comment->date_published; ?> :</small>
+                                </span>
+                                <strong class="text-success"><?=$comment->username; ?></strong>
+                                <p>
+                                    <?=$comment->content; ?>
+                                </p>
+                            </div>
+                        </li>
+                        <?php endforeach?>
+                        
+                        
+                    </ul>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div>
       <form method="post">
       <?= $form->input('content', 'Contenu', ['type' => 'textarea']); ?>
