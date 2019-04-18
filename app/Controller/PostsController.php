@@ -72,7 +72,7 @@ class PostsController extends AppController
         
         if (!empty($_POST) && isset($_POST)) {
             $result = $this->Comment->create([
-                'content' => htmlspecialchars($_POST['content']),
+                'content' =>  filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'date_created' => date('Y-m-d H:i:s'),
                 'status' => null,
                 'user_id' => $_SESSION['auth']->id,
@@ -85,7 +85,7 @@ class PostsController extends AppController
         }
         $comments = $this->Comment->findWithComment(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
         $count = $this->Comment->count(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $this->render('posts.singlePost', compact('post', 'user', 'comments', 'count', 'form', 'waiting_coms', 'flashs'));
     }
 }

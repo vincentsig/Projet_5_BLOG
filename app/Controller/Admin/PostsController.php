@@ -36,10 +36,10 @@ class PostsController extends AppController
     {
         if (!empty($_POST)) {
             $result = $this->Post-> create([
-                'title' => $_POST['title'],
-                'lead_in'=> $_POST['lead_in'],
-                'content' => $_POST['content'],
-                'category_id' => $_POST['category_id'],
+                'title' => filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                'lead_in'=> filter_input(INPUT_POST, 'lead_in', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                'content' => filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                'category_id' => filter_input(INPUT_POST,'category_id',FILTER_SANITIZE_NUMBER_INT),
                 'date_created' => date('Y-m-d H:i:s'),
                 'user_id' => $_SESSION['auth']->id
             ]);
@@ -50,7 +50,7 @@ class PostsController extends AppController
         }
        
         $categories = $this->Category->getList('id', 'title');
-        $form = new BootstrapForm(array($_POST));
+        $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $this->render('admin.posts.edit', compact('categories', 'form'));
     }
 
@@ -63,10 +63,10 @@ class PostsController extends AppController
     {
         if (!empty($_POST)) {
             $result = $this->Post->update(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT), [
-                'title' => $_POST['title'],
-                'lead_in'=> $_POST['lead_in'],
-                'content' => $_POST['content'],
-                'category_id' => $_POST['category_id'],
+                'title' =>filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                'lead_in'=> filter_input(INPUT_POST, 'lead_in', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                'content' => filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                'category_id' => filter_input(INPUT_POST,'category_id',FILTER_SANITIZE_NUMBER_INT),
                 'last_update' => date('Y-m-d H:i:s'),
                 'user_id' => $_SESSION['auth']->id
             ]);

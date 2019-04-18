@@ -34,7 +34,7 @@ class HomeController extends AppController
         $posts = $this->Post->lastFourPosts();
         $categories = $this->Category->all();
         $flashs = Session::getInstance();
-        $validator = new Validator($_POST);
+        $validator = new Validator(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $contact = new Contact(App::getInstance()->getEmail());
         
          if(!empty($_POST))
@@ -45,8 +45,9 @@ class HomeController extends AppController
             if($validator->isValid())
             {
             
-                $contact->contact( htmlentities($_POST['firstname']),htmlentities($_POST['surname']),
-                htmlentities($_POST['email']), htmlentities($_POST['message']));
+                $contact->contact( filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                filter_input(INPUT_POST, 'surname', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL), filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
                 $flashs->setFlash('success', 'Votre email de contact à bien été envoyé');
                 App::redirect('index.php?page=home.index.php');
             }
@@ -56,7 +57,7 @@ class HomeController extends AppController
             $flashs =$flashs->getFlashes();
         }
         $errors = $validator->getErrors();
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $this->render('home.index',compact('posts', 'categories', 'flashs', 'form','errors', 'contact'));
     }
 

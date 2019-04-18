@@ -43,14 +43,14 @@ class UsersController extends AppController
     public function edit()
     {
         if (!empty($_POST)) {
-            $result = $this->User->update($_GET['id'], [
-                'role_id' => $_POST['role_id']
+            $result = $this->User->update(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT), [
+                'role_id' => filter_input(INPUT_POST, 'role_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
             ]);
             if ($result) {
                 return $this->index();
             }
         }
-        $user = $this->User->find($_GET['id']);
+        $user = $this->User->find(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
         $roles = $this->Role->getList('id', 'name');
         $form = new BootstrapForm($user);
         $this->render('admin.users.edit', compact('roles', 'form', 'user'));
@@ -72,12 +72,12 @@ class UsersController extends AppController
             $auth = App::getAuth($db, Session::getInstance());
             $flashs = Session::getInstance();
             $session_id = $auth->getUserId();
-            if($_POST['id'] === $session_id)
+            if( filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT) === $session_id)
             {
                 $flashs->setFlash('danger', "Vous ne pouvez pas supprimer votre propre compte");
                 App::redirect('index.php?page=admin.users.index');
             }
-            $this->User->delete($_POST['id']);
+            $this->User->delete(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT));
             return $this->index();
             
         }
