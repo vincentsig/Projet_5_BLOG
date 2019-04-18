@@ -27,10 +27,10 @@ class UsersController extends AppController
     {
         $errors = [];
         $db = App::getInstance()->getDb();
-        $validator = new Validator($_POST);
+        $validator = new Validator(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $flashs = Session::getInstance();
 
-        if (!empty($_POST)) {
+        if (!empty($_POST) || isset($_POST)) {
             $validator->isAlpha('username', "Votre pseudo n'est pas valide (alphanumérique)");
             
             if ($validator->isValid()) {
@@ -45,7 +45,9 @@ class UsersController extends AppController
             
             if ($validator->isValid()) {
                 $auth = new Auth($db, Session::getInstance());
-                $auth->register($db, $_POST['username'], $_POST['password'], $_POST['email']);
+                $auth->register($db,filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                                     filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS), 
+                                     filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
                 $flashs->setFlash('success', 'Un email de confirmation vous a été envoyé pour valider votre compte');
                 App::redirect('index.php?page=users.login.php');
             }
@@ -54,7 +56,7 @@ class UsersController extends AppController
             $flashs =$flashs->getFlashes();
         }
         $errors = $validator->getErrors();
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $this->render('users.register', compact('form', 'user', 'flashs', 'errors', 'validator'));
     }
 
@@ -68,7 +70,9 @@ class UsersController extends AppController
         $db = App::getInstance()->getDb();
         $flashs = Session::getInstance();
 
-        if (App::getAuth()->confirm($db, $_GET['id'], $_GET['token'], Session::getInstance())) {
+        if (App::getAuth()->confirm($db, filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT),
+                                         filter_input(INPUT_GET, 'token', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                                          Session::getInstance())) {
             $flashs->setFlash('success', "Votre compte a bien été validé");
             App::redirect('index.php?page=users.account');
         } else {
@@ -95,7 +99,8 @@ class UsersController extends AppController
             App::redirect('index.php?page=users.account');
         }
         if (!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
-            $user = $auth->login($db, $_POST['username'], $_POST['password']);
+            $user = $auth->login($db, filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                                    filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             if ($user) {
                 $flashs->setFlash('success', 'Vous êtes maintenant connecté');
                 App::redirect('index.php');
@@ -106,7 +111,7 @@ class UsersController extends AppController
         }
       
 
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $this->render('users.login', compact('form', 'flashs', 'errors'));
     }
 
@@ -122,12 +127,14 @@ class UsersController extends AppController
         $auth = App::getAuth();
         $auth->restrict();
         $flashs = Session::getInstance();
-        if (!empty($_POST)) {
-            if (empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm']) {
+        if (!empty($_POST))  {
+            if (empty($_POST['password'])
+                 || filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+                  != filter_input(INPUT_POST, 'password_confirm', FILTER_SANITIZE_FULL_SPECIAL_CHARS)) {
                 $flashs->setFlash('danger', 'Les mots de passes ne correspondent pas');
             } else {
                 $user_id = $_SESSION['auth']->id;
-                $password= password_hash($_POST['password'], PASSWORD_BCRYPT);
+                $password= password_hash(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS), PASSWORD_BCRYPT);
                 $db = App::getInstance()->getDb();
                 $auth->update_password($db, $password, $user_id);
                 $flashs->setFlash('success', 'Votre mot de passe a bien été mis à jour');
@@ -137,7 +144,7 @@ class UsersController extends AppController
         if ($flashs->hasFlashes()) {
             $flashs =$flashs->getFlashes();
         }
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $this->render('users.account', compact('form', 'auth', 'flashs'));
     }
 
@@ -152,6 +159,6 @@ class UsersController extends AppController
         
         App::getAuth()->logout();
         Session::getInstance()->setFlash('success', 'Vous êtes maintenant déconnecté');
-        return $this->login();
+        return App::redirect('index.php?page=users.login');
     }
 }
