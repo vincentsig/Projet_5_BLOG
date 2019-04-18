@@ -18,7 +18,7 @@ class Autoloader
     }
 
     /**
-     * include file matching to our class
+     * load the class with the path
      * @param $class string name of the loading class
      */
     public static function autoload($class)

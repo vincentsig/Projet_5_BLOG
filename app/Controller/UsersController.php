@@ -88,7 +88,9 @@ class UsersController extends AppController
         $db = App::getInstance()->getDb();
         $auth = App::getAuth($db, Session::getInstance());
         $flashs = Session::getInstance();
-
+        if ($flashs->hasFlashes()) {
+            $flashs =$flashs->getFlashes();
+        }
         if ($auth->logged()) {
             App::redirect('index.php?page=users.account');
         }
@@ -99,11 +101,10 @@ class UsersController extends AppController
                 App::redirect('index.php');
             } else {
                 $flashs->setFlash('danger', 'Identifiant ou mot de passe incorrecte');
+                App::redirect('index.php?page=users.login');
             }
         }
-        if ($flashs->hasFlashes()) {
-            $flashs =$flashs->getFlashes();
-        }
+      
 
         $form = new BootstrapForm($_POST);
         $this->render('users.login', compact('form', 'flashs', 'errors'));
@@ -148,6 +149,7 @@ class UsersController extends AppController
      */
     public function logout()
     {
+        
         App::getAuth()->logout();
         Session::getInstance()->setFlash('success', 'Vous êtes maintenant déconnecté');
         return $this->login();

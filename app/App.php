@@ -3,7 +3,7 @@
 use Core\Database\MysqlDatabase;
 use Core\Auth\Auth;
 use Core\Auth\Session;
-use Core\Auth\Contact;
+
 
 class App
 {

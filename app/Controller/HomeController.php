@@ -36,10 +36,7 @@ class HomeController extends AppController
         $flashs = Session::getInstance();
         $validator = new Validator($_POST);
         $contact = new Contact(App::getInstance()->getEmail());
-        if($flashs->hasFlashes())
-        {
-            $flashs =$flashs->getFlashes();
-        }
+        
          if(!empty($_POST))
         {
             $validator->isAlpha('firstname', "Votre Prénom n'est pas valide (alphanumérique)");
@@ -54,7 +51,10 @@ class HomeController extends AppController
                 App::redirect('index.php?page=home.index.php');
             }
         }
-        
+        if($flashs->hasFlashes())
+        {
+            $flashs =$flashs->getFlashes();
+        }
         $errors = $validator->getErrors();
         $form = new BootstrapForm($_POST);
         $this->render('home.index',compact('posts', 'categories', 'flashs', 'form','errors', 'contact'));

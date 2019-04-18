@@ -32,7 +32,7 @@ class Session
      * save a flash message in the Session 'flash'
      * @return void
      */
-    public function setFlash($key, $message)
+    public function setFlash(string $key, string $message)
     {
         $_SESSION['flash'][$key] = $message;
     }
