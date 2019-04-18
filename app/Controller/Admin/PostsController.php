@@ -62,7 +62,7 @@ class PostsController extends AppController
     public function edit()
     {
         if (!empty($_POST)) {
-            $result = $this->Post->update($_GET['id'], [
+            $result = $this->Post->update(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT), [
                 'title' => $_POST['title'],
                 'lead_in'=> $_POST['lead_in'],
                 'content' => $_POST['content'],
@@ -74,7 +74,7 @@ class PostsController extends AppController
                 return $this->index();
             }
         }
-        $post = $this->Post->find($_GET['id']);
+        $post = $this->Post->find(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
         $categories = $this->Category->getList('id', 'title');
         $form = new BootstrapForm($post);
         $this->render('admin.posts.edit', compact('categories', 'form', 'post'));
@@ -88,7 +88,7 @@ class PostsController extends AppController
     public function delete()
     {
         if (!empty($_POST)) {
-            $this->Post->delete($_POST['id']);
+            $this->Post->delete(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT));
             {
                 return $this->index();
             }

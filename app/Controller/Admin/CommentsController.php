@@ -41,7 +41,7 @@ class CommentsController extends AppController
             $flashs =$flashs->getFlashes();
         }
         $comments = $this->Comment->waitingList();
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $this->render('admin.comments.validation', compact('comments', 'form', 'flashs'));
     }
 
@@ -54,8 +54,8 @@ class CommentsController extends AppController
     public function valid()
     {
         $flashs = Session::getInstance();
-        if (!empty($_POST)) {
-            $this->Comment->update($_POST['id'], [
+        if (!empty($_POST)|| isset($_POST)) {
+            $this->Comment->update((filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT)), [
                 'status' => date('Y-m-d H:i:s')], true);
             {
                 $flashs->setFlash('success', 'Le commentaire à bien été publié');
@@ -71,8 +71,8 @@ class CommentsController extends AppController
      */
     public function delete()
     {
-        if (!empty($_POST)) {
-            $this->Comment->delete($_POST['id']);
+        if (!empty($_POST) || isset($_POST)) {
+            $this->Comment->delete((filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT)));
             {
                 return $this->index();
             }

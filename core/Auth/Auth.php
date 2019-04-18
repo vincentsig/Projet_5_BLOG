@@ -95,6 +95,13 @@ class Auth
     }
 
 
+    /**
+     * connect
+     * connect the user
+     * @param  mixed $user
+     *
+     * @return void
+     */
     public function connect($user)
     {
         $this->session->write('auth', $user);
@@ -105,6 +112,15 @@ class Auth
         $this->session->delete('auth');
     }
 
+    /**
+     * login
+     *
+     * @param  mixed $db
+     * @param  mixed $username
+     * @param  mixed $password
+     *
+     * @return array
+     */
     public function login($db, $username, $password)
     {
         $user = $db->prepare('SELECT * FROM user WHERE username = ? AND confirmed_at IS NOT NULL', [$username], null, true);
@@ -120,8 +136,8 @@ class Auth
     {
         if (!$this->session->read('auth')) {
             $this->session->setFlash('danger', $this->options['restriction_msg']);
-            header('Location: index.php?page=users.login');
-            exit();
+            return App::redirect('index.php?page=users.login');;
+            
         }
     }
 
