@@ -27,10 +27,13 @@ class UsersController extends AppController
     {
         $errors = [];
         $db = App::getInstance()->getDb();
-        $validator = new Validator(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $validator = new Validator($_POST);
         $flashs = Session::getInstance();
+        if ($flashs->hasFlashes()) {
+            $flashs =$flashs->getFlashes();
+        }
 
-        if (!empty($_POST) || isset($_POST)) {
+        if (!empty($_POST)) {
             $validator->isAlpha('username', "Votre pseudo n'est pas valide (alphanumérique)");
             
             if ($validator->isValid()) {
@@ -52,9 +55,7 @@ class UsersController extends AppController
                 App::redirect('index.php?page=users.login.php');
             }
         }
-        if ($flashs->hasFlashes()) {
-            $flashs =$flashs->getFlashes();
-        }
+       
         $errors = $validator->getErrors();
         $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $this->render('users.register', compact('form', 'user', 'flashs', 'errors', 'validator'));

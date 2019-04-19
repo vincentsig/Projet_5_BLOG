@@ -13,11 +13,11 @@
         <div class="col-lg-12 col-md-10 mx-auto">
         <div class="post-preview">
             <h4 class="post-title">
-                  <?= $post->title; ?>
+                  <?= filter_var($post->title, FILTER_SANITIZE_STRING); ?>
             </h4>
             <p class="post-meta">Posté par
-              <?= $post->username;?>, le <?= $post->date_created;?><br>
-              tag: <?= $post->category;?>
+              <?= filter_var($post->username, FILTER_SANITIZE_STRING);?>, le <?= filter_var($post->date_created, FILTER_SANITIZE_STRING);?><br>
+              tag: <?= filter_var($post->category, FILTER_SANITIZE_STRING);?>
             </p>
             <p><?= $post->content?></p>
         </div>    
