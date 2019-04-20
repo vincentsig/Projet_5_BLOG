@@ -34,7 +34,7 @@ class HomeController extends AppController
         $posts = $this->Post->lastFourPosts();
         $categories = $this->Category->all();
         $flashs = Session::getInstance();
-        $validator = new Validator($_POST);
+        $validator = new Validator(filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING));
         $contact = new Contact(App::getInstance()->getEmail());
         if($flashs->hasFlashes())
         {
