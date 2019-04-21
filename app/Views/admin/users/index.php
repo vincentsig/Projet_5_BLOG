@@ -1,12 +1,8 @@
 
-
-<?= var_dump($session_id);?>
-<?= var_dump($_SESSION['auth']);?>
-
 <?php foreach ($flashs as $type => $message): ?>
-<div class="alert alert-<?= $type; ?>">
+<div class="alert alert-<?=filter_var($type, FILTER_SANITIZE_STRING) ; ?>">
   <ul>
-    <li><?=$message;?></li>
+    <li><?=filter_var($message, FILTER_SANITIZE_STRING);?></li>
     </div>
   </ul>
 <?php endforeach; ?>
@@ -28,15 +24,15 @@
 <tbody>
     <?php foreach ($users as $user):?>
     <tr>
-        <td><?= $user->id; ?></td>
-        <td><?= $user->username; ?></td>
-        <td><?= $user->email; ?></td>
-        <td><?= $user->role_id; ?></td>
+        <td><?=filter_var($user->id, FILTER_SANITIZE_NUMBER_INT) ; ?></td>
+        <td><?= filter_var($user->username, FILTER_SANITIZE_STRING); ?></td>
+        <td><?= filter_var($user->email, FILTER_SANITIZE_STRING); ?></td>
+        <td><?=filter_var($user->role_id, FILTER_SANITIZE_NUMBER_INT) ; ?></td>
         <td>
-            <a class="btn btn-primary" href="?page=admin.users.edit&id=<?= $user->id;?>">Editer</a>
+            <a class="btn btn-primary" href="?page=admin.users.edit&id=<?=filter_var($user->id, FILTER_SANITIZE_NUMBER_INT) ;?>">Editer</a>
             <form action="?page=admin.users.delete" method="post" style="display: inline;">
 
-                <input type="hidden" name="id" value="<?= $user->id; ?>">
+                <input type="hidden" name="id" value="<?= filter_var($user->id, FILTER_SANITIZE_NUMBER_INT); ?>">
                 <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>      
         </td>    

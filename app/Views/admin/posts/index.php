@@ -22,14 +22,14 @@
 <tbody>
     <?php foreach ($posts as $post):?>
     <tr>
-        <td><?= $post->id; ?></td>
-        <td><?= $post->title; ?></td>
+        <td><?=filter_var($post->id, FILTER_SANITIZE_NUMBER_INT) ; ?></td>
+        <td><?=filter_var($post->title, FILTER_SANITIZE_STRING) ; ?></td>
         <td>
-            <a class="btn btn-primary" href="?page=admin.posts.edit&id=<?= $post->id;?>">Editer</a>
+            <a class="btn btn-primary" href="?page=admin.posts.edit&id=<?= filter_var($post->id, FILTER_SANITIZE_NUMBER_INT);?>">Editer</a>
 
             <form action="?page=admin.posts.delete" method="post" style="display: inline;">
 
-                <input type="hidden" name="id" value="<?= $post->id; ?>">
+                <input type="hidden" name="id" value="<?=filter_var($post->id, FILTER_SANITIZE_NUMBER_INT); ?>">
                 <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>
         </td>    

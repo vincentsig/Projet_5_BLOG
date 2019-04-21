@@ -1,7 +1,7 @@
 <?php foreach ($flashs as $type => $message): ?>
-<div class="alert alert-<?= $type; ?>">
+<div class="alert alert-<?=filter_var($type, FILTER_SANITIZE_STRING); ?>">
   <ul>
-    <li><?=$message;?></li>
+    <li><?=filter_var($message, FILTER_SANITIZE_STRING);?></li>
     </div>
   </ul>
 <?php endforeach; ?>
@@ -32,16 +32,16 @@
         <div class="post-preview">
           <a href="<?= $post->url ?>">
             <h4 class="post-title">
-            <a href="<?= $post->url ?>"><?= $post->title; ?></a>
+            <a href="<?= filter_var($post->url, FILTER_SANITIZE_STRING) ?>"><?= filter_var($post->title, FILTER_SANITIZE_STRING); ?></a>
             </h4>
-            <p><?= $post->lead_in ?><br><a class="btn btn-primary" href="<?= $post->url ?>">Suite</a></p>
+            <p><?= filter_var($post->lead_in, FILTER_SANITIZE_STRING) ?><br><a class="btn btn-primary" href="<?=filter_var($post->url, FILTER_SANITIZE_STRING)?>">Suite</a></p>
             
             </a>
             <p class="post-meta">Posté par
-              <?= $post->username;?>, le <?= $post->date_created;?>
-              <?php if(isset($post->last_update)):?>, dernière modification : <?= $post->last_update?><br>
+              <?= filter_var($post->username, FILTER_SANITIZE_STRING);?>, le <?= filter_var($post->date_created, FILTER_SANITIZE_STRING);?>
+              <?php if(isset($post->last_update)):?>, dernière modification : <?= filter_var($post->last_update, FILTER_SANITIZE_STRING)?><br>
               <?php endif;?>
-              tag: <?= $post->category;?>
+              tag: <?=filter_var($post->category, FILTER_SANITIZE_STRING) ;?>
             </p>
         </div>
         <hr>
@@ -55,7 +55,7 @@
 
 <?php  foreach ($errors as $error): ?>
     <li>
-      <?=$error?>;
+      <?=filter_var($error, FILTER_SANITIZE_STRING)?>;
     </li>
 <?php endforeach?> 
 

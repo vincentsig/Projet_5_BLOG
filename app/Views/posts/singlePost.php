@@ -2,7 +2,7 @@
 <?php foreach ($flashs as $flash): ?>
 <div class="alert alert-info">
 <ul>
-    <li><?=$flash; ?></li>
+    <li><?=filter_var($flash, FILTER_SANITIZE_STRING); ?></li>
 </ul>
 </div>
       
@@ -19,7 +19,7 @@
               <?= filter_var($post->username, FILTER_SANITIZE_STRING);?>, le <?= filter_var($post->date_created, FILTER_SANITIZE_STRING);?><br>
               tag: <?= filter_var($post->category, FILTER_SANITIZE_STRING);?>
             </p>
-            <p><?= $post->content?></p>
+            <p><?=filter_var($post->content, FILTER_SANITIZE_STRING) ?></p>
         </div>    
         </div>
       </div>
@@ -30,7 +30,7 @@
 
 
 <h5>Commentaires( <?php foreach ($count as $value): ?>
-                    <?=$value; ?>)
+                    <?=filter_var($value, FILTER_SANITIZE_STRING); ?>)
                 <?php endforeach?>
 </h5>
 
@@ -39,9 +39,9 @@
      <ul>
      <?php  foreach ($comments as $comment): ?>
             <li>
-                  <p>Auteur : <?=$comment->username; ?></p>
-                  <p>Date de publication : <?=$comment->date_published; ?></p>
-                  <p><?=$comment->content; ?></p>  
+                  <p>Auteur : <?=filter_var($comment->username, FILTER_SANITIZE_STRING); ?></p>
+                  <p>Date de publication : <?=filter_var($comment->date_published, FILTER_SANITIZE_STRING); ?></p>
+                  <p><?=filter_var($comment->date_published, FILTER_SANITIZE_STRING); ?></p>  
             </li>    
             <?php endforeach?>  
      </ul>    
@@ -56,7 +56,7 @@
       après qu'un des admnistrateur du site aura vérifié son contenu. Merci de votre compréhension</p>
             <li>
       <blockquote>
-                  <p><?=$com->content; ?></p>  
+                  <p><?=filter_var($com->content, FILTER_SANITIZE_STRING); ?></p>  
             </li>    
             <?php endforeach?>
      </ul> 
@@ -73,11 +73,11 @@
                 <?php  foreach ($comments as $comment): ?>
                     <ul class="media-list">
                                 <span class="text-muted pull-right">
-                                    <small class="text-muted">publié le <?=$comment->date_published; ?> :</small>
+                                    <small class="text-muted">publié le <?=filter_var($comment->date_published, FILTER_SANITIZE_STRING); ?> :</small>
                                 </span>
-                                <strong class="text-success"><?=$comment->username; ?></strong>
+                                <strong class="text-success"><?=filter_var($comment->username, FILTER_SANITIZE_STRING); ?></strong>
                                 <p>
-                                    <?=$comment->content; ?>
+                                    <?=filter_var($comment->content, FILTER_SANITIZE_STRING); ?>
                                 </p>
                             </div>
                         </li>

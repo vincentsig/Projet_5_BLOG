@@ -28,12 +28,12 @@
 <tbody>
     <?php foreach ($comments as $comment):?>
     <tr>
-        <td><?= $comment->id; ?></td>
-        <td><?= $comment->user_id; ?></td>
-        <td><?= $comment->content; ?></td>
+        <td><?=filter_var($comment->id, FILTER_SANITIZE_NUMBER_INT) ; ?></td>
+        <td><?=filter_var($comment->user_id, FILTER_SANITIZE_NUMBER_INT) ; ?></td>
+        <td><?=filter_var($comment->content, FILTER_SANITIZE_STRING) ; ?></td>
         <td> 
             <form action="?page=admin.comments.delete" method="post" style="display: inline;">
-                <input type="hidden" name="id" value="<?= $comment->id; ?>">
+                <input type="hidden" name="id" value="<?=filter_var($comment->id, FILTER_SANITIZE_NUMBER_INT); ?>">
                 <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>
         </td>    

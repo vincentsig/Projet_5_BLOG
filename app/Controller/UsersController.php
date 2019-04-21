@@ -27,7 +27,7 @@ class UsersController extends AppController
     {
         $errors = [];
         $db = App::getInstance()->getDb();
-        $validator = new Validator($_POST);
+        $validator = new Validator(filter_input_array(INPUT_POST,$_POST, FILTER_SANITIZE_STRING));
         $flashs = Session::getInstance();
         if ($flashs->hasFlashes()) {
             $flashs =$flashs->getFlashes();
@@ -58,7 +58,7 @@ class UsersController extends AppController
        
         $errors = $validator->getErrors();
         $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $this->render('users.register', compact('form', 'user', 'flashs', 'errors', 'validator'));
+        $this->render('users.register', compact('form',  'flashs', 'errors', 'validator'));
     }
 
     /**
@@ -113,7 +113,7 @@ class UsersController extends AppController
       
 
         $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $this->render('users.login', compact('form', 'flashs', 'errors'));
+        $this->render('users.login', compact('form', 'flashs'));
     }
 
 
