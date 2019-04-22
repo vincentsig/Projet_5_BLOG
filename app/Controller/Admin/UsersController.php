@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use \Core\HTML\BootstrapForm;
 use \Core\Auth\Session;
-
 use App;
 
 class UsersController extends AppController
@@ -75,7 +74,7 @@ class UsersController extends AppController
             if( filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT) === $session_id)
             {
                 $flashs->setFlash('danger', "Vous ne pouvez pas supprimer votre propre compte");
-                App::redirect('index.php?page=admin.users.index');
+                return App::redirect('index.php?page=admin.users.index');
             }
             $this->User->delete(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT));
             return $this->index();

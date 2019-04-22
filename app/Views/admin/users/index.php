@@ -32,7 +32,7 @@
             <a class="btn btn-primary" href="?page=admin.users.edit&id=<?=filter_var($user->id, FILTER_SANITIZE_NUMBER_INT) ;?>">Editer</a>
             <form action="?page=admin.users.delete" method="post" style="display: inline;">
 
-                <input type="hidden" name="id" value="<?= filter_var($user->id, FILTER_SANITIZE_NUMBER_INT); ?>">
+                <input type="hidden" name="id" value="<?= $user->id; ?>">
                 <button type="submit" class="btn btn-danger">Supprimer</button>
             </form>      
         </td>    

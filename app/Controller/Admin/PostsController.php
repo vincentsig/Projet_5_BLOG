@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use \Core\HTML\BootstrapForm;
+use \Core\Auth\Session;
+use App;
 
 class PostsController extends AppController
 {
@@ -22,8 +24,13 @@ class PostsController extends AppController
      */
     public function index()
     {
-        $posts = $this->Post->all();
-        $this->render('admin.posts.index', compact('posts'));
+        $flashs = Session::getInstance();
+        if($flashs->hasFlashes())
+        {
+            $flashs =$flashs->getFlashes();
+        }
+        $posts = $this->Post->allPosts();
+        $this->render('admin.posts.index', compact('posts', 'flashs'));
     }
    
     
@@ -80,11 +87,20 @@ class PostsController extends AppController
         $this->render('admin.posts.edit', compact('categories', 'form', 'post'));
     }
     
+    public function archived()
+    {
+        $posts = $this->Post->archived();
+        $this->render('admin.posts.archived', compact('posts'));
+    }
+
+
+
     /**
      * delete
      * delete permanently a blogpost
      * @return void
      */
+    /*
     public function delete()
     {
         if (!empty($_POST)) {
@@ -93,5 +109,34 @@ class PostsController extends AppController
                 return $this->index();
             }
         }
+    }*/
+
+    public function delete()
+    {  
+        $flashs = Session::getInstance();
+        if (!empty($_POST)) {
+            $this->Post->update(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT), [
+                'archive' =>  date('Y-m-d H:i:s')]);
+                $flashs->setFlash('success', "Le commentaire n'est plus visible sur le site, il est maintenant classé comme 'archive' en base de données");
+            {
+                return App::redirect('index.php?page=admin.posts.index');;
+            }
+        }
+        
     }
+
+    public function publish()
+    {
+        $flashs = Session::getInstance();
+        if (!empty($_POST)) {
+            $this->Post->update(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT), [
+                'archive' =>  NULL]);
+                $flashs->setFlash('success', "Le commentaire est de nouveau visible sur le site");
+            {
+                return App::redirect('index.php?page=admin.posts.index');
+            }
+        }
+        
+    }
+
 }

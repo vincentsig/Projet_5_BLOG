@@ -1,12 +1,27 @@
+<?php foreach ($flashs as $flash): ?>
+<div class="alert alert-info">
+<ul>
+    <li><?=filter_var($flash, FILTER_SANITIZE_STRING); ?></li>
+</ul>
+</div>
+<?php endforeach?>
+
 <div class="container">
     <h1 class="section-heading">Gestion des Articles</h1>
     <div class="row">
-      <div class="col-lg-12 col-md-10 mx-auto">
+      <div class="col-lg-4 col-md-6 mx-auto">
 
 <p>
     <a href="?page=admin.posts.add" class="btn btn-success">Ajouter un article</a>
 </p>
+</div>
+<div class="col-lg-4 col-md-6 mx-auto">
 
+<p>
+    <a href="?page=admin.posts.archived" class="btn btn-success">Voir les articles archivés</a>
+</p>
+</div>
+</div>
 
 <div class="container">
     <div class="row">
@@ -30,7 +45,7 @@
             <form action="?page=admin.posts.delete" method="post" style="display: inline;">
 
                 <input type="hidden" name="id" value="<?=filter_var($post->id, FILTER_SANITIZE_NUMBER_INT); ?>">
-                <button type="submit" class="btn btn-danger">Supprimer</button>
+                <button type="submit" class="btn btn-danger">Archiver</button>
             </form>
         </td>    
     </tr>
