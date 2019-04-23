@@ -14,19 +14,34 @@ I tried to do as much as I could whithout using any libraries. It was important 
 
 ## Information
 
-The MVC structure is inspired by the php courses of Grafikart:
+The MVC structure is inspired by the php courses of Grafikart:  
 https://www.grafikart.fr/formations/programmation-objet-php
 
 
-The Bootstrap theme used for the CSS is Clean Blog created by Start Bootstrap:
+The Bootstrap theme used for the CSS is Clean Blog created by Start Bootstrap: 
 https://github.com/BlackrockDigital/startbootstrap-clean-blog
 
 
 
 ## Installation
 
-1. Download and clone the github repositoy:
-
+1 - Download and clone the github repositoy:  
 https://github.com/vincentsig/Projet_5_BLOG.git
 
+2 - Import the script "blog.sql" in \Database to your own database managment system.
 
+3 -  Rename the file "config_sample.php" in app\config   into "config.php" and complete
+
+4 - Open the file config.php and complete the fields beetween ** ** to configure the PDO connection and your email adresse for the contact form.
+
+5 - To use the contact form on your localserver you need to edit your php.ini :  
+[mail function]
+  ; For Win32 only.  
+  SMTP = localhost  
+  smtp_port = 25  
+  ; For Win32 only.  
+  ;sendmail_from = me@example.com  
+  ; For Unix only.  You may supply arguments as well (default: "sendmail -t -i").  
+
+    
+    
