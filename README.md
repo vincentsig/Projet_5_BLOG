@@ -36,18 +36,19 @@ https://github.com/vincentsig/Projet_5_BLOG.git
 
 5. To use the contact form on your localserver you need to edit your php.ini :  
 [mail function]
-- ; For Win32 only.  
-- SMTP = localhost  
-- smtp_port = 25  
-- ; For Win32 only.  
-- ;sendmail_from = me@example.com  
-- ; For Unix only.  You may supply arguments as well (default: "sendmail -t -i").  
+
+    ; For Win32 only.  
+    SMTP = localhost  
+    smtp_port = 25  
+    ; For Win32 only.  
+    ;sendmail_from = me@example.com  
+    ; For Unix only.  You may supply arguments as well (default: "sendmail -t -i").  
 
 6. Managing back office on the application  
 
     You need to log with the admin account already available in your database.
-- username: admin
--  login: admin  
+username: admin
+login: admin  
          When you are connected with this account you can access to the backoffice directly on the application, there is a link in the footer "ESPACE ADMNISTRATION". You can now managment the users right. 
 
     
