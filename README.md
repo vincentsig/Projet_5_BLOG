@@ -14,27 +14,30 @@ I tried to do as much as I could whithout using any libraries. It was important 
 
 ## Information
 
-The MVC structure is inspired by the php courses of Grafikart:  
-https://www.grafikart.fr/formations/programmation-objet-php
+The MVC structure is inspired by the php courses of Grafikart: 
+
+    https://www.grafikart.fr/formations/programmation-objet-php
 
 
-The Bootstrap theme used for the CSS is Clean Blog created by Start Bootstrap: 
-https://github.com/BlackrockDigital/startbootstrap-clean-blog
+The Bootstrap theme used for the CSS is Clean Blog created by Start Bootstrap:  
+
+     https://github.com/BlackrockDigital/startbootstrap-clean-blog
 
 
 
 ## Installation
 
-1. Download and clone the github repositoy:  
-https://github.com/vincentsig/Projet_5_BLOG.git
+**1. Download and clone the github repositoy:**  
 
-2. **Import the script "blog.sql" in \Database to your own database managment system.**
+    https://github.com/vincentsig/Projet_5_BLOG.git
 
-3. **Rename the file "config_sample.php" in app\config   into "config.php" and complete**
+**2. Import the script "blog.sql" in \Database to your own database managment system.**
 
-4. **Open the file config.php and complete the fields beetween ** ** to configure the PDO connection and your email adresse for the contact form.**
+**3. Rename the file "config_sample.php" in app\config   into "config.php" and complete**
 
-5. **To use the contact form on your localserver you need to edit your php.ini :**  
+**4. Open the file config.php and complete the fields beetween ** ** to configure the PDO connection and your email adresse for the contact form.**
+
+**5. To use the contact form on your localserver you need to edit your php.ini :**  
 
     [mail function]   
     ; For Win32 only.     
@@ -44,12 +47,13 @@ https://github.com/vincentsig/Projet_5_BLOG.git
     ;sendmail_from = me@example.com      
     ; For Unix only.  You may supply arguments as well (default: "sendmail -t -i").      
 
-6. **Managing back office on the application**  
+**6. Managing back office on the application**  
 
     You need to log with the admin account already available in your database.
-username: admin
-login: admin  
-         When you are connected with this account you can access to the backoffice directly on the application, there is a link in the footer "ESPACE ADMNISTRATION". You can now managment the users right. 
+    username: admin  
+    login: admin   
+
+    When you are connected with this account you can access to the backoffice directly on the application, there is a link in the footer "ESPACE ADMNISTRATION". You can now managment the users right. 
 
     
     
