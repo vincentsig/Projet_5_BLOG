@@ -1,4 +1,3 @@
-
 <?php foreach ($flashs as $flash): ?>
 <div class="alert alert-info">
 <ul>
@@ -19,36 +18,30 @@
               <?= filter_var($post->username, FILTER_SANITIZE_STRING);?>, le <?= filter_var($post->date_created, FILTER_SANITIZE_STRING);?><br>
               tag: <?= filter_var($post->category, FILTER_SANITIZE_STRING);?>
             </p>
-            <p><?=filter_var($post->content, FILTER_SANITIZE_STRING) ?></p>
+            </div>   
+            <p><?= htmlspecialchars_decode($post->content);?></p> 
+            
+        
+        <div class="col-lg-6 col-md-2 mx-auto">       
+            <img src="<?=$post->image?>" class="img-responsive" alt=""  width="460" height="345">
+            </div>    
+     
+            
         </div>    
-        </div>
-      </div>
-
+    </div>
 </div>
 
 
-
-
-<h5>Commentaires( <?php foreach ($count as $value): ?>
+<h5>Commentaires(<?php foreach ($count as $value):?>
                     <?=filter_var($value, FILTER_SANITIZE_STRING); ?>)
                 <?php endforeach?>
 </h5>
 
 
-<div>
-     <ul>
-     <?php  foreach ($comments as $comment): ?>
-            <li>
-                  <p>Auteur : <?=filter_var($comment->username, FILTER_SANITIZE_STRING); ?></p>
-                  <p>Date de publication : <?=filter_var($comment->date_published, FILTER_SANITIZE_STRING); ?></p>
-                  <p><?=filter_var($comment->date_published, FILTER_SANITIZE_STRING); ?></p>  
-            </li>    
-            <?php endforeach?>  
-     </ul>    
-</div>
 
 
-<div>
+
+<div class="col-md-10 col-md-offset-4 col-sm-12">
 <blockquote>
      <ul>
      <?php  foreach ($waiting_coms as $com): ?>
@@ -92,7 +85,7 @@
     </div>
 </div>
 
-<div>
+<div class="col-md-10 col-md-offset-4 col-sm-12">
       <form method="post">
       <?= $form->input('content', 'Contenu', ['type' => 'textarea']); ?>
       <button class="btn btn-primary">Sauvegarder</button> 

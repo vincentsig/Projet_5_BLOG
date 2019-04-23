@@ -1,9 +1,14 @@
 <h1 class="section-heading">Gestion des catégories</h1>
-
-<p>
-    <a href="?page=admin.categories.add" class="btn btn-success">Ajouter une catégorie</a>
-</p>
-
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 mx-auto">
+            <a href="?page=admin.categories.add" class="btn btn-success">Ajouter une catégorie</a> 
+        </div>
+        <div class="col-lg-3 col-md-6 mx-auto">
+            <a class="btn btn-primary" href="?page=admin.index.dashboard">Retour</a>
+        </div>  
+    </div>
+</div>
 
 <div class="container">
     <div class="row">

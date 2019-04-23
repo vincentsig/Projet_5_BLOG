@@ -42,7 +42,7 @@
         <td>
             <a class="btn btn-primary" href="?page=admin.posts.edit&id=<?= filter_var($post->id, FILTER_SANITIZE_NUMBER_INT);?>">Editer</a>
 
-            <form action="?page=admin.posts.delete" method="post" style="display: inline;">
+            <form action="?page=admin.posts.erase" method="post" style="display: inline;">
 
                 <input type="hidden" name="id" value="<?=filter_var($post->id, FILTER_SANITIZE_NUMBER_INT); ?>">
                 <button type="submit" class="btn btn-danger">Archiver</button>

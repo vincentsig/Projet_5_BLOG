@@ -100,18 +100,20 @@ class PostsController extends AppController
      * delete permanently a blogpost
      * @return void
      */
-    /*
+    
     public function delete()
     {
+        $flashs = Session::getInstance();
         if (!empty($_POST)) {
             $this->Post->delete(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT));
+            $flashs->setFlash('success', "L'archive à été définitivement surpprimé de la base de donnée");
             {
-                return $this->index();
+                return App::redirect('index.php?page=admin.posts.index');
             }
         }
-    }*/
+    }
 
-    public function delete()
+    public function erase()
     {  
         $flashs = Session::getInstance();
         if (!empty($_POST)) {
@@ -119,7 +121,7 @@ class PostsController extends AppController
                 'archive' =>  date('Y-m-d H:i:s')]);
                 $flashs->setFlash('success', "Le commentaire n'est plus visible sur le site, il est maintenant classé comme 'archive' en base de données");
             {
-                return App::redirect('index.php?page=admin.posts.index');;
+                return App::redirect('index.php?page=admin.posts.index');
             }
         }
         

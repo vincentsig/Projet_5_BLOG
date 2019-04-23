@@ -9,6 +9,15 @@
 
 <div class="container">
     <h1 class="section-heading">Gestion des Utilisateurs</h1>
+    
+    <div class="row">
+            <div  class="col-lg-9 col-md-10 mx-auto">
+            </div>
+            <div class="col-lg-3 col-md-10 mx-auto">
+                <a class="btn btn-primary" href="?page=admin.index.dashboard">Retour</a>
+            </div>  
+    </div>
+
     <div class="row">
       <div class="col-lg-12 col-md-10 mx-auto">
 <table class="table table-dark">

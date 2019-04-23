@@ -12,11 +12,14 @@ class PostTable extends Table
     public function last()
     {
         return $this->query(
-            "SELECT blogpost.id, blogpost.title, blogpost.lead_in, blogpost.content,
-                blogpost.date_created, category.title as category
+            "SELECT blogpost.id, blogpost.title, blogpost.lead_in, blogpost.content,  blogpost.archive, blogpost.image,
+            DATE_FORMAT(blogpost.date_created, '%d/%m/%Y %H:%i:%s') as date_created ,
+            DATE_FORMAT(blogpost.last_update, '%d/%m/%Y %H:%i:%s') as last_update, category.title as category, user.username as username, user.id as id_user 
         FROM blogpost
+        LEFT JOIN user ON blogpost.user_id = user.id
         LEFT JOIN category ON category_id = category.id
-        ORDER BY blogpost.date_created DESC
+        WHERE  blogpost.archive IS NULL
+        ORDER BY date_created DESC
         "
         );
     }
@@ -38,7 +41,7 @@ class PostTable extends Table
         LEFT JOIN category ON category_id = category.id
         WHERE  blogpost.archive IS NULL
         ORDER BY date_created DESC
-        LIMIT 4"
+        LIMIT 2"
         );
     }
 
@@ -52,7 +55,7 @@ class PostTable extends Table
     public function findWithCategory($id)
     {
         return $this->query(
-            "SELECT blogpost.id, blogpost.title, blogpost.lead_in, blogpost.content,blogpost.archive,
+            "SELECT blogpost.id, blogpost.title, blogpost.lead_in, blogpost.content,blogpost.archive, blogpost.image,
             blogpost.date_created as date_created, category.title as category, user.username as username , user.id as id_user
         FROM blogpost
         LEFT JOIN user ON blogpost.user_id = user.id

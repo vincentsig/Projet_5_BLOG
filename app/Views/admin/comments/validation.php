@@ -9,6 +9,13 @@
 
 <table class="table table-dark">
 <h4>Voici la listes des commentaires en attentes de validation</h4>
+<div class="row">
+            <div  class="col-lg-9 col-md-10 mx-auto">
+            </div>
+            <div class="col-lg-3 col-md-10 mx-auto">
+                <a class="btn btn-primary" href="?page=admin.comments.index">Retour</a>
+            </div>  
+    </div> 
 <thead>
     <tr>
     <th scope="col">ID</th>

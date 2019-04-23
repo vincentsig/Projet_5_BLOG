@@ -27,7 +27,7 @@ class MysqlDatabase extends Database
     public function getPDO()
     {
         if ($this->pdo === null) {
-            $pdo = new PDO('mysql:dbname=blog;localhost', 'root', '');
+            $pdo = new PDO('mysql:dbname=' . "$this->db_name" . ';' . "$this->db_host","$this->db_user","$this->db_pass");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo;
         }
