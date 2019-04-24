@@ -5,7 +5,7 @@ Creation of a PHP blog for a school project with OpenClassrooms.
 This is one of my projects of my apprenticeship training with OpenClassrooms to be a PHP web-developer.
 The main constraint, was to not use any Framework during the developing phase.
 It’s the first time I’m developing a web-site in PHP.
-I tried to do as much as I could whithout using any libraries. It was important for me to understand the basic of this language and the concept of the OOP.
+I tried to do as much as I could whithout using any libraries. It was important for me to understand the basics of this language and the concept of the OOP.
 
 ## Code quality
 
