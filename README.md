@@ -45,9 +45,13 @@ The Bootstrap theme used for the CSS is Clean Blog created by Start Bootstrap:
     smtp_port = 25      
     ; For Win32 only.      
     ;sendmail_from = me@example.com      
-    ; For Unix only.  You may supply arguments as well (default: "sendmail -t -i").      
+    ; For Unix only.  You may supply arguments as well (default: "sendmail -t -i"). 
+    
+**6. Run the application**
+ 
+     To start the project create a virtualhost that points to the folder /public/index.php
 
-**6. Managing back office on the application**  
+**7. Managing back office on the application**  
 
     You need to log with the admin account already available in your database.
     username: admin  
