@@ -6,7 +6,6 @@
 </div>
       
 <?php endforeach; ?>
-
 <div class="container">
       <div class="row">
         <div class="col-lg-12 col-md-10 mx-auto">
@@ -21,12 +20,11 @@
             </div>   
             <p><?= htmlspecialchars_decode($post->content);?></p> 
             
-        
+        <?php if(isset($post->image_dir)):?>
         <div class="col-lg-6 col-md-2 mx-auto">       
-            <img src="<?=$post->image?>" class="img-responsive" alt=""  width="460" height="345">
-            </div>    
-     
-            
+            <img src="<?=filter_var($post->image_dir, FILTER_SANITIZE_STRING);?>" class="img-responsive" alt=""  width="460" height="345">
+        </div>
+    <?php endif?>      
         </div>    
     </div>
 </div>

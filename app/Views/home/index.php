@@ -11,29 +11,33 @@
           <div class="page-heading">
              <h2>About Me</h2>
            <p>Bonjour, je m'appelle Vincent, j'ai 31 ans et je suis actuellement en formation pour devenir développeur web.
-            Après avoir travaillé dans différents domaines et sur différents continents, j'ai décidé de me reconvertir vers
-             la fin de l'année 2019.<br>
-            Le développement web m'a toujours attiré, je suis une personne curieuse et passionnée. Le milieu de la programmation
-            me permet d'apprendre et de découvrir de nouvelles choses chaque jours.</p>
+            Après avoir travaillé dans différents domaines et sur différents continents, j'ai décidé d'éffectuer une reconversion professionnelle durant l'année 2019.<br>
+            Le développement web m'a toujours attiré, je suis une personne curieuse et passionnée. Ce milieu en perpétuelle évolution me permet d'apprendre et de découvrir
+            de nouvelles choses chaque jours.</p>
       
-            <p>Je suis d'avantage spécialisé en programmation back-end avec le langage PHP et je suis capable de travailler sur
+            <p>Spécialisé en programmation back-end avec le langage PHP, je suis capable de travailler sur
             toutes les étapes d'un projet, de sa conceptualisation à sa réalisation.</p>  
           </div>
       </div>     
 </div>
 <hr>
-
-<h2>Mes Projets</h2>
+<h2>Mes Derniers Projets</h2>
  <br>     
 <div class="container">
   <div class="row">
     <?php foreach ($posts as $post): ?>
-      <div class="col-lg-6 col-md-8 mx-auto">
+      <div class="col-lg-5 col-md-8 mx-auto">
         <div class="post-preview">
           <a href="<?= $post->url ?>">
             <h4 class="post-title">
-            <a href="<?= filter_var($post->url, FILTER_SANITIZE_STRING) ?>"><?= filter_var($post->title, FILTER_SANITIZE_STRING); ?></a>
+            <a href="<?= filter_var($post->url, FILTER_SANITIZE_STRING) ?>"><?= filter_var($post->title, FILTER_SANITIZE_STRING); ?></a> 
             </h4>
+            <br>
+            <div>
+              <a href="<?= filter_var($post->url, FILTER_SANITIZE_STRING) ?>">
+                <img src="<?= filter_var($post->image_dir, FILTER_SANITIZE_STRING)?>" alt="logo" class="img-responsiv" height="180" width="300">
+            </a>
+            </div>
             <p><?= filter_var($post->lead_in, FILTER_SANITIZE_STRING) ?><br><a class="btn btn-primary" href="<?=filter_var($post->url, FILTER_SANITIZE_STRING)?>">Suite</a></p>
             
             </a>
@@ -63,7 +67,7 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <p>Si vous avez une question ou une suggestion, n'hésitez pas à me concacter avec le formulaire suivant.
-          Je vous contacterais dès que possible.</p>
+          Je vous répondrais le plus rapidement possible.</p>
         
         <form action="" method="post">
             <?= $form->input('firstname', 'Prénom'); ?>
@@ -81,8 +85,33 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-10 mx-auto">
-      <a href="cv\CV_Signoret_Vincent.pdf" target="_blank">Cliquez ici pour voir le pdf</a>    
+      Si vous désirez en savoir plus sur mon parcours professionnel, vous pouvez consulter mon CV en cliquant sur les liens ci-dessous.
       </div>
+  </div>
+</div>
+<br>
+  <div class="container">
+  <div class="row">
+      <div class="col-lg-6 col-md-10 ">
+       <a href="cv\CV_Signoret_Vincent.pdf">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-address-card fa-stack-1x fa-inverse"></i>
+                </span>
+                Format PDF
+              </a>   
+      </div>
+      
+      <div class="col-lg-6 col-md-10 ">
+       <a href="https://www.linkedin.com/in/vincent-signoret-082944168/">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                </span>
+                Profil Linkedin
+              </a>   
+      </div>
+
     </div>
   </div>
 </div>
