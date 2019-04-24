@@ -53,7 +53,8 @@ The Bootstrap theme used for the CSS is Clean Blog created by Start Bootstrap:
     username: admin  
     login: admin   
 
-    When you are connected with this account you can access to the backoffice directly on the application, there is a link in the footer "ESPACE ADMNISTRATION". You can now managment the users right. 
+    When you are connected with this account you can access to the backoffice directly on the application,  
+    there is a link in the footer "ESPACE ADMNISTRATION". You can now managment the users right. 
 
     
     
