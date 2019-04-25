@@ -21,8 +21,8 @@
             <p><?= htmlspecialchars_decode($post->content);?></p> 
             
         <?php if(isset($post->image_dir)):?>
-        <div class="col-lg-6 col-md-2 mx-auto">       
-            <a href=<?=$post->extern_link?>><img src="<?=filter_var($post->image_dir, FILTER_SANITIZE_STRING);?>" class="img-responsive" alt=""  width="460" height="345"></a>
+        <div class="col-lg-6 col-md-10 mx-auto">       
+            <a href=<?=filter_var($post->extern_link, FILTER_SANITIZE_URL)?> target="_blank"><img src="<?=filter_var($post->image_dir, FILTER_SANITIZE_STRING);?>" class="img-responsive" alt=""  width="460" height="345"></a>
         </div>
     <?php endif?>      
         </div>    

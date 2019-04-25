@@ -54,6 +54,7 @@ class HomeController extends AppController
                 $flashs->setFlash('success', 'Votre email de contact à bien été envoyé');
                 App::redirect('index.php?page=home.index.php');
             }
+            
         }
         
         $errors = $validator->getErrors();

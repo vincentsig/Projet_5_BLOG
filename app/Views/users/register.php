@@ -4,7 +4,7 @@
     <p>Vous n'avez pas rempli le formulaire correctement</p>
     <ul>
         <?php foreach ($errors as $error): ?>
-           <li><?=filter_var($flash, FILTER_SANITIZE_STRING) ; ?></li>
+           <li><?=filter_var($error, FILTER_SANITIZE_STRING) ; ?></li>
         <?php endforeach; ?>
     </ul>
 </div>

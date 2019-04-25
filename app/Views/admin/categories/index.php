@@ -36,7 +36,7 @@
             </form>
         </td>    
     </tr>
-    <?php endforeach?>
+<?php endforeach;?>
 </tbody>
 </table>
         </div>

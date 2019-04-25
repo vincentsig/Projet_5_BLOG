@@ -5,6 +5,16 @@
     </div>
   </ul>
 <?php endforeach; ?>
+<?php if (!empty($errors)): ?>
+<div class="alert alert-danger">
+    <p>Vous n'avez pas rempli le formulaire correctement</p>
+    <ul>
+        <?php foreach ($errors as $error): ?>
+           <li><?=filter_var($error, FILTER_SANITIZE_STRING) ; ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
 <div class="container">
       <div class="row">
         <div class="col-lg-12 col-md-8 mx-auto">
@@ -28,14 +38,14 @@
     <?php foreach ($posts as $post): ?>
       <div class="col-lg-5 col-md-8 mx-auto">
         <div class="post-preview">
-          <a href="<?= $post->url ?>">
+          <a href="<?= filter_var($post->url, FILTER_SANITIZE_STRING) ?>">
             <h4 class="post-title">
             <a href="<?= filter_var($post->url, FILTER_SANITIZE_STRING) ?>"><?= filter_var($post->title, FILTER_SANITIZE_STRING); ?></a> 
             </h4>
             <br>
             <div>
               <a href="<?= filter_var($post->url, FILTER_SANITIZE_STRING) ?>">
-                <img src="<?= filter_var($post->image_dir, FILTER_SANITIZE_STRING)?>" alt="logo" class="img-responsiv" height="180" width="300">
+                <img src="<?= filter_var($post->image_dir, FILTER_SANITIZE_STRING)?>" alt="logo" class="img-responsiv" height="120" width="220">
             </a>
             </div>
             <p><?= filter_var($post->lead_in, FILTER_SANITIZE_STRING) ?><br><a class="btn btn-primary" href="<?=filter_var($post->url, FILTER_SANITIZE_STRING)?>">Suite</a></p>
@@ -56,12 +66,6 @@
    
 
 <h2>Formulaire de contact</h2>
-
-<?php  foreach ($errors as $error): ?>
-    <li>
-      <?=filter_var($error, FILTER_SANITIZE_STRING)?>;
-    </li>
-<?php endforeach?> 
 
 <div class="container">
     <div class="row">
@@ -93,7 +97,7 @@
   <div class="container">
   <div class="row">
       <div class="col-lg-6 col-md-10 ">
-       <a href="cv\CV_Signoret_Vincent.pdf">
+       <a href="cv\CV_Signoret_Vincent.pdf" target="_blank">
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
                   <i class="fas fa-address-card fa-stack-1x fa-inverse"></i>

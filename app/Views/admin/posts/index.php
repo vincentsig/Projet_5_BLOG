@@ -4,31 +4,30 @@
     <li><?=filter_var($flash, FILTER_SANITIZE_STRING); ?></li>
 </ul>
 </div>
-<?php endforeach?>
+<?php endforeach;?>
 
 <div class="container">
     <h1 class="section-heading">Gestion des Articles</h1>
     <div class="row">
-      <div class="col-lg-4 col-md-6 mx-auto">
-
-<p>
-    <a href="?page=admin.posts.add" class="btn btn-success">Ajouter un article</a>
-</p>
-</div>
-<div class="col-lg-4 col-md-6 mx-auto">
-
-<p>
-    <a href="?page=admin.posts.archived" class="btn btn-success">Voir les articles archivés</a>
-</p>
-</div>
-</div>
-<div class="row">
-            <div  class="col-lg-9 col-md-10 mx-auto">
-            </div>
-            <div class="col-lg-3 col-md-10 mx-auto">
-                <a class="btn btn-primary" href="?page=admin.index.dashboard">Retour</a>
-            </div>  
+        <div class="col-lg-4 col-md-6 mx-auto">
+            <p>
+                <a href="?page=admin.posts.add" class="btn btn-success">Ajouter un article</a>
+            </p>
+        </div>
+        <div class="col-lg-4 col-md-6 mx-auto">
+            <p>
+                <a href="?page=admin.posts.archived" class="btn btn-success">Voir les articles archivés</a>
+            </p>
+        </div>
     </div>
+    <div class="row">
+        <div  class="col-lg-9 col-md-10 mx-auto">
+        </div>
+        <div class="col-lg-3 col-md-10 mx-auto">
+            <a class="btn btn-primary" href="?page=admin.index.dashboard">Retour</a>
+        </div>  
+    </div>
+
 <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-10 mx-auto">
@@ -55,9 +54,10 @@
             </form>
         </td>    
     </tr>
-    <?php endforeach?>
+    <?php endforeach;?>
 </tbody>
 </table>
         </div>
     </div>
+</div>
 </div>
