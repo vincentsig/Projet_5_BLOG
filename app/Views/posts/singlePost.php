@@ -22,7 +22,7 @@
             
         <?php if(isset($post->image_dir)):?>
         <div class="col-lg-6 col-md-2 mx-auto">       
-            <img src="<?=filter_var($post->image_dir, FILTER_SANITIZE_STRING);?>" class="img-responsive" alt=""  width="460" height="345">
+            <a href=<?=$post->extern_link?>><img src="<?=filter_var($post->image_dir, FILTER_SANITIZE_STRING);?>" class="img-responsive" alt=""  width="460" height="345"></a>
         </div>
     <?php endif?>      
         </div>    

@@ -56,7 +56,7 @@ class PostTable extends Table
     public function findWithCategory($id)
     {
         return $this->query(
-            "SELECT blogpost.id, blogpost.title, blogpost.lead_in, blogpost.content,blogpost.archive,  image.tag as tag, image.image_dir,
+            "SELECT blogpost.id, blogpost.title, blogpost.lead_in, blogpost.content, blogpost.archive, blogpost.extern_link,  image.tag as tag, image.image_dir,
             blogpost.date_created as date_created, category.title as category, user.username as username , user.id as id_user
         FROM blogpost
         LEFT JOIN user ON blogpost.user_id = user.id

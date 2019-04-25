@@ -22,7 +22,13 @@
 </p>
 </div>
 </div>
-
+<div class="row">
+            <div  class="col-lg-9 col-md-10 mx-auto">
+            </div>
+            <div class="col-lg-3 col-md-10 mx-auto">
+                <a class="btn btn-primary" href="?page=admin.index.dashboard">Retour</a>
+            </div>  
+    </div>
 <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-10 mx-auto">

@@ -9,10 +9,10 @@
       <div class="row">
         <div class="col-lg-12 col-md-8 mx-auto">
           <div class="page-heading">
-             <h2>About Me</h2>
+             <h2>À propos de moi</h2>
            <p>Bonjour, je m'appelle Vincent, j'ai 31 ans et je suis actuellement en formation pour devenir développeur web.
             Après avoir travaillé dans différents domaines et sur différents continents, j'ai décidé d'éffectuer une reconversion professionnelle durant l'année 2019.<br>
-            Le développement web m'a toujours attiré, je suis une personne curieuse et passionnée. Ce milieu en perpétuelle évolution me permet d'apprendre et de découvrir
+            Le développement web m'a toujours attiré, je suis une personne curieuse et passionné. Ce milieu en perpétuelle évolution me permet d'apprendre et de découvrir
             de nouvelles choses chaque jours.</p>
       
             <p>Spécialisé en programmation back-end avec le langage PHP, je suis capable de travailler sur
