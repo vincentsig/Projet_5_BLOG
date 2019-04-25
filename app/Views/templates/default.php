@@ -1,4 +1,4 @@
-<?php include('header.php');?>
+<?php require('header.php');?>
 
 
 
@@ -13,4 +13,4 @@
 
   <hr>
 
-<?php include('footer.php');?>
+<?php require('footer.php');?>

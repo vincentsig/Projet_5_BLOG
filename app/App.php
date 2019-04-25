@@ -1,5 +1,5 @@
 <?php
- use Core\Config;
+use Core\Config;
 use Core\Database\MysqlDatabase;
 use Core\Auth\Auth;
 use Core\Auth\Session;
@@ -93,7 +93,7 @@ class App
     {
         $config = Config::getInstance(ROOT . '/config/config.php');
 
-        if (is_null($this->my_email)) {
+        if (($this->my_email)===NULL) {
             $this->my_email = $config->get('my_email');
         }
         return $this->my_email;

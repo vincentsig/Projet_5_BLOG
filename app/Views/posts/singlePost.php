@@ -82,10 +82,11 @@
 
     </div>
 </div>
-
+<?php if(isset($_SESSION['auth'])): ?>
 <div class="col-md-10 col-md-offset-4 col-sm-12">
       <form method="post">
       <?= $form->input('content', 'Contenu', ['type' => 'textarea']); ?>
       <button class="btn btn-primary">Sauvegarder</button> 
       </form>
 </div>
+<?php endif?>
