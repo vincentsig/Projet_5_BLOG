@@ -25,8 +25,7 @@ class PostsController extends AppController
     public function index()
     {
         $flashs = Session::getInstance();
-        if($flashs->hasFlashes())
-        {
+        if ($flashs->hasFlashes()) {
             $flashs =$flashs->getFlashes();
         }
         $posts = $this->Post->allPosts();
@@ -46,7 +45,7 @@ class PostsController extends AppController
                 'title' => filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'lead_in'=> filter_input(INPUT_POST, 'lead_in', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'content' => filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                'category_id' => filter_input(INPUT_POST,'category_id',FILTER_SANITIZE_NUMBER_INT),
+                'category_id' => filter_input(INPUT_POST, 'category_id', FILTER_SANITIZE_NUMBER_INT),
                 'date_created' => date('Y-m-d H:i:s'),
                 'user_id' => $_SESSION['auth']->id
             ]);
@@ -69,11 +68,11 @@ class PostsController extends AppController
     public function edit()
     {
         if (!empty($_POST)) {
-            $result = $this->Post->update(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT), [
+            $result = $this->Post->update(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT), [
                 'title' =>filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'lead_in'=> filter_input(INPUT_POST, 'lead_in', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'content' => filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                'category_id' => filter_input(INPUT_POST,'category_id',FILTER_SANITIZE_NUMBER_INT),
+                'category_id' => filter_input(INPUT_POST, 'category_id', FILTER_SANITIZE_NUMBER_INT),
                 'last_update' => date('Y-m-d H:i:s'),
                 'user_id' => $_SESSION['auth']->id
             ]);
@@ -81,7 +80,7 @@ class PostsController extends AppController
                 return $this->index();
             }
         }
-        $post = $this->Post->find(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+        $post = $this->Post->find(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
         $categories = $this->Category->getList('id', 'title');
         $form = new BootstrapForm($post);
         $this->render('admin.posts.edit', compact('categories', 'form', 'post'));
@@ -105,7 +104,7 @@ class PostsController extends AppController
     {
         $flashs = Session::getInstance();
         if (!empty($_POST)) {
-            $this->Post->delete(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT));
+            $this->Post->delete(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT));
             $flashs->setFlash('success', "L'archive à été définitivement surpprimé de la base de donnée");
             {
                 return App::redirect('index.php?page=admin.posts.index');
@@ -114,31 +113,28 @@ class PostsController extends AppController
     }
 
     public function erase()
-    {  
+    {
         $flashs = Session::getInstance();
         if (!empty($_POST)) {
-            $this->Post->update(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT), [
+            $this->Post->update(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT), [
                 'archive' =>  date('Y-m-d H:i:s')]);
-                $flashs->setFlash('success', "Le commentaire n'est plus visible sur le site, il est maintenant classé comme 'archive' en base de données");
+            $flashs->setFlash('success', "Le commentaire n'est plus visible sur le site, il est maintenant classé comme 'archive' en base de données");
             {
                 return App::redirect('index.php?page=admin.posts.index');
             }
         }
-        
     }
 
     public function publish()
     {
         $flashs = Session::getInstance();
         if (!empty($_POST)) {
-            $this->Post->update(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT), [
-                'archive' =>  NULL]);
-                $flashs->setFlash('success', "Le commentaire est de nouveau visible sur le site");
+            $this->Post->update(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT), [
+                'archive' =>  null]);
+            $flashs->setFlash('success', "Le commentaire est de nouveau visible sur le site");
             {
                 return App::redirect('index.php?page=admin.posts.index');
             }
         }
-        
     }
-
 }

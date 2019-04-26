@@ -35,11 +35,11 @@ class PostsController extends AppController
 
     public function categories()
     {
-        $category = $this->Category->find(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+        $category = $this->Category->find(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
         if ($category===false) {
             $this->notFound();
         }
-        $posts = $this->Post->lastByCategory(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+        $posts = $this->Post->lastByCategory(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
         $categories = $this->Category->all();
         $this->render('posts.category', compact('posts', 'categories', 'category'));
     }
@@ -55,7 +55,7 @@ class PostsController extends AppController
         $auth = new Auth($db, Session::getInstance());
         $waiting_coms = [];
         if ($auth->logged()) {
-            $waiting_coms = $this->Comment->waitingValidation($_SESSION['auth']->id, filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+            $waiting_coms = $this->Comment->waitingValidation($_SESSION['auth']->id, filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
         }
       
         $flashs = Session::getInstance();
@@ -63,27 +63,27 @@ class PostsController extends AppController
             $flashs =$flashs->getFlashes();
         }
 
-        $post = $this->Post->findWithCategory(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+        $post = $this->Post->findWithCategory(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
         if ($post ==false) {
             $this->notFound();
         }
         
         if (!empty($_POST) && isset($_POST)) {
-                $this->Comment->create([
+            $this->Comment->create([
                 'content' =>  filter_input(INPUT_POST, 'content', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                 'date_created' => date('Y-m-d H:i:s'),
                 'status' => null,
                 'user_id' => $_SESSION['auth']->id,
-                'blogpost_id' =>filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT)
+                'blogpost_id' =>filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)
             ]);
 
             $flashs->setFlash('success', 'Votre commentaire sera publié après avoir été validé,
             merci de votre compréhension.');
-            return App::redirect('index.php?page=posts.singlepost&id=' . filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+            return App::redirect('index.php?page=posts.singlepost&id=' . filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
         }
-        $comments = $this->Comment->findWithComment(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
-        $count = $this->Comment->count(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+        $comments = $this->Comment->findWithComment(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+        $count = $this->Comment->count(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
         $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $this->render('posts.singlePost', compact('post','comments', 'count', 'form', 'waiting_coms', 'flashs'));
+        $this->render('posts.singlePost', compact('post', 'comments', 'count', 'form', 'waiting_coms', 'flashs'));
     }
 }

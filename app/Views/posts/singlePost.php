@@ -20,7 +20,7 @@
             </div>   
             <p><?= htmlspecialchars_decode($post->content);?></p> 
             
-        <?php if(isset($post->image_dir)):?>
+        <?php if (isset($post->image_dir)):?>
         <div class="col-lg-6 col-md-10 mx-auto">       
             <a href=<?=filter_var($post->extern_link, FILTER_SANITIZE_URL)?> target="_blank"><img src="<?=filter_var($post->image_dir, FILTER_SANITIZE_STRING);?>" class="img-responsive" alt=""  width="460" height="345"></a>
         </div>
@@ -82,7 +82,7 @@
 
     </div>
 </div>
-<?php if(isset($_SESSION['auth'])): ?>
+<?php if (isset($_SESSION['auth'])): ?>
 <div class="col-md-10 col-md-offset-4 col-sm-12">
       <form method="post">
       <?= $form->input('content', 'Contenu', ['type' => 'textarea']); ?>

@@ -53,7 +53,7 @@
             </a>
             <p class="post-meta">Posté par
               <?= filter_var($post->username, FILTER_SANITIZE_STRING);?>, le <?= filter_var($post->date_created, FILTER_SANITIZE_STRING);?>
-              <?php if(isset($post->last_update)):?>, dernière modification : <?= filter_var($post->last_update, FILTER_SANITIZE_STRING)?><br>
+              <?php if (isset($post->last_update)):?>, dernière modification : <?= filter_var($post->last_update, FILTER_SANITIZE_STRING)?><br>
               <?php endif;?>
               tag: <?=filter_var($post->category, FILTER_SANITIZE_STRING) ;?>
             </p>

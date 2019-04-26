@@ -83,19 +83,18 @@ class PostTable extends Table
     public function allPosts()
     {
         return $this->query(
-        "SELECT * 
+            "SELECT * 
         FROM blogpost
-        WHERE blogpost.archive IS NULL");
+        WHERE blogpost.archive IS NULL"
+        );
     }
   
     public function archived()
     {
         return $this->query(
-        "SELECT * 
+            "SELECT * 
         FROM blogpost
-        WHERE blogpost.archive IS NOT NULL");
+        WHERE blogpost.archive IS NOT NULL"
+        );
     }
-
-
-
 }

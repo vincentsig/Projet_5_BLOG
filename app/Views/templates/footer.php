@@ -5,8 +5,8 @@
           <div class="col-lg-9 col-md-10 mx-auto">
           </div>
           <div class="col-lg-3 col-md-10 mx-auto">
-          <?php if(isset($_SESSION['auth'])): ?>
-            <?php if(($_SESSION['auth']->role_id == 1)): ?>
+          <?php if (isset($_SESSION['auth'])): ?>
+            <?php if (($_SESSION['auth']->role_id == 1)): ?>
           <a button class="btn btn-primary" href="index.php?page=admin.index.dashboard">espace administration</a>
             <?php endif; ?>
             <?php endif; ?>

@@ -63,6 +63,4 @@ class CommentTable extends Table
         WHERE comment.status IS NULL"
         );
     }
-
-   
 }

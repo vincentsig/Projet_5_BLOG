@@ -132,12 +132,17 @@ class Auth
         }
     }
 
+    /**
+     * restrict
+     * restrict access if it's a different session
+     * @return void
+     */
     public function restrict()
     {
         if (!$this->session->read('auth')) {
             $this->session->setFlash('danger', $this->options['restriction_msg']);
-            return App::redirect('index.php?page=users.login');;
-            
+            return App::redirect('index.php?page=users.login');
+            ;
         }
     }
 
@@ -173,9 +178,9 @@ class Auth
      */
     public function getRole()
     {
-        if ($this->logged()){
-        $role = $_SESSION['auth']->role_id;
-        return $role;
+        if ($this->logged()) {
+            $role = $_SESSION['auth']->role_id;
+            return $role;
         }
     }
 }

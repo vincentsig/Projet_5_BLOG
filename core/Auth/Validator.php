@@ -3,8 +3,8 @@ use Core\Database\Database;
 
 namespace Core\Auth;
 
-class Validator 
-{   
+class Validator
+{
     private $data;
     private $errors = [];
 
@@ -18,7 +18,7 @@ class Validator
      */
     public function __construct($data)
     {
-        $this->data = $data;  
+        $this->data = $data;
     }
 
     /**
@@ -30,8 +30,7 @@ class Validator
      */
     private function getField($field)
     {
-        if(!isset($this->data[$field]))
-        {
+        if (!isset($this->data[$field])) {
             return null;
         }
         return $this->data[$field];
@@ -46,27 +45,23 @@ class Validator
      */
     public function isAlpha($field, $errorMsg)
     {
-        if(!preg_match('/^[a-zA-Z0-9_]+$/', $this->getField($field)))
-        {
+        if (!preg_match('/^[a-zA-Z0-9_]+$/', $this->getField($field))) {
             $this->errors[$field] = $errorMsg;
         }
-    
-    
     }
 
     /**
      * isUniq
      *
-     * @param  mixed 
+     * @param  mixed
      * @param  mixed $table
      * @param  mixed $errorMsg
      * Check if the field is not already in the database
      * @return void
      */
-    public function isUniq($field, $db,  $table, $errorMsg)
+    public function isUniq($field, $db, $table, $errorMsg)
     {
-        
-        $record = $db->prepare("SELECT id FROM $table WHERE $field = ?",[$this->getField($field)], null, true);
+        $record = $db->prepare("SELECT id FROM $table WHERE $field = ?", [$this->getField($field)], null, true);
         if ($record) {
             $this->errors[$field] = $errorMsg;
             return false;
@@ -104,8 +99,7 @@ class Validator
     public function isConfirmed($field, $errorMsg)
     {
         $value = $this->getField($field);
-        if(empty($value) || $value != $this->getField($field . '_confirm'))
-        {
+        if (empty($value) || $value != $this->getField($field . '_confirm')) {
             $this->errors[$field] = $errorMsg;
         }
     }
@@ -131,7 +125,4 @@ class Validator
     {
         return $this->errors;
     }
-
-
-
 }

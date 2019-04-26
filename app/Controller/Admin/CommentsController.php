@@ -55,7 +55,7 @@ class CommentsController extends AppController
     {
         $flashs = Session::getInstance();
         if (!empty($_POST)|| isset($_POST)) {
-            $this->Comment->update((filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT)), [
+            $this->Comment->update((filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT)), [
                 'status' => date('Y-m-d H:i:s')], true);
             {
                 $flashs->setFlash('success', 'Le commentaire à bien été publié');
@@ -72,7 +72,7 @@ class CommentsController extends AppController
     public function delete()
     {
         if (!empty($_POST) || isset($_POST)) {
-            $this->Comment->delete((filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT)));
+            $this->Comment->delete((filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT)));
             {
                 return $this->index();
             }

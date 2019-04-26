@@ -4,7 +4,6 @@ use Core\Database\MysqlDatabase;
 use Core\Auth\Auth;
 use Core\Auth\Session;
 
-
 class App
 {
     public $title = 'My portefolio';
@@ -78,9 +77,7 @@ class App
      */
     public static function redirect($page)
     {
-        
         return header("Location: $page");
-        
     }
 
 
@@ -93,7 +90,7 @@ class App
     {
         $config = Config::getInstance(ROOT . '/config/config.php');
 
-        if (($this->my_email)===NULL) {
+        if (($this->my_email)===null) {
             $this->my_email = $config->get('my_email');
         }
         return $this->my_email;

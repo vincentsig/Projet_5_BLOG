@@ -17,6 +17,5 @@ class AppController extends \App\Controller\AppController
         if ($auth !=1) {
             $this->forbidden();
         }
-        
     }
 }

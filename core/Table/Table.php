@@ -22,7 +22,7 @@ class Table
     {
         $this->db = $db;
 
-        if (($this->table)===NULL) {
+        if (($this->table)===null) {
             $parts = explode('\\', get_class($this));
             $class_name = end($parts);
             $this->table = strtolower(str_replace('Table', '', $class_name));

@@ -27,7 +27,7 @@ class UsersController extends AppController
     {
         $errors = [];
         $db = App::getInstance()->getDb();
-        $validator = new Validator(filter_input_array(INPUT_POST,$_POST, FILTER_SANITIZE_STRING));
+        $validator = new Validator(filter_input_array(INPUT_POST, $_POST, FILTER_SANITIZE_STRING));
         $flashs = Session::getInstance();
         if ($flashs->hasFlashes()) {
             $flashs =$flashs->getFlashes();
@@ -48,9 +48,12 @@ class UsersController extends AppController
             
             if ($validator->isValid()) {
                 $auth = new Auth($db, Session::getInstance());
-                $auth->register($db,filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                                     filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS), 
-                                     filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+                $auth->register(
+                    $db,
+                    filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                    filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                    filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+                );
                 $flashs->setFlash('success', 'Un email de confirmation vous a été envoyé pour valider votre compte');
                 App::redirect('index.php?page=users.login.php');
             }
@@ -58,7 +61,7 @@ class UsersController extends AppController
        
         $errors = $validator->getErrors();
         $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $this->render('users.register', compact('form',  'flashs', 'errors', 'validator'));
+        $this->render('users.register', compact('form', 'flashs', 'errors', 'validator'));
     }
 
     /**
@@ -71,9 +74,12 @@ class UsersController extends AppController
         $db = App::getInstance()->getDb();
         $flashs = Session::getInstance();
 
-        if (App::getAuth()->confirm($db, filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT),
-                                         filter_input(INPUT_GET, 'token', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                                          Session::getInstance())) {
+        if (App::getAuth()->confirm(
+            $db,
+            filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT),
+            filter_input(INPUT_GET, 'token', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            Session::getInstance()
+        )) {
             $flashs->setFlash('success', "Votre compte a bien été validé");
             App::redirect('index.php?page=users.account');
         } else {
@@ -100,8 +106,11 @@ class UsersController extends AppController
             App::redirect('index.php?page=users.account');
         }
         if (!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
-            $user = $auth->login($db, filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-                                    filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $user = $auth->login(
+                $db,
+                filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+            );
             if ($user) {
                 $flashs->setFlash('success', 'Vous êtes maintenant connecté');
                 App::redirect('index.php');
@@ -128,7 +137,7 @@ class UsersController extends AppController
         $auth = App::getAuth();
         $auth->restrict();
         $flashs = Session::getInstance();
-        if (!empty($_POST))  {
+        if (!empty($_POST)) {
             if (empty($_POST['password'])
                  || filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
                   != filter_input(INPUT_POST, 'password_confirm', FILTER_SANITIZE_FULL_SPECIAL_CHARS)) {
@@ -157,7 +166,6 @@ class UsersController extends AppController
      */
     public function logout()
     {
-        
         App::getAuth()->logout();
         Session::getInstance()->setFlash('success', 'Vous êtes maintenant déconnecté');
         return App::redirect('index.php?page=users.login');

@@ -42,14 +42,14 @@ class UsersController extends AppController
     public function edit()
     {
         if (!empty($_POST)) {
-            $result = $this->User->update(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT), [
+            $result = $this->User->update(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT), [
                 'role_id' => filter_input(INPUT_POST, 'role_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
             ]);
             if ($result) {
                 return $this->index();
             }
         }
-        $user = $this->User->find(filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT));
+        $user = $this->User->find(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
         $roles = $this->Role->getList('id', 'name');
         $form = new BootstrapForm($user);
         $this->render('admin.users.edit', compact('roles', 'form', 'user'));
@@ -64,22 +64,17 @@ class UsersController extends AppController
      */
     public function delete()
     {
-
-        if (!empty($_POST)) 
-        {
+        if (!empty($_POST)) {
             $db = App::getInstance()->getDb();
             $auth = App::getAuth($db, Session::getInstance());
             $flashs = Session::getInstance();
             $session_id = $auth->getUserId();
-            if( filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT) === $session_id)
-            {
+            if (filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT) === $session_id) {
                 $flashs->setFlash('danger', "Vous ne pouvez pas supprimer votre propre compte");
                 return App::redirect('index.php?page=admin.users.index');
             }
-            $this->User->delete(filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT));
+            $this->User->delete(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT));
             return $this->index();
-            
         }
-        
     }
 }
