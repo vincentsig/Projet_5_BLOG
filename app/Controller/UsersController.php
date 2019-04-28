@@ -137,6 +137,9 @@ class UsersController extends AppController
         $auth = App::getAuth();
         $auth->restrict();
         $flashs = Session::getInstance();
+        if ($flashs->hasFlashes()) {
+            $flashs =$flashs->getFlashes();
+        }
         if (!empty($_POST)) {
             if (empty($_POST['password'])
                  || filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
@@ -151,12 +154,76 @@ class UsersController extends AppController
             }
             App::redirect('index.php?page=users.account');
         }
-        if ($flashs->hasFlashes()) {
-            $flashs =$flashs->getFlashes();
-        }
+      
         $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $this->render('users.account', compact('form', 'auth', 'flashs'));
     }
+
+    public function forget()
+    {
+        $db = App::getInstance()->getDb();
+        $auth = App::getAuth($db, Session::getInstance());
+        $flashs = Session::getInstance();
+        if ($flashs->hasFlashes()) 
+        {
+            $flashs =$flashs->getFlashes();
+        }
+        if(!empty($_POST) && !empty($_POST['email']))
+        {
+            if($auth->resetPassword($db, $_POST['email']))
+            {
+                $flashs->setFlash('success', 'Les instructions du rappel de mot de passe vous ont été envoyées par emails');
+                App::redirect('index.php?page=users.reset');
+            }
+            else
+            {
+                $flashs->setFlash('danger', 'Aucun compte ne correspond à cet adresse');
+                App::redirect('index.php?page=users.forget');
+            }
+        }
+       
+        $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $this->render('users.forget', compact('form', 'auth', 'flashs'));
+    }
+
+    public function reset()
+    {
+        $db = App::getInstance()->getDb();
+        $auth = App::getAuth($db, Session::getInstance());
+        $flashs = Session::getInstance();
+        if ($flashs->hasFlashes()) {
+            $flashs =$flashs->getFlashes();
+        }
+
+        if(isset($_GET['id']) && isset($_GET['token'])){
+            $user = $auth->checkResetToken($db, $_GET['id'], $_GET['token']);
+            if($user){
+                if(!empty($_POST)){
+                    $validator = new Validator($_POST);
+                    $validator->isConfirmed('password');
+                    if($validator->isValid()){
+                        $password = $auth->hashPassword($_POST['password']);
+                    $result = $this->User->update(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT), [
+                        'password' => $password,
+                        'reset_at' => NULL,
+                        'reset_token' => NULL, 
+                         ]);
+                        $auth->connect($user);
+                        Session::getInstance()->setFlash('success','Votre mot de passe a bien été modifié');
+                        App::redirect('index.php?page=users.account.php');
+                    }
+                }
+            }
+            else
+            {
+                Session::getInstance()->setFlash('danger',"Ce token n'est pas valide");
+                App::redirect('index.php?page=users.forget.php');
+            }
+        }
+        
+        $form = new BootstrapForm(filter_input(INPUT_POST, '$_POST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $this->render('users.reset', compact('form', 'auth', 'flashs'));
+    }      
 
 
     /**

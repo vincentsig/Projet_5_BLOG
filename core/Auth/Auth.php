@@ -66,8 +66,7 @@ class Auth
         mail(
             $email,
             'Confirmation de votre compte',
-            "Afin de valider votre compte merci de cliquer sur 
-         ce lien\n\nhttp://localhost/Projet_5/public/index.php?page=users.confirm&id=$user_id&token=$token",
+            "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://localhost/Projet_5/public/index.php?page=users.confirm&id=$user_id&token=$token",
             $headers
         );
     }
@@ -146,11 +145,62 @@ class Auth
         }
     }
 
+    /**
+     * update_password
+     * Update your password account
+     * @param  mixed $db
+     * @param  mixed $password
+     * @param  mixed $user_id
+     *
+     * @return void
+     */
     public function update_password($db, $password, $user_id)
     {
         $db->prepare('UPDATE user SET password = ? WHERE id = ?', [$password, $user_id]);
     }
     
+
+    /**
+     * resetPassword
+     * Reset your password account if forget
+     * @param  mixed $db
+     * @param  mixed $email
+     *
+     * @return void
+     */
+    public function resetPassword($db, $email){
+        $user = $db->prepare('SELECT * FROM user WHERE email = ? AND confirmed_at IS NOT NULL', [$email], null, true);
+        if($user){
+            $reset_token = StrToken::random(60);
+            $db->prepare('UPDATE user SET reset_token = ?, reset_at = NOW() WHERE id = ?', [$reset_token, $user->id]);
+
+            $headers = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+            $headers .= 'From: "' . $this->my_email . "\r\n";
+            mail($_POST['email'], 'Réinitiatilisation de votre mot de passe', 
+            "Afin de réinitialiser votre mot de passe merci de cliquer sur ce lien\n\nhttp://localhost/Projet_5/public/index.php?page=users.reset&id=$user->id&token=$reset_token");
+            return $user;
+        }
+        return false;
+    }
+
+
+    /**
+     * checkResetToken
+     *
+     * @param  mixed $db
+     * @param  mixed $user_id
+     * @param  mixed $token
+     *  check if there is a reset token, the time limit to validate the token is 30 minutes, 
+     * after that it will expire. 
+     * @return void
+     */
+    public function checkResetToken($db, $user_id, $token){
+        return $db->prepare('SELECT * FROM user WHERE id = ? AND reset_token IS NOT NULL AND reset_token = ? AND reset_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)', [$user_id, $token], null, true);
+    }
+
+
+
 
     public function logged()
     {

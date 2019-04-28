@@ -96,7 +96,7 @@ class Validator
      * check if the value in field matching the confirmation field
      * @return void
      */
-    public function isConfirmed($field, $errorMsg)
+    public function isConfirmed($field, $errorMsg = '')
     {
         $value = $this->getField($field);
         if (empty($value) || $value != $this->getField($field . '_confirm')) {
