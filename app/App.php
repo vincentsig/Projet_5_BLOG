@@ -36,7 +36,7 @@ class App
 
     /**
      * getTable
-     *initialize object corresponding to the table ($name) from the DBB
+     *initialize object corresponding to the table ($name) from the DB
      * @param  mixed $name
      *
      * @return void

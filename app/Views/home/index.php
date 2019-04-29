@@ -31,6 +31,7 @@
       </div>     
 </div>
 <hr>
+
 <h2>Mes Derniers Projets</h2>
  <br>     
 <div class="container">

@@ -11,6 +11,7 @@ class Autoloader
 
     /**
      * register autoloader
+     * execute the function 'autoload' inside the class __CLASS__
      */
     public static function register()
     {
@@ -18,8 +19,9 @@ class Autoloader
     }
 
     /**
-     * load the class with the path
-     * @param $class string name of the loading class
+     * autoload only the class with the namespace of your application (here it's App\)
+     * if $class start with App\, remove App\ and replace '\' by '/' ,then require the file.
+     * @param $class  name of the loading class
      */
     public static function autoload($class)
     {

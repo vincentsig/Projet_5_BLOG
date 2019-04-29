@@ -24,7 +24,7 @@ class BootstrapForm extends Form
         $type = isset($options['type']) ? $options['type'] : 'texte';
         $label ='<label>' . $label . '</label>';
         if ($type ==='textarea') {
-            $input ='<textarea rows="5" name="' . $name
+            $input ='<textarea rows="5" name="' . htmlspecialchars($name)
              . '" class="form-control">' . $this->getValue($name) . '</textarea>';
         } else {
             $input ='<input type="' . $type .'" name="' . $name
@@ -37,7 +37,7 @@ class BootstrapForm extends Form
     public function select($name, $label, $options)
     {
         $label ='<label>' . $label . '</label>';
-        $input ='<select class="form-control" name="' . $name . '">';
+        $input ='<select class="form-control" name="' . htmlspecialchars($name) . '">';
         foreach ($options as $k => $v) {
             $attributes= '';
             if ($k == $this->getValue($name)) {

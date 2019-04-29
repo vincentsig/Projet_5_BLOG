@@ -159,6 +159,11 @@ class UsersController extends AppController
         $this->render('users.account', compact('form', 'auth', 'flashs'));
     }
 
+    /**
+     * forget
+     * send email to reset password
+     * @return void
+     */
     public function forget()
     {
         $db = App::getInstance()->getDb();
@@ -170,7 +175,7 @@ class UsersController extends AppController
         }
         if(!empty($_POST) && !empty($_POST['email']))
         {
-            if($auth->resetPassword($db, $_POST['email']))
+            if($auth->resetPassword($db, filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS)))
             {
                 $flashs->setFlash('success', 'Les instructions du rappel de mot de passe vous ont été envoyées par emails');
                 App::redirect('index.php?page=users.reset');
@@ -186,6 +191,11 @@ class UsersController extends AppController
         $this->render('users.forget', compact('form', 'auth', 'flashs'));
     }
 
+    /**
+     * reset
+     * reset the password and update token status
+     * @return void
+     */
     public function reset()
     {
         $db = App::getInstance()->getDb();
@@ -196,15 +206,15 @@ class UsersController extends AppController
         }
 
         if(isset($_GET['id']) && isset($_GET['token'])){
-            $user = $auth->checkResetToken($db, $_GET['id'], $_GET['token']);
+            $user = $auth->checkResetToken($db, filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'token', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             if($user){
                 if(!empty($_POST)){
-                    $validator = new Validator($_POST);
+                    $validator = new Validator(filter_input_array(INPUT_POST, $_POST, FILTER_SANITIZE_STRING));
                     $validator->isConfirmed('password');
                     if($validator->isValid()){
-                        $password = $auth->hashPassword($_POST['password']);
+                    $password = $auth->hashPassword($_POST['password']);
                     $result = $this->User->update(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT), [
-                        'password' => $password,
+                        'password' => filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
                         'reset_at' => NULL,
                         'reset_token' => NULL, 
                          ]);
