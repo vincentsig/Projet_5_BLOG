@@ -37,21 +37,12 @@ The Bootstrap theme used for the CSS is Clean Blog created by Start Bootstrap:
 
 **4. Open the file config.php and complete the fields beetween ** ** to configure the PDO connection and your email adresse for the contact form.**
 
-**5. To use the contact form on your localserver you need to edit your php.ini :**  
-
-    [mail function]   
-    ; For Win32 only.     
-    SMTP = localhost     
-    smtp_port = 25      
-    ; For Win32 only.      
-    ;sendmail_from = me@example.com      
-    ; For Unix only.  You may supply arguments as well (default: "sendmail -t -i"). 
     
-**6. Run the application**
+**5. Run the application**
  
      To start the project create a virtualhost that points to the folder /public/index.php
 
-**7. Managing back office on the application**  
+**6. Managing back office on the application**  
 
     You need to log with the admin account already available in your database.
     username: admin  
