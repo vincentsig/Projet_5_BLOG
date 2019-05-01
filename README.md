@@ -33,7 +33,7 @@ The Bootstrap theme used for the CSS is Clean Blog created by Start Bootstrap:
 
 **2. Import the script "blog.sql" in \Database to your own database managment system.**
 
-**3. Rename the file "config_sample.php" in \config   into "config.php" and complete**
+**3. Rename the file "config_sample.php"(in the directory \config) into "config.php"**
 
 **4. Open the file config.php and complete the fields beetween ** ** to configure the PDO connection and your email adresse for the contact form.**
 
