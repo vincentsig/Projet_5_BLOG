@@ -209,12 +209,13 @@ class UsersController extends AppController
             $user = $auth->checkResetToken($db, filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT), filter_input(INPUT_GET, 'token', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             if($user){
                 if(!empty($_POST)){
+                       
                     $validator = new Validator(filter_input_array(INPUT_POST, $_POST, FILTER_SANITIZE_STRING));
                     $validator->isConfirmed('password');
                     if($validator->isValid()){
                     $password = $auth->hashPassword($_POST['password']);
                     $result = $this->User->update(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT), [
-                        'password' => filter_input(INPUT_POST, 'password', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+                        'password' => $password,
                         'reset_at' => NULL,
                         'reset_token' => NULL, 
                          ]);

@@ -9,6 +9,7 @@ class Auth
 {
     protected $db;
     private $my_email;
+    private $local_url;
     private $session;
     private $options = [
         'restriction_msg' => "Vous n'avez pas le droit d'accéder à cette page"
@@ -21,6 +22,7 @@ class Auth
         $this->session = $session;
         $this->db =$db;
         $this->my_email= App::getInstance()->getEmail();
+        $this->local_url= App::getInstance()->getLocalUrl();
     }
    
     
@@ -66,7 +68,7 @@ class Auth
         mail(
             $email,
             'Confirmation de votre compte',
-            "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://localhost/Projet_5/public/index.php?page=users.confirm&id=$user_id&token=$token",
+            "Afin de valider votre compte merci de cliquer sur ce lien\n\n{$this->local_url}public/index.php?page=users.confirm&id=$user_id&token=$token",
             $headers
         );
     }
@@ -178,7 +180,7 @@ class Auth
             $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
             $headers .= 'From: "' . $this->my_email . "\r\n";
             mail($_POST['email'], 'Réinitiatilisation de votre mot de passe', 
-            "Afin de réinitialiser votre mot de passe merci de cliquer sur ce lien\n\nhttp://localhost/Projet_5/public/index.php?page=users.reset&id=$user->id&token=$reset_token");
+            "Afin de réinitialiser votre mot de passe merci de cliquer sur ce lien\n\n{$this->local_url}public/index.php?page=users.reset&id=$user->id&token=$reset_token");
             return $user;
         }
         return false;

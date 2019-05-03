@@ -11,6 +11,7 @@ class App
     private static $_instance;
     private $db_instance;
     private $my_email;
+    private $local_url;
 
     public static function getInstance()
     {
@@ -95,4 +96,16 @@ class App
         }
         return $this->my_email;
     }
+
+
+    public function getLocalUrl()
+    {
+        $config = Config::getInstance(ROOT . '/config/config.php');
+
+        if (($this->local_url)===null) {
+            $this->local_url = $config->get('local_url');
+        }
+        return $this->local_url;
+    }
+    
 }

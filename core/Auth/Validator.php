@@ -25,7 +25,7 @@ class Validator
      * getField
      *
      * @param  mixed $field
-     * verifie que $field est bien dans la variable $data passé en POST
+     * verify that $field is in the var $data through the POST method
      * @return void
      */
     private function getField($field)
@@ -93,7 +93,7 @@ class Validator
      *
      * @param  mixed $field
      * @param  mixed $errorMsg
-     * check if the value in field matching the confirmation field
+     * check if the value in field matches the confirmation field
      * @return void
      */
     public function isConfirmed($field, $errorMsg = '')

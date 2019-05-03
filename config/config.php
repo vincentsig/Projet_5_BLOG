@@ -7,5 +7,6 @@ return array(
     "db_host"=> "localhost",
     "db_user"=> "root",
     "db_pass"=> "",
-    "my_email"=>"vincent.signoret.mail@gmail.com"
+    "my_email"=>"vincent.signoret.mail@gmail.com",
+    "local_url"=>"http://localhost/Projet_5/"
 );

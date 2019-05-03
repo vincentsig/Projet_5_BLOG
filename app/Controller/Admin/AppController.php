@@ -12,7 +12,7 @@ class AppController extends \App\Controller\AppController
     {
         parent::__construct();
         $db = App::getInstance()->getDb();
-        $auth = new Auth($db, Session::getInstance());
+        $auth = App::getInstance()->getAuth();
         $auth = $auth->getRole();
         if ($auth !=1) {
             $this->forbidden();
