@@ -19,7 +19,7 @@ class PostTable extends Table
         LEFT JOIN user ON blogpost.user_id = user.id
         LEFT JOIN category ON category_id = category.id
         WHERE  blogpost.archive IS NULL
-        ORDER BY date_created DESC
+        ORDER BY date_created ASC
         "
         );
     }
@@ -27,10 +27,10 @@ class PostTable extends Table
 
     /**
      * last
-     * get the last 4 blogposts
+     * get the last 2 blogposts
      * @return array
      */
-    public function lastFourPosts()
+    public function lastTwoPosts()
     {
         return $this->query(
             "SELECT blogpost.id, blogpost.title, blogpost.lead_in, blogpost.content, blogpost.archive, image.tag as tag, image.image_dir,
@@ -41,7 +41,7 @@ class PostTable extends Table
         LEFT JOIN category ON category_id = category.id
         LEFT JOIN image ON blogpost.id = image.blogpost_id
         WHERE  blogpost.archive IS NULL AND tag='logo'
-        ORDER BY date_created DESC
+        ORDER BY date_created ASC
         LIMIT 2"
         );
     }

@@ -52,12 +52,12 @@ class CategoriesController extends AppController
     public function edit()
     {
         if (!empty($_POST)) {
-            $this->Post->update(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT), [
-                'title' => filter_input_array(INPUT_POST, 'title', FILTER_SANITIZE_STRING),
+            $this->Category->update(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT), [
+                'title' => filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING),
             ]);
             return $this->index();
         }
-        $category = $this->Category->findfilter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $category = $this->Category->find(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
         $form = new BootstrapForm($category);
         $this->render('admin.categories.edit', compact('form'));
     }

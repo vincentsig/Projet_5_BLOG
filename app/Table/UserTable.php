@@ -17,4 +17,5 @@ class UserTable extends Table
             true
         );
     }
+
 }

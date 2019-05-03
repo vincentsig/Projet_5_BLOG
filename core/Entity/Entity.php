@@ -6,7 +6,8 @@ class Entity
 {
     /**
      * __get
-     * get the attributes in the table
+     * magic function
+     * guess the name of the method and return the method
      * @param  mixed $key
      *
      * @return void

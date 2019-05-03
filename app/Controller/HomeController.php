@@ -30,7 +30,7 @@ class HomeController extends AppController
     public function index()
     {
         $errors = [];
-        $posts = $this->Post->lastFourPosts();
+        $posts = $this->Post->lastTwoPosts();
         $categories = $this->Category->all();
         $flashs = Session::getInstance();
         $validator = new Validator(filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING));

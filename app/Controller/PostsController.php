@@ -28,9 +28,11 @@ class PostsController extends AppController
      */
     public function blogpost()
     {
+        $db = App::getInstance()->getDb();
+        $auth = new Auth($db, Session::getInstance());
         $posts = $this->Post->last();
         $categories = $this->Category->all();
-        $this->render('posts.blogposts', compact('posts', 'categories'));
+        $this->render('posts.blogposts', compact('posts', 'categories','auth'));
     }
 
     public function categories()

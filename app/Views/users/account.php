@@ -3,7 +3,7 @@
 <?php foreach ($flashs as $type => $message): ?>
   <div class="alert alert-<?= $type; ?>">
     <ul>
-      <li><?=$message;?></li>
+      <li><?=filter_var($message, FILTER_SANITIZE_STRING);?></li>
     </ul>
   </div>
 <?php endforeach; ?>

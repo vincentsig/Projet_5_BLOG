@@ -77,7 +77,7 @@ class PostsController extends AppController
                 'user_id' => $_SESSION['auth']->id
             ]);
             if ($result) {
-                return $this->index();
+                return App::redirect('index.php?page=admin.posts.index');
             }
         }
         $post = $this->Post->find(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));

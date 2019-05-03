@@ -1,11 +1,12 @@
 
 <div class="container">
    
-        <h1 class="section-heading">Gestion des Commentaires</h1>
+       
         
 
     <div class="row">
       <div class="col-lg-12 col-md-10 mx-auto">
+      
             <h4 class="section-heading">Commentaire en attentes de validation</h4>
         <p>Vous pouvez gérer ici les commentaires. Pour voir les commentaires en attentes de validation cliquez sur le bouton ci dessous.</p>
 
@@ -16,8 +17,8 @@
         </div>
 
     </div>
-</div>
-</div>
+    </div>
+
 
 <div class="container">
 
@@ -32,7 +33,7 @@
             <div class="col-lg-3 col-md-10 mx-auto">
                 <a class="btn btn-primary" href="?page=admin.index.dashboard">Retour</a>
             </div>  
-    </div>
+        </div>
             <table class="table table-dark">
             <thead>
                 <tr>
